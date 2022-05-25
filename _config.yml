@@ -163,7 +163,7 @@ giscus:
   category-id:         DIC_kwDOHZL19s4CPSRG
   mapping:             "pathname"
   reaction-enabled:    "1"
-  theme:               "dark_dimmed"
+  theme:               "preferred_color_scheme"
   crossorigin:         "anonymous"
 
 # Setting a tinyletter username will enable the newsletter subscription box.
@@ -177,7 +177,7 @@ giscus:
 
 hydejack:
   # Configure the order of complementary content on blog posts
-  post_addons:         [about, related, random, comments]
+  post_addons:         [about, related, comments]
 
   # Configure the order of complementary content on project pages
   project_addons:      [about]
