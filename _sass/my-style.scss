@@ -72,4 +72,17 @@ applause-button {
     .outline {
       fill: var(--accent-color);
     }
-  }  
+  }
+
+// comments
+.utterances {
+    max-width: 100%;
+  }
+  
+  .giscus, .giscus-frame {
+    width: 100%;
+  }
+  
+  .giscus-frame {
+    border: none;
+  }

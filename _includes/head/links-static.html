@@ -27,8 +27,8 @@
 {% endif %}
 
 {% assign disqus = site.disqus | default:site.disqus_shortname %}
-{% if disqus %}
-<link rel="dns-prefetch" href="https://{{ disqus }}.disqus.com" id="_hrefDisqus">
+{% if site.comments.provider == "disqus" and site.disqus %}
+  <link rel="dns-prefetch" href="https://{{ disqus }}.disqus.com" id="_hrefDisqus">
 {% endif %}
 
 {% if page.applause_button %}
