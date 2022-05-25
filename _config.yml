@@ -177,7 +177,7 @@ giscus:
 
 hydejack:
   # Configure the order of complementary content on blog posts
-  post_addons:         [about, random, comments]
+  post_addons:         [about, related, random, comments]
 
   # Configure the order of complementary content on project pages
   project_addons:      [about]
@@ -236,7 +236,7 @@ hydejack:
   no_breadcrumbs:      false
 
   # Set to `true` when building with the `--lsi` option
-  use_lsi:             true
+  use_lsi:             false
 
   # When using Google Analytics, set to `true` to display a cookie notice banner.
   # When enabled, no user-related data will be stored until the user gives consent.
