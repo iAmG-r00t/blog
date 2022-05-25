@@ -1,0 +1,75 @@
+// Image centering
+
+.text-align-center {
+    text-align: center;
+  }
+
+.text-below {
+    padding-top: 2em;
+}
+
+.text-color-red {
+    color: red;
+}
+.text-color-aliceblue {
+    color: aliceblue;
+}
+
+.text-color-cyan {
+    color: cyan;
+}
+
+  
+img.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.align-left {
+    content: "";
+    clear: both;
+    display: table;
+    float: left;
+    margin-right: 1em;
+}
+
+img.align-right {
+    content: "";
+    clear: both;
+    display: table;
+    float: right;
+    margin-left: 1em;
+}
+
+// applause-button
+applause-button {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+  
+    .count-container {
+      color: inherit;
+    }
+  }
+
+// clap count
+.clap-count {
+    @extend h4;
+    color: var(--accent-color);
+    display: none;
+  
+    svg {
+      height: 1em;
+      vertical-align: middle;
+      width: 1em;
+    }
+  
+    .flat {
+      fill: var(--body-bg);
+    }
+  
+    .outline {
+      fill: var(--accent-color);
+    }
+  }  
