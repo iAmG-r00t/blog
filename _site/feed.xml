@@ -1,5 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-KE"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en-KE" /><updated>2022-05-25T15:11:06+03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">th3_gr00t</title><subtitle>One and only nerd who is on a journey to being a vulnerability researcher.
-</subtitle><author><name>th3gr00t</name></author><entry><title type="html">Security + DevOp’s Play Ground Automation Setup</title><link href="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/" rel="alternate" type="text/html" title="Security + DevOp’s Play Ground Automation Setup" /><published>2020-03-13T00:00:00+03:00</published><updated>2020-03-13T00:00:00+03:00</updated><id>http://localhost:4000/blog/dev/security-devops-play-ground-automation</id><content type="html" xml:base="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-KE"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en-KE" /><updated>2022-05-26T19:44:13+03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">th3_gr00t</title><subtitle>One and only nerd who is on a journey to being a vulnerability researcher.
+</subtitle><author><name>th3gr00t</name></author><entry><title type="html">Bye Blogger, Hello Jekyll</title><link href="http://localhost:4000/blog/scripts/2022-05-25-the-move/" rel="alternate" type="text/html" title="Bye Blogger, Hello Jekyll" /><published>2022-05-25T00:00:00+03:00</published><updated>2022-05-25T00:00:00+03:00</updated><id>http://localhost:4000/blog/scripts/the-move</id><content type="html" xml:base="http://localhost:4000/blog/scripts/2022-05-25-the-move/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#intro&quot; id=&quot;markdown-toc-intro&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#the-move&quot; id=&quot;markdown-toc-the-move&quot;&gt;The move&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#epilogue&quot; id=&quot;markdown-toc-epilogue&quot;&gt;Epilogue&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#resources&quot; id=&quot;markdown-toc-resources&quot;&gt;Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;p&gt;Greetings 👋🏾, I hope it is not too late to wish everyone a happy new year 😅.&lt;/p&gt;
+
+&lt;p&gt;Last year when I was beginning ALX, a software engineering program, I envisioned myself creating a whole CMS for my portfolio and blog. My goal was if I got to enjoy building web applications, I would enjoy doing web security. A new strategy for learning web security is required because I never enjoyed programming web applications. I dropped out of the program (due to personal reasons), but I am doing their C and python programming modules.&lt;/p&gt;
+
+&lt;p&gt;Early this year, my friend and a mentor made a move on his blog, and I decided to do the same. After researching various Jekyll themes, I opted to buy the &lt;a href=&quot;https://hydejack.com/&quot;&gt;Hydejack Pro&lt;/a&gt; theme.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-move&quot;&gt;The move&lt;/h2&gt;
+
+&lt;p&gt;Jekyll has a &lt;a href=&quot;https://import.jekyllrb.com/docs/blogger/&quot;&gt;resource&lt;/a&gt; on how one can import my posts from Blogger. The ruby gem &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll-import&lt;/code&gt; converts the Blogger XML file into a set of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.html&lt;/code&gt; files. But that is half of what was required, and after research, I found a &lt;a href=&quot;https://www.sevarg.net/2021/07/04/moving-from-blogger-to-jekyll/&quot;&gt;post&lt;/a&gt; by Russell Graves where he did some automation bit on his move from Blogger to Jekyll. I used some of his scripts with some minor tweaks and managed to get the markdown files. I still had to re-write the posts and create new images; it was tiresome, but I managed.&lt;/p&gt;
+
+&lt;h2 id=&quot;epilogue&quot;&gt;Epilogue&lt;/h2&gt;
+
+&lt;p&gt;As the headline of the blog states, I am on a particular journey, and I plan to use this platform to share and rant about everything I learn.&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sevarg.net/2021/07/04/moving-from-blogger-to-jekyll/&quot;&gt;Moving from Blogger to Jekyll&lt;/a&gt; by Russell Graves.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lazyren.github.io/devlog/how-i-customized-hydejack-theme.html&quot;&gt;How I customized Hydejack Theme&lt;/a&gt; by DaeIn Lee.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lazyren.github.io/devlog/hydejack-post-writing-tips-tricks.html&quot;&gt;Hydejack Post Writing Tips &amp;amp; Tricks&lt;/a&gt; by DaeIn Lee.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="scripts" /><category term="Blog" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2022-05-25/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2022-05-25/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Security + DevOp’s Play Ground Automation Setup</title><link href="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/" rel="alternate" type="text/html" title="Security + DevOp’s Play Ground Automation Setup" /><published>2020-03-13T00:00:00+03:00</published><updated>2020-03-13T00:00:00+03:00</updated><id>http://localhost:4000/blog/dev/security-devops-play-ground-automation</id><content type="html" xml:base="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#prologue&quot; id=&quot;markdown-toc-prologue&quot;&gt;Prologue&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#playground-gadgets&quot; id=&quot;markdown-toc-playground-gadgets&quot;&gt;Playground gadgets&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#why-shell-script-&quot; id=&quot;markdown-toc-why-shell-script-&quot;&gt;Why shell script ??&lt;/a&gt;&lt;/li&gt;
