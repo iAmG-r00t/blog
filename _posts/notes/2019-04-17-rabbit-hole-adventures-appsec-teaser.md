@@ -4,7 +4,7 @@ title: 'Rabbit Hole Adventures: AppSec Teaser'
 image: /assets/img/blog/2019-04-17/image1.png
 description: >
   I'm not saying that putting on makeup will change the world or even your life, but it can be a first step in learning things about yourself you may never have discovered otherwise. At worst, you could make a big mess and have a good laugh. - Kevyn Aucoin
-category: scripts
+category: notes
 tags: [appsec]
 ---
 
