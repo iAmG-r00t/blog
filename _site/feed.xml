@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-KE"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en-KE" /><updated>2022-05-26T19:44:13+03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">th3_gr00t</title><subtitle>One and only nerd who is on a journey to being a vulnerability researcher.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-KE"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en-KE" /><updated>2022-05-27T10:41:27+03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">th3_gr00t</title><subtitle>One and only nerd who is on a journey to being a vulnerability researcher.
 </subtitle><author><name>th3gr00t</name></author><entry><title type="html">Bye Blogger, Hello Jekyll</title><link href="http://localhost:4000/blog/scripts/2022-05-25-the-move/" rel="alternate" type="text/html" title="Bye Blogger, Hello Jekyll" /><published>2022-05-25T00:00:00+03:00</published><updated>2022-05-25T00:00:00+03:00</updated><id>http://localhost:4000/blog/scripts/the-move</id><content type="html" xml:base="http://localhost:4000/blog/scripts/2022-05-25-the-move/">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#intro&quot; id=&quot;markdown-toc-intro&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#the-move&quot; id=&quot;markdown-toc-the-move&quot;&gt;The move&lt;/a&gt;&lt;/li&gt;
@@ -26,6 +26,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.sevarg.net/2021/07/04/moving-from-blogger-to-jekyll/&quot;&gt;Moving from Blogger to Jekyll&lt;/a&gt; by Russell Graves.&lt;/li&gt;
+  &lt;li&gt;Russell’s collection of &lt;a href=&quot;https://github.com/Syonyk/blogger_to_jekyll&quot;&gt;scripts&lt;/a&gt; to help migrate from Blogger to Jekyll.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://lazyren.github.io/devlog/how-i-customized-hydejack-theme.html&quot;&gt;How I customized Hydejack Theme&lt;/a&gt; by DaeIn Lee.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://lazyren.github.io/devlog/hydejack-post-writing-tips-tricks.html&quot;&gt;Hydejack Post Writing Tips &amp;amp; Tricks&lt;/a&gt; by DaeIn Lee.&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="scripts" /><category term="Blog" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2022-05-25/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2022-05-25/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Security + DevOp’s Play Ground Automation Setup</title><link href="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/" rel="alternate" type="text/html" title="Security + DevOp’s Play Ground Automation Setup" /><published>2020-03-13T00:00:00+03:00</published><updated>2020-03-13T00:00:00+03:00</updated><id>http://localhost:4000/blog/dev/security-devops-play-ground-automation</id><content type="html" xml:base="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/">&lt;ul id=&quot;markdown-toc&quot;&gt;
@@ -42,32 +43,34 @@
 
 &lt;h2 id=&quot;prologue&quot;&gt;Prologue&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Problem statement;&lt;/code&gt;&lt;/strong&gt; I used to use a virtual environment as my playground to break and tinker around with stuff, then got a new laptop and I had to set up the whole environment from zero to how my virtual environment state was. I did it the first time manually and when I was done setting up everything found out that the hard disk for the new laptop was faulty 🤬. I had to replace the hard disk and re-do the setup all over again. It was tiresome and it took me a whole week because each time I was faced with a problem that I had to fix, format the disk, reinstall the OS, and re-do the setup.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Problem statement;&lt;/code&gt;&lt;/strong&gt; I used to use a virtual environment as my playground to break and tinker around with stuff, then I got a new laptop, and I had to set up the whole environment from zero to my virtual environment state. I did it the first time manually, and when I was done setting up everything, I found out that the new laptop’s hard disk was faulty 🤬. I had to replace the hard disk and re-do the setup again.&lt;/p&gt;
 
-&lt;p&gt;I got tired of that cycle and I decided to google around for a solution and I came by a &lt;a href=&quot;https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/&quot;&gt;post&lt;/a&gt; by &lt;a href=&quot;https://victoria.dev/&quot;&gt;Victoria Drake&lt;/a&gt;. Which made me realize that I can automate my setup process and make my life easy.&lt;/p&gt;
+&lt;p&gt;It was tiresome, and it took me a whole week because each time I was faced with a problem, I had to fix, format the disk, reinstall the OS, and re-do the setup.&lt;/p&gt;
 
-&lt;p&gt;First I want to start by noting down my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;playground gadgets&lt;/code&gt; and then proceed to explain why I decided to use the bash shell script and not the other fancy stuff (like Vagrant, puppet, chef, or ansible).&lt;/p&gt;
+&lt;p&gt;I got tired of that cycle, and I decided to google around for a solution. I came by a &lt;a href=&quot;https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/&quot;&gt;post&lt;/a&gt; by &lt;a href=&quot;https://victoria.dev/&quot;&gt;Victoria Drake&lt;/a&gt;, which made me realize that I can automate my setup process and simplify my life.&lt;/p&gt;
+
+&lt;p&gt;I want to start by noting down my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;playground gadgets&lt;/code&gt; and then explain why I decided to use the bash shell script and not the other fancy stuff (like Vagrant, puppet, chef, or ansible).&lt;/p&gt;
 
 &lt;h2 id=&quot;playground-gadgets&quot;&gt;Playground gadgets&lt;/h2&gt;
 
-&lt;p&gt;I have four major gadgets that I use on a normal day, which are;&lt;/p&gt;
+&lt;p&gt;I have four major gadgets that I use on a typical day, which are;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tmux&lt;/code&gt; - handles all my terminal sessions and screens.&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Vim&lt;/code&gt; - this is my Integrated Development Environment.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Keepass2&lt;/code&gt; - handles all my SSH keys and stores some of my passwords.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash&lt;/code&gt; - preferred shell, this is where I call home. (I defaulted to using bash instead of ZSH)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Keepass2&lt;/code&gt; - holds all my SSH keys and stores some of my passwords.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash&lt;/code&gt; - preferred shell; this is where I call home. (I defaulted to using bash instead of ZSH)&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;why-shell-script-&quot;&gt;Why shell script ??&lt;/h2&gt;
 
-&lt;p&gt;I decided to use shell script because it will allow me to better understand the language and fine-tune my coding skills plus it comes by default in most Unix systems. While with the other fancy tools I would be forced to install and maybe configure.&lt;/p&gt;
+&lt;p&gt;I decided to use shell script because it will allow me to understand the language better and fine-tune my coding skills. Plus, it comes by default in most Unix systems. While with the other fancy tools, I would be forced to install and maybe configure.&lt;/p&gt;
 
 &lt;h2 id=&quot;dotfiles&quot;&gt;Dotfiles&lt;/h2&gt;
 
-&lt;p&gt;Most of the above-mentioned gadgets have configuration files that are called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dotfiles&lt;/code&gt;. I won’t go into detail on each dotfile check out &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Victoria&apos;s post&lt;/code&gt; she has done most of the explanation, but I will try my best not to skip the most important bits.&lt;/p&gt;
+&lt;p&gt;Most of the gadgets mentioned above have configuration files that are called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dotfiles&lt;/code&gt;. I won’t explain each dotfile; check out Victoria’s &lt;a href=&quot;https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/&quot;&gt;post&lt;/a&gt; she has done most of the explanation, but I will try my best not to skip the most important bits.&lt;/p&gt;
 
-&lt;p&gt;For the structure of my dotfiles, I decided to place all my dotfiles in one directory, then each config in its directory with its name.&lt;/p&gt;
+&lt;p&gt;The dotfiles structure; I decided to place all my dotfiles in one directory, then each config in its directory with its name.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2020-03-13/image1.png&quot; alt=&quot;image1&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
@@ -75,57 +78,57 @@
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;The image above is the representation of how I have arranged my config files before you get to question why let me mention that I am a neat freak (kind of), my mind is as organized as a library so that’s why!! now you can go ahead and judge me but it works for me, just do you!&lt;/p&gt;
+    &lt;p&gt;The image above represents how I have arranged my config files. Before you ask why? Let me mention that I am a neat freak (kind of). My mind is as organized as a shelf, so that’s why!! Now you can judge me, but it works for me!&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;In the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bash&lt;/code&gt; folder, I have two aliases one that does contain the normal aliases and the other that contains aliases that have secrets, tokens, and IPs.&lt;/p&gt;
+    &lt;p&gt;In the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bash&lt;/code&gt; folder, I have two aliases, one containing the regular aliases and the other containing aliases with secrets, tokens, and IPs.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt; folder contains the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YouCompleteMe&lt;/code&gt; vim plugin config which I stole from [Jonas &lt;a href=&quot;https://jonasdevlieghere.com/a-better-youcompleteme-config/&quot;&gt;Devlieghere&lt;/a&gt; and the vim config file.&lt;/p&gt;
+    &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt; folder contains the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YouCompleteMe&lt;/code&gt; vim plugin config I stole from &lt;a href=&quot;https://jonasdevlieghere.com/a-better-youcompleteme-config/&quot;&gt;Jonas Devlieghere&lt;/a&gt; and the vim config file.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eddie&lt;/code&gt; folder contains a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;greetings.txt&lt;/code&gt; file which contains lines I would like the &lt;a href=&quot;https://github.com/victoriadrake/eddie-terminal&quot;&gt;eddie-terminal&lt;/a&gt; to tell me each time I spawn my terminal. Awesome right!! The project is by the one and only &lt;a href=&quot;https://victoria.dev/&quot;&gt;Victoria Drake&lt;/a&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;The last folder was for Oh-My-ZSH which I currently don’t use in my setup. But it contained various files that were from the bash folder but for the Oh-My-ZSH shell.&lt;/p&gt;
+    &lt;p&gt;The last folder was for Oh-My-ZSH, which I currently don’t use in my setup. But it contained various files that were from the bash folder but for the Oh-My-ZSH shell.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;setup-scripts&quot;&gt;Setup Scripts&lt;/h2&gt;
 
-&lt;p&gt;For the setup scripts, I will explain the major parts. You can go ahead and check out the whole &lt;a href=&quot;https://github.com/iAmG-r00t/desktop-setup&quot;&gt;project repo&lt;/a&gt; on my &lt;a href=&quot;https://github.com/iAmG-r00t&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For the setup scripts, I will explain the significant bits. And for the rest, you can check out the whole &lt;a href=&quot;https://github.com/iAmG-r00t/desktop-setup&quot;&gt;project repo&lt;/a&gt; on my &lt;a href=&quot;https://github.com/iAmG-r00t&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;dotfiles.sh&lt;/strong&gt; setups all my dotfiles, it does more than that so you should have a look at it.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;desktop.sh&lt;/strong&gt; setups up my folders and desktop environment look and feel. This includes setting up a screensaver, background image, user profile icon, and favorite apps on my dock. (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Kindly read Victoria Drake&apos;s post, she explained how to do it&lt;/code&gt;, I would like to mention that some settings like renaming the trash on the desktop don’t work in Ubuntu 19 but works efficiently with ubuntu 18, you can play around with it have fun!!)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;software.sh&lt;/strong&gt; installs all the packages I use on a day-to-day basis and the dependencies required to install all the applications.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;setup.sh&lt;/strong&gt; brings all the scripts together this is where it all starts, also it does some cleanup, installs vim and tmux plugins, &lt;del&gt;changes my default shell from bash to zsh&lt;/del&gt;, and then logs out the desktop for some settings to take effect.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;dotfiles.sh&lt;/strong&gt; setups all my dotfiles. Plus, it does more, so you should have a look at it.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;desktop.sh&lt;/strong&gt; setups up my folders and desktop environment look and feel, including setting up a screensaver, background image, user profile icon, and favorite apps on my dock (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kindly read Victoria Drake&apos;s post, she explained how to do it&lt;/code&gt;). I want to mention that some settings like renaming the trash on the desktop don’t work in Ubuntu 19 but work with ubuntu 18. You can play around with it.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;software.sh&lt;/strong&gt; installs all the packages I use daily and the dependencies required to install all the applications.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;setup.sh&lt;/strong&gt; brings all the scripts together. Everything is executed from here, plus it does some cleanup, installs vim and tmux plugins, &lt;del&gt;changes my default shell from bash to zsh&lt;/del&gt;, and then logs out the desktop for some settings to take effect.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;sync.sh&lt;/strong&gt; syncs all my dotfiles from the home user directory to the local Github repository so that I can update the remote repository.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;secrets-how-do-you-handle-them&quot;&gt;Secrets🙊, how do you handle them?&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;The fun part;&lt;/em&gt;&lt;/strong&gt; so when I was reading Victoria’s post she pointed out that some files that one wouldn’t put on a public repo won’t / shouldn’t be pushed to the remote repository (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;best security practice&lt;/code&gt;), that was a problem for me because I wanted to backup everything and at the same time share it to the world. Github doesn’t allow one to set some directories in a repository as private so I had to think of a solution to my problem.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;The fun part;&lt;/em&gt;&lt;/strong&gt; In Victoria’s &lt;a href=&quot;https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/&quot;&gt;post&lt;/a&gt;, she pointed out there were some files that one wouldn’t put on a public repo as a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;best security practice&lt;/code&gt;. That was a problem for me because I wanted to back up everything while sharing what was required. Github doesn’t allow one to set some directories in a repository as private, so I had to think of a solution to my problem.&lt;/p&gt;
 
-&lt;p&gt;After some research, I found a lot of &lt;a href=&quot;#sols&quot;&gt;solutions&lt;/a&gt; on how to achieve this but I decided to stick with &lt;a href=&quot;https://git-secret.io/&quot;&gt;git-secret&lt;/a&gt;. It uses GPG RSA key pair to encrypt all of your desired secret files and allows you to push them to a public repository, which you can later decrypt in your local environment using the same GPG key.&lt;/p&gt;
+&lt;p&gt;Later on, I found a few &lt;a href=&quot;#sols&quot;&gt;solutions&lt;/a&gt; to achieve this. I decided to stick with &lt;a href=&quot;https://git-secret.io/&quot;&gt;git-secret&lt;/a&gt;, which was among the solutions. It uses GPG RSA key pair to encrypt all of your desired secret files and allows you to push them to a public repository, which you can later decrypt in your local environment using the same GPG key.&lt;/p&gt;
 
 &lt;h2 id=&quot;ssh-keys&quot;&gt;SSH Keys&lt;/h2&gt;
 
-&lt;p&gt;I am paranoid and at the same time lazy. I required a way to log in to my servers efficiently the same way I log in to my online accounts using &lt;a href=&quot;https://www.lastpass.com/&quot;&gt;LastPass&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I am paranoid while at the same time lazy. I required a way to log in to my servers efficiently the same way I log in to my online accounts using &lt;a href=&quot;https://www.lastpass.com/&quot;&gt;LastPass&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;There is a way of doing this &lt;a href=&quot;https://devopsheaven.com/ssh/security/lastpass/devops/2018/06/13/ssh-lastpass-cli.html&quot;&gt;using LastPass&lt;/a&gt; but there were two issues with that, one is that I love to separate my work and social life (&lt;strong&gt;&lt;em&gt;I do have two separate machines for this …&lt;/em&gt;&lt;/strong&gt;) meaning I needed a way to store all the passwords that I use during work separately from my mere Gmail and other personal account passwords. &lt;/p&gt;
+&lt;p&gt;There is a way of doing this &lt;a href=&quot;https://devopsheaven.com/ssh/security/lastpass/devops/2018/06/13/ssh-lastpass-cli.html&quot;&gt;using LastPass&lt;/a&gt;, but there was an issue where I love to separate my work and social life (&lt;strong&gt;&lt;em&gt;I do have two separate machines for this …&lt;/em&gt;&lt;/strong&gt;). I needed a way to store all the passwords I use during work separately from my mere Gmail and other personal/social account passwords. &lt;/p&gt;
 
-&lt;p&gt;After some research I decided to use &lt;a href=&quot;https://keepass.info/index.html&quot;&gt;KeePass&lt;/a&gt;, I had heard about it during the time I was working at Safaricom PLC but I never knew it had great perks.&lt;/p&gt;
+&lt;p&gt;Later on, I found &lt;a href=&quot;https://keepass.info/index.html&quot;&gt;KeePass&lt;/a&gt;, which I had heard about when working at Safaricom PLC. I never knew it had great perks.&lt;/p&gt;
 
-&lt;p&gt;It allows you to store SSH keys and has a plugin known as &lt;a href=&quot;https://keeagent.readthedocs.io/en/stable/&quot;&gt;KeeAgent&lt;/a&gt; which acts as an &lt;a href=&quot;https://www.ssh.com/ssh/agent&quot;&gt;ssh-agent&lt;/a&gt;, which allows you to log in to your servers when the KeePass database file is open without prompting for the ssh-key passphrase.&lt;/p&gt;
+&lt;p&gt;It allows you to store SSH keys and has a plugin known as &lt;a href=&quot;https://keeagent.readthedocs.io/en/stable/&quot;&gt;KeeAgent&lt;/a&gt;, which acts as an &lt;a href=&quot;https://www.ssh.com/ssh/agent&quot;&gt;ssh-agent&lt;/a&gt;. It enables you to log in to your servers when the KeePass database file is open without prompting for the ssh-key passphrase.&lt;/p&gt;
 
-&lt;p&gt;KeePass has a lot of plugins that do a variety of things, so I decided to look for a way to backup my passwords somewhere and that’s when I found &lt;a href=&quot;https://bitbucket.org/devinmartin/keecloud/wiki/Home&quot;&gt;KeeCloud&lt;/a&gt;, It allows you to store a backup in Dropbox and sync the local file with the dropbox file using triggers or manually using KeePass Synchronize option.&lt;/p&gt;
+&lt;p&gt;KeePass has a lot of plugins that do a variety of things, so I decided to look for a way to backup my passwords somewhere, and that’s when I found &lt;a href=&quot;https://bitbucket.org/devinmartin/keecloud/wiki/Home&quot;&gt;KeeCloud&lt;/a&gt;. It allows you to store a backup in Dropbox and sync the local file with the dropbox file using triggers or manually using the KeePass Synchronize option.&lt;/p&gt;
 
 &lt;h2 id=&quot;epilogue&quot;&gt;Epilogue&lt;/h2&gt;
 
-&lt;p&gt;All that being said and done, I need to mention that I will be updating this setup process as time goes by, so if you are reading this blog now or later in the future, check out my Github repository for any updates.&lt;/p&gt;
+&lt;p&gt;All that being said and done, I need to mention that I will be updating this setup process as time goes by, so if you are reading this blog now or later, check out my Github repository for any updates.&lt;/p&gt;
 
-&lt;p&gt;Now let me showcase my work before I end this post, I hope the demo gods will spare me today.&lt;/p&gt;
+&lt;p&gt;Now let me showcase my work before I end this post. I hope the demo gods will spare me today.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://asciinema.org/a/cM0sOz8r2idXdf2E4arL0bhFM&quot;&gt;&lt;img src=&quot;https://asciinema.org/a/cM0sOz8r2idXdf2E4arL0bhFM.svg&quot; alt=&quot;asciicast&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -135,9 +138,9 @@
     &lt;iframe src=&quot;https://www.youtube.com/embed/oNDbW7nxqBM&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 
-&lt;p style=&quot;padding-top: 2em&quot;&gt;Before I end this post sorry for the shaky video was recording with my phone, next time I will look for better solutions for such situations. Anyways thank you for your time.&lt;/p&gt;
+&lt;p style=&quot;padding-top: 2em&quot;&gt;Before I end this post, sorry for the shaky video recording, I was using my phone; next time, I will look for better solutions for such situations. Anyways thank you for your time.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot; title=&quot;UPDATE&quot;&gt;I reconstructed the whole project in 2020 quarter three during the covid period into single modules. In January 2021 when I was creating some challenges for the &lt;a href=&quot;https://ciphercode.dev/&quot;&gt;Aspire CTF&lt;/a&gt; I ended up deleting my whole 2020 projects directory that I hadn’t backed up to GitHub (Backups are important BTW). Hence this project will be redone.&lt;/p&gt;
+&lt;p class=&quot;note&quot; title=&quot;UPDATE&quot;&gt;In 2020 quarter three, during the covid period, I reconstructed the whole project into single modules. In January 2021, when I was creating some challenges for the &lt;a href=&quot;https://ciphercode.dev/&quot;&gt;Aspire CTF&lt;/a&gt;, I deleted my whole 2020 projects directory that I hadn’t backed up to GitHub (Backups are important, BTW). Hence this project will be redone.&lt;/p&gt;
 
 &lt;h2 id=&quot;sols&quot;&gt;Resources&lt;/h2&gt;
 
@@ -172,35 +175,35 @@
 
 &lt;h2 id=&quot;prologue&quot;&gt;Prologue&lt;/h2&gt;
 
-&lt;p&gt;Hi, 👋 happy new year 🎉.  In my previous &lt;a href=&quot;2019-04-17-rabbit-hole-adventures-appsec-teaser.md&quot;&gt;post&lt;/a&gt;, I talked about the lessons I learned while learning how to find bugs in a mobile application.&lt;/p&gt;
+&lt;p&gt;Hi, 👋 happy new year 🎉.  In my previous &lt;a href=&quot;/blog/scripts/2019-04-17-rabbit-hole-adventures-appsec-teaser/&quot;&gt;post&lt;/a&gt;, I talked about the lessons I learned while learning to find bugs in a mobile application.&lt;/p&gt;
 
 &lt;p&gt;So I decided to write this blog post and bring the adventure to an end.&lt;/p&gt;
 
-&lt;p&gt;Last year I attended AfricaHackon. despite not participating in the CTF contest as a player, I did try to solve the challenges, but this time I took more interest in the Mobile Apps, RE, and pwn challenges.&lt;/p&gt;
+&lt;p&gt;Last year I attended AfricaHackon. Despite not participating in the CTF contest as a player, I did try to solve the challenges, but this time I took more interest in the Mobile Apps, RE, and pwn challenges.&lt;/p&gt;
 
-&lt;p&gt;In this post, I am going to focus on the mobile application and its challenges.&lt;/p&gt;
+&lt;p&gt;This post will focus on the mobile application and its challenges.&lt;/p&gt;
 
-&lt;p&gt;The players were provided an APK file. When I got hold of the APK file, I installed it on my test device, a Homepesa Sacco application that had a login and register account when spawned.&lt;/p&gt;
+&lt;p&gt;The players were provided an APK file. When I got hold of the APK file, I installed it on my test device, a Homepesa Sacco application with a login and register account when spawned.&lt;/p&gt;
 
-&lt;p&gt;There were six challenges, so before starting to solve the challenges I decided to do some recon to get to understand the application.&lt;/p&gt;
+&lt;p&gt;There were six challenges, so before starting to solve the challenges, I decided to do some recon to understand the application.&lt;/p&gt;
 
 &lt;h2 id=&quot;recon&quot;&gt;Recon&lt;/h2&gt;
 
-&lt;p&gt;Below are the steps I normally follow to get to understand the application;&lt;/p&gt;
+&lt;p&gt;Below are the steps I usually follow to get to understand the application;&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Decompile the application&lt;/strong&gt; (one can use apktool or change the filename extension from dot apk to dot zip then unzip it using any archive utility e.g: 7zip, WinRAR, e.t.c …) this allowed me to view the source code of the app.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Read the manifest file&lt;/strong&gt; to identify application-defined permissions, look for any misconfigurations set, locate any exported activities or services, and identify any broadcast receivers and content providers.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Used &lt;a href=&quot;https://labs.f-secure.com/tools/drozer/&quot;&gt;drozer&lt;/a&gt;&lt;/strong&gt; to identify any attack surface present, and look for files that are being stored locally in the application directory.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Decompile the application&lt;/strong&gt; (one can use apktool or change the filename extension from dot apk to dot zip, then unzip it using any archive utility, e.g., 7zip, WinRAR, e.t.c …); this allowed me to view the source code of the app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Read the manifest file&lt;/strong&gt; to identify application-defined permissions, look for any misconfigurations set, locate exported activities or services, and identify broadcast receivers and content providers.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Used &lt;a href=&quot;https://labs.f-secure.com/tools/drozer/&quot;&gt;drozer&lt;/a&gt;&lt;/strong&gt; to identify any attack surface present and look for files that are being stored locally in the application directory.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;challenges&quot;&gt;Challenges&lt;/h2&gt;
 
-&lt;p&gt;Afterward, I decided to look at the challenges and focus on what is required, getting the flags. There were six challenges, I will explain how I was able to attain the flag for each challenge.&lt;/p&gt;
+&lt;p&gt;Afterward, I decided to look at the challenges and focus on what is required, getting the flags. There were six challenges; I will explain how I was able to attain the flag for each challenge.&lt;/p&gt;
 
 &lt;h3 class=&quot;text-align-center&quot; id=&quot;challenge-1-manifestation&quot;&gt;Challenge 1: Manifestation&lt;/h3&gt;
 
-&lt;p&gt;From the title of the challenge, it seemed like we were to take a look at the manifest file but from my recon process, I never found it. After consulting with the creator he said the flag was a comment in the manifest file. For this challenge one couldn’t attain the flag because it wasn’t there, it seems like when one is building the application comments that were placed in the manifest file were removed.&lt;/p&gt;
+&lt;p&gt;From the challenge title, it seemed like we were to look at the manifest file, but I never spotted it during my recon process. After consulting with the creator, he said the flag was a comment in the manifest file. One couldn’t attain the flag for this challenge because it wasn’t there. The application comments placed in the manifest file were removed when he compiled the source code.&lt;/p&gt;
 
 &lt;h3 class=&quot;text-align-center&quot; id=&quot;challenge-2-registration-payment-bypass&quot;&gt;Challenge 2: Registration Payment Bypass&lt;/h3&gt;
 
@@ -208,19 +211,19 @@
 
 &lt;p class=&quot;figcaption&quot;&gt;chall2: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;challenge description&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;For the second challenge, I went ahead on registering an account, before finishing registration one was required to do a registration payment. For this challenge when I was reviewing the code I saw the flag right there hardcoded in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Home&lt;/code&gt; class.&lt;/p&gt;
+&lt;p&gt;For the second challenge, I went ahead with registering an account, and during the last step of registration, one was required to make a registration payment. When reviewing the code, I saw the flag right there hardcoded in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Home&lt;/code&gt; class.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2020-02-24/image3.png&quot; alt=&quot;image3&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
 &lt;p class=&quot;figcaption&quot;&gt;chall2: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hardcoded flag&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Most of the players went ahead and submitted this flag, but for me, I wasn’t satisfied. This wasn’t the proper way of attaining the flag. So I went ahead and reviewed the code. A database file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bitwise&lt;/code&gt; was being created when the &lt;strong&gt;onCreate&lt;/strong&gt; method is called, and data was being placed in the database during the account creation process.&lt;/p&gt;
+&lt;p&gt;Most of the players went ahead and submitted this flag, but for me, I wasn’t satisfied. This wasn’t the proper way of attaining the flag. So I went ahead and reviewed the code. A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bitwise&lt;/code&gt; database file was created when the &lt;strong&gt;onCreate&lt;/strong&gt; method was called, and data was placed in the database during the account creation process.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2020-02-24/image4.png&quot; alt=&quot;image4&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
 &lt;p class=&quot;figcaption&quot;&gt;chall2: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onCreate method&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Looking at the Alert statement, it was being triggered after checking the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bitwise&lt;/code&gt; database if the account status was active or not active and if an account is active it’s when we are presented with our flag.&lt;/p&gt;
+&lt;p&gt;The Alert statement was triggered after checking the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bitwise&lt;/code&gt; database if the account status was active or not active, and if an account is active, it’s when we are presented with our flag.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2020-02-24/image5.png&quot; alt=&quot;image5&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
@@ -253,15 +256,15 @@
 
 &lt;p class=&quot;figcaption&quot;&gt;chall3: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;challenge description&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;This was a very interesting challenge. I learned a new attack vector before the event was about to end, the challenge had zero solves so we were given a clue, try to log in with a correct email address but a wrong password. I went ahead and did that and I was presented with an alert box saying that I have entered the wrong password, prompting me if I would want to recover the password. So I proceeded and placed my email on the recover password page and was sent a recovery link in the email address I provided.&lt;/p&gt;
+&lt;p&gt;This was a very interesting challenge. I learned a new attack vector before the event was about to end. The challenge had zero solves, so we were given a clue, try to log in with a correct email address but a wrong password. I did that, and I was presented with an alert box saying that I had entered the wrong password, prompting me if I wanted to recover the password. So I proceeded and placed my email on the recover password page and was sent a recovery link in the email address I provided.&lt;/p&gt;
 
-&lt;p&gt;Opening the email address in the browser I was presented with a page where I was to set a new password to reset it.&lt;/p&gt;
+&lt;p&gt;Opening the email address in the browser, I was presented with a page where I was to set a new password to reset it.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2020-02-24/image11.png&quot; alt=&quot;image11&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
 &lt;p class=&quot;figcaption&quot;&gt;chall3: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Recover Password Page&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Looking at the URL link; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://159.203.60.168/recoverypassmy.php?id=9408&lt;/code&gt; seems like we can test for SQL injection, I proceeded to test and my tool of choice was &lt;a href=&quot;https://github.com/sqlmapproject/sqlmap&quot;&gt;sqlmap&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Looking at the URL link; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://159.203.60.168/recoverypassmy.php?id=9408&lt;/code&gt; seems like we can test for SQL injection. I proceeded to test, and my tool of choice was &lt;a href=&quot;https://github.com/sqlmapproject/sqlmap&quot;&gt;sqlmap&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sqlmap -u URL -b&lt;/code&gt;&lt;/p&gt;
 
@@ -269,7 +272,7 @@
 
 &lt;p class=&quot;figcaption&quot;&gt;chall3: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SQL Map&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Boom we have an SQL injection present, and we have our entry point &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;recoverpassmy.php&lt;/code&gt;&lt;/strong&gt; which is our flag.&lt;/p&gt;
+&lt;p&gt;Boom, we have an SQL injection present, and we have our entry point &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;recoverpassmy.php&lt;/code&gt;&lt;/strong&gt;, our flag.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Flag3;&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;recoverpassmy.php&lt;/code&gt;&lt;/p&gt;
 
@@ -301,7 +304,7 @@
 
 &lt;p class=&quot;figcaption&quot;&gt;chall5: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;challenge description&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;This will be short, trust me …. so md5 hash isn’t the best encryption. The best thing about sqlmap is that it’s capable of decrypting/cracking hashes with either a custom (which you feed it …) or default wordlist. But there are also other ways of decrypting md5 hashes.&lt;/p&gt;
+&lt;p&gt;This will be short. Md5 hash isn’t the best encryption. The best thing about sqlmap is that it’s capable of decrypting/cracking hashes with either a custom (which you feed it) or default wordlist. But there are also other ways of decrypting md5 hashes.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2020-02-24/image17.png&quot; alt=&quot;image17&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
@@ -315,9 +318,9 @@
 
 &lt;p class=&quot;figcaption&quot;&gt;chall6: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;challenge description&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Obtaining the flag for the last challenge was tough. I stared at the code for a while and the way I found the flag was more on checking each class that was involved in sending SMS.&lt;/p&gt;
+&lt;p&gt;Obtaining the flag for the last challenge was tough. I stared at the code for a while, and the way I found the flag was more on checking each class involved in sending SMS.&lt;/p&gt;
 
-&lt;p&gt;I would love to point out that the way I solved this challenge was not the proper way from the creator’s point of view. He mentioned that one had to intercept or do a man-in-the-middle attack on the SMS request to solve the challenge. For me I found the flag hardcoded in the code.&lt;/p&gt;
+&lt;p&gt;I would love to point out that the way I solved this challenge was not the proper way from the creator’s point of view. He mentioned that one had to intercept or do a man-in-the-middle attack on the SMS request to solve the challenge. For me, I found the flag hardcoded in the code.&lt;/p&gt;
 
 &lt;p&gt;The issue being SMS gateway owned, SMS-gateway qual to an API, this being my theory I looked at various classes starting from the &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MobilesasaClient&lt;/code&gt;&lt;/strong&gt; class where it has a field for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flag 3&lt;/code&gt;.&lt;/p&gt;
 
@@ -325,7 +328,7 @@
 
 &lt;p class=&quot;figcaption&quot;&gt;chall6: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MobilesasaClient Class&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;When I saw this, I knew that I am close. So I decided to look at the &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MySMSBroadcastReceiver&lt;/code&gt;&lt;/strong&gt; class where there was no interesting thing so after sitting down and looking at the &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MobilesasaClient&lt;/code&gt;&lt;/strong&gt; class I noticed a small detail I had missed &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sendSMS&lt;/code&gt;&lt;/strong&gt; I used that to query for any other string that contains the same string and I found the flag in the &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ConfirmPhone&lt;/code&gt;&lt;/strong&gt; class.&lt;/p&gt;
+&lt;p&gt;When I saw this, I knew that I was close. So I decided to look at the &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MySMSBroadcastReceiver&lt;/code&gt;&lt;/strong&gt; class, where there was nothing interesting. But after sitting down and looking at the &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MobilesasaClient&lt;/code&gt;&lt;/strong&gt; class, I noticed a small detail I had missed &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sendSMS&lt;/code&gt;&lt;/strong&gt;. I used that to query for any other string containing the exact string and found the flag in the &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ConfirmPhone&lt;/code&gt;&lt;/strong&gt; class.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2020-02-24/image20.png&quot; alt=&quot;image20&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
@@ -333,7 +336,7 @@
 
 &lt;p&gt;&lt;strong&gt;Flag6:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N37w0rk@n@lysisM0bileS@s@&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;As we can note the flag states we should have done network analysis to solve the challenge, next time I will have that in mind.&lt;/p&gt;
+&lt;p&gt;As we can note, the flag states we should have done a network analysis to solve the challenge. Next time I will have that in mind.&lt;/p&gt;
 
 &lt;h2 id=&quot;epilogue&quot;&gt;Epilogue&lt;/h2&gt;
 
@@ -403,13 +406,13 @@
 
 &lt;h2 id=&quot;prologue&quot;&gt;Prologue&lt;/h2&gt;
 
-&lt;p&gt;It’s a new year and this year requires a different me. In this blog post, I will be showcasing the CTF challenges I created for the USIU hackathon event this year. I must say it was an amazing experience and due to time and other constraints, I never got the opportunity to create a lot of challenges. The ideas were there trust me.&lt;/p&gt;
+&lt;p&gt;It’s a new year, and this year requires a different me. In this blog post, I will be showcasing the CTF challenges I created for the USIU hackathon event this year. It was an amazing experience, and due to time and other constraints, I never got the opportunity to create a lot of challenges. The ideas were there, trust me.&lt;/p&gt;
 
 &lt;p&gt;Having graduated from USIU last year (&lt;a href=&quot;https://twitter.com/th3_gr00t/status/1046028164537954304&quot;&gt;this-is-me&lt;/a&gt;), I was contacted and allowed to create another challenge for the students in the information security class to tackle, and I accepted the challenge.&lt;/p&gt;
 
-&lt;p&gt;This year I had to do things differently despite the time they had contacted me. It wasn’t easy because CTF creation isn’t a one, two, and three work, it requires a lot of time, google kung-fu, and foundation mastery. I also never had an idea of the number of people who were going to participate and their skill level, and that is why I decided to keep it simple as an introductory CTF.&lt;/p&gt;
+&lt;p&gt;This year I had to do things differently despite the time they had contacted me. It wasn’t easy because CTF creation isn’t a one, two, and three work. It requires a lot of time, google kung-fu, and foundation mastery. I also never had an idea of the number of people who were going to participate and their skill level, and that is why I decided to keep it simple as an introductory CTF.&lt;/p&gt;
 
-&lt;p&gt;Resources used; Azure VM (yeah I roll like that 😂😂😂😂), &lt;a href=&quot;https://ctfd.io/about/&quot;&gt;CTFd&lt;/a&gt; deployed in the VM, Ubuntu VM on my local machine for creating the challenges, CherryTree for taking notes, and well my brain 😅😅😅😅&lt;/p&gt;
+&lt;p&gt;Resources used; Azure VM (yeah, I roll like that 😂😂😂😂), &lt;a href=&quot;https://ctfd.io/about/&quot;&gt;CTFd&lt;/a&gt; deployed in the VM, Ubuntu VM on my local machine for creating the challenges, CherryTree for taking notes, and well, my brain 😅😅😅😅&lt;/p&gt;
 
 &lt;h2 id=&quot;challenges&quot;&gt;Challenges&lt;/h2&gt;
 
@@ -417,11 +420,11 @@
 
 &lt;h2 id=&quot;category-1-miscellaneous&quot;&gt;Category 1 &lt;em&gt;Miscellaneous&lt;/em&gt;&lt;/h2&gt;
 
-&lt;p&gt;This category contained three challenges where the first challenge was more on basic foundations, (&lt;em&gt;easy&lt;/em&gt;), the second challenge was on OSINT (&lt;em&gt;easy&lt;/em&gt;), and the third challenge was on cryptography (&lt;em&gt;medium&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;This category contained three challenges where the first challenge was more on basic foundations (&lt;em&gt;easy&lt;/em&gt;), the second challenge was on OSINT (&lt;em&gt;easy&lt;/em&gt;), and the third challenge was on cryptography (&lt;em&gt;medium&lt;/em&gt;).&lt;/p&gt;
 
 &lt;h2 id=&quot;category-2-general&quot;&gt;Category 2: &lt;em&gt;General&lt;/em&gt;&lt;/h2&gt;
 
-&lt;p&gt;The second category also contained three challenges where the first challenge contained a text file that had the flag inside it, and one was required to retrieve it (&lt;em&gt;easy&lt;/em&gt;). The second challenge was almost like the first challenge but with a twist (&lt;em&gt;easy&lt;/em&gt;), there were two text files where one had the flag, and the third challenge was a zip file that was password protected with files where one had the password and the other one contained the flag (&lt;em&gt;hard&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;The second category also contained three challenges; where the first challenge contained a text file that had the flag inside it, and one was required to retrieve it (&lt;em&gt;easy&lt;/em&gt;). The second challenge was almost like the first challenge, but with a twist (&lt;em&gt;easy&lt;/em&gt;), there were two text files where one had the flag, and the third challenge was a zip file that was password protected with files where one had the password, and the other one contained the flag (&lt;em&gt;hard&lt;/em&gt;).&lt;/p&gt;
 
 &lt;h2 id=&quot;category-3-steganography&quot;&gt;Category 3: &lt;em&gt;Steganography&lt;/em&gt;&lt;/h2&gt;
 
@@ -439,9 +442,9 @@
 
 &lt;p class=&quot;figcaption&quot;&gt;Challenges&lt;/p&gt;
 
-&lt;p&gt;I would like to congratulate the &lt;a href=&quot;https://twitter.com/AbdiHacks/status/1102219256517877760&quot;&gt;USIU team&lt;/a&gt; for winning the CTF, I will post the challenges on my GitHub with hints to solve the challenges.&lt;/p&gt;
+&lt;p&gt;I want to congratulate the &lt;a href=&quot;https://twitter.com/AbdiHacks/status/1102219256517877760&quot;&gt;USIU team&lt;/a&gt; for winning the CTF. I will post the challenges on my GitHub with hints to solve them.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot; Title=&quot;Announcement&quot;&gt;Do try and solve the last challenge on steg some goodies are waiting for you.&lt;/p&gt;
+&lt;p class=&quot;note&quot; Title=&quot;Announcement&quot;&gt;Do try and solve the last challenge on steg. Some goodies are waiting for you.&lt;/p&gt;
 
 &lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
 
@@ -460,23 +463,23 @@
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;O&lt;/code&gt;pen &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;S&lt;/code&gt;ource &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INT&lt;/code&gt;telligence, is a technique of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;collecting data from publicly available sources to produce actionable intelligence&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;While I was roaming the internet space, I came by a YT video titled; open-source intelligence, what I learned being an OSINT creeper by Josh Huff. After watching the video I was excited and eager to learn more. I proceeded to give it a try, but after a few trials, I felt like I had no grip on the methodology presented by Josh.&lt;/p&gt;
+&lt;p&gt;While roaming the internet space, I came by a YT video titled; open-source intelligence, what I learned being an OSINT creeper by Josh Huff. After watching the video, I was excited and eager to learn more. I proceeded to give it a try, but after a few trials, I felt like I had no grip on the methodology presented by Josh.&lt;/p&gt;
 
 &lt;div class=&quot;youtube-wrapper&quot; style=&quot;padding-top: 2em&quot;&gt;
     &lt;iframe src=&quot;https://www.youtube.com/embed/6kBOCnOlwqI&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 
-&lt;p style=&quot;padding-top: 2em&quot;&gt;I thought maybe I would find a CTF challenge on OSINT that I can solve but there wasn’t any. Most challenges I found were by DEFCON and they were on site but they had taken recordings which I binged on them for a while. A few minutes later, I had a light bulb moment; why don’t I create my challenge. Ding!! ding!! ding!!&lt;/p&gt;
+&lt;p style=&quot;padding-top: 2em&quot;&gt;Maybe I would find a CTF challenge on OSINT that I could solve, but there wasn’t any. Most of the challenges I found were by DEFCON, and they were on site but had taken recordings which I binged on them for a while. A few minutes later, I had a light bulb moment; why don’t I create my challenge. Ding!! Ding!! Ding!!&lt;/p&gt;
 
-&lt;p&gt;Excitement and fear rushed through my veins, I went ahead to prepare a storyline and did some research to make the challenge solvable.&lt;/p&gt;
+&lt;p&gt;Excitement and fear rushed through my veins. I went ahead to prepare a storyline and did some research to make the challenge solvable.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-challenge&quot;&gt;The Challenge&lt;/h2&gt;
 
-&lt;p&gt;The platform I decided to use for hosting the challenge was the Facebook C.T.F (F.B.C.T.F) platform, it was quite easy to set up, although if you have some other service using port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;80&lt;/code&gt;, I would advise you to either shut down the running service or change the Apache service port from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;80&lt;/code&gt; to either &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1234&lt;/code&gt; on the configuration file.&lt;/p&gt;
+&lt;p&gt;The platform I decided to use for hosting the challenge was the Facebook C.T.F (F.B.C.T.F). It was quite easy to set up; however, if you have some other service using port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;80&lt;/code&gt;, I would advise you to either shut down the running service or change the Apache service port from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;80&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1234&lt;/code&gt; on the configuration file.&lt;/p&gt;
 
-&lt;p&gt;The storyline creation process was quite a challenge because I had to use publicly accessible data to correlate and make a story out of them. The storyline I came up with was of a young boy who was an orphan, being moved from one orphanage to another with him always seeking to find a place which he could call home. Later on, he ended up seeking vengeance on a former colleague who used to be at his sanctuary place (home) for destroying the home’s reputation.&lt;/p&gt;
+&lt;p&gt;The storyline creation process was quite a challenge because I had to use publicly accessible data to correlate and make a story out of them. The storyline I came up with was of a young boy who was an orphan, being moved from one orphanage to another with him, always seeking to find a place he could call home. Later on, he sought vengeance on a former colleague who used to be at his sanctuary place for destroying the home’s reputation.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;while re-writing this post, I just noticed the storyline was vague but it was what I had at that moment.&lt;/p&gt;
+&lt;p class=&quot;note&quot;&gt;while re-writing this post, I noticed the storyline was vague, but it was what I had at that moment.&lt;/p&gt;
 
 &lt;p&gt;A &lt;a href=&quot;https://github.com/iAmG-r00t/OSINT-CTF/blob/master/PWN3RS%20OSINT%20CTF%20GUIDE.pdf&quot;&gt;guide&lt;/a&gt; was provided to the players, where they were to follow a specific path from one country to the other while solving all seven levels.&lt;/p&gt;
 
@@ -504,13 +507,13 @@
 
 &lt;h2 id=&quot;epilogue&quot;&gt;Epilogue&lt;/h2&gt;
 
-&lt;p&gt;It was an amazing experience, got the opportunity to create something that allowed me to learn and share the knowledge I had learned. I am looking forward to doing more of this on different topics.&lt;/p&gt;
+&lt;p&gt;It was an amazing experience. I got the opportunity to create something that allowed me to learn and share my knowledge. I am looking forward to doing more of this on different topics.&lt;/p&gt;
 
-&lt;p&gt;The first player who completed the challenge was &lt;a href=&quot;https://twitter.com/AntonyMutiga&quot;&gt;Antony&lt;/a&gt; Mutiga](https://twitter.com/AntonyMutiga). His write-up is attached in the resources section (the funny thing is that he was my teammate at the AfricaHackOn CTF event 2018, that is a story for another day).&lt;/p&gt;
+&lt;p&gt;The first player who completed the challenge was &lt;a href=&quot;https://twitter.com/AntonyMutiga&quot;&gt;Antony&lt;/a&gt; Mutiga](https://twitter.com/AntonyMutiga). His write-up is attached in the resources section (the funny thing is that he was my teammate at the AfricaHackOn CTF event 2018, a story for another day).&lt;/p&gt;
 
 &lt;p&gt;I am happy to say this was a success, and I have provided all the configs of the challenge for anyone who wants to set it up.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;The OSINT framework is enough to guide you in solving the challenges, give it a try.&lt;/p&gt;
+&lt;p class=&quot;note&quot;&gt;The OSINT framework is enough to guide you in solving the challenges. Give it a try.&lt;/p&gt;
 
 &lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
 
@@ -530,13 +533,13 @@
 
 &lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
 
-&lt;p&gt;I had a blog where I had posted posts on what is a CTF and a write-up of this CTF. The blog encountered some technical issues that led to the creation of a new one, due to my laziness I am not going to do another whole write-up for this CTF. I want to explain what is a CTF, and what led me to create this CTF plus leave an assignment for you.&lt;/p&gt;
+&lt;p&gt;I had a blog where I had posted posts on what a CTF is and a write-up of this CTF. The blog encountered some technical issues that led to creating a new one; due to my laziness, I will not do another whole write-up for this CTF. I want to explain what a CTF is and what led me to create this CTF and leave an assignment for you.&lt;/p&gt;
 
 &lt;h2 id=&quot;capture-the-flag&quot;&gt;Capture The Flag&lt;/h2&gt;
 
-&lt;p&gt;A Capture the Flag; &lt;strong&gt;CTF&lt;/strong&gt; is a kind of information security competition, that enables someone interested in learning cyber security to build and polish up their skills. CTFs allowed me to learn how to hack and get into the cyber security field.&lt;/p&gt;
+&lt;p&gt;A Capture the Flag; &lt;strong&gt;CTF&lt;/strong&gt; is a kind of information security competition that enables someone interested in learning cyber security to build and polish up their skills. CTFs allowed me to learn how to hack and get into the cyber security field.&lt;/p&gt;
 
-&lt;p&gt;It being a competition means there are various types of challenges from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;web application&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;reverse engineering&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cryptography&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;binary exploitation&lt;/code&gt; (referred to as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pwn&lt;/code&gt;), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;forensics&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miscellaneous&lt;/code&gt; involved for the challenger to solve and win prizes.&lt;/p&gt;
+&lt;p&gt;Being a competition means there are various types of challenges from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;web application&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;reverse engineering&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cryptography&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;binary exploitation&lt;/code&gt; (referred to as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pwn&lt;/code&gt;), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;forensics&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miscellaneous&lt;/code&gt; involved for the challenger to solve and win prizes.&lt;/p&gt;
 
 &lt;div class=&quot;youtube-wrapper&quot; style=&quot;padding-top: 2em&quot;&gt;
     &lt;iframe src=&quot;https://www.youtube.com/embed/8ev9ZX9J45A&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
@@ -544,25 +547,25 @@
 
 &lt;h2 id=&quot;my-first-ctf-build&quot;&gt;My First CTF Build&lt;/h2&gt;
 
-&lt;p&gt;The third-year semester year 2017 was the first time I encountered a CTF challenge. I was a sucker for being spoon-fed most of the time and it was rough, but I guess everyone’s first encounter is likely to be the same.&lt;/p&gt;
+&lt;p&gt;The third-year semester year 2017 was the first time I encountered a CTF challenge. I was a sucker for being spoon-fed most of the time, and it was rough, but I guess everyone’s first encounter is likely to be the same.&lt;/p&gt;
 
-&lt;p&gt;I only had two classes to attend for a whole three-month period, and with all that free time I got the opportunity to sharpen my wits. I started with [OverTheWire&lt;a href=&quot;http://overthewire.org/wargames/&quot;&gt;: Wargames&lt;/a&gt; Bandit then went ahead to pwning several built virtual machines from &lt;a href=&quot;https://www.vulnhub.com/&quot;&gt;Vulnerable by Design: Vulnhub&lt;/a&gt;, and also participated in a few online CTF competitions.&lt;/p&gt;
+&lt;p&gt;I only had two classes to attend for a whole three-month period, and with all that free time, I got the opportunity to sharpen my wits. I started with &lt;a href=&quot;http://overthewire.org/wargames/&quot;&gt;OverTheWire Wargames&lt;/a&gt; Bandit, then went ahead to pwning several built virtual machines from &lt;a href=&quot;https://www.vulnhub.com/&quot;&gt;Vulnerable by Design: Vulnhub&lt;/a&gt;, and also participated in a few online CTF competitions.&lt;/p&gt;
 
-&lt;p&gt;During the semester there was an upcoming Hackathon event at the university, I used to dislike such event’s because they focused on developers and neglected information security. That being the case I decided to have a chat with the organizers who allowed me to create a simple Boot2Root challenge.&lt;/p&gt;
+&lt;p&gt;During the semester, there was an upcoming Hackathon event at the university, and I used to dislike such event’s because they focused on developers and neglected information security students. That being the case, I decided to chat with the organizers, who allowed me to create a simple Boot2Root challenge.&lt;/p&gt;
 
 &lt;p&gt;The CTF I created was a vulnerable machine that I had solved and gained 100% root access. I enjoyed the struggle of solving it and tweaking it, and the challengers who participated in the event had a good time solving it too.&lt;/p&gt;
 
 &lt;p class=&quot;note&quot;&gt;The challenge contained clues that assisted the challenger in acquiring the next flag.&lt;/p&gt;
 
-&lt;p&gt;I would like to give credit to &lt;a href=&quot;https://twitter.com/@RobertWinkel&quot;&gt;Robert Winkel&lt;/a&gt;, it was his vulnerable machine challenge that allowed me to get started.&lt;/p&gt;
+&lt;p&gt;I want to give credit to &lt;a href=&quot;https://twitter.com/@RobertWinkel&quot;&gt;Robert Winkel&lt;/a&gt;, it was his vulnerable machine challenge that got me started.&lt;/p&gt;
 
 &lt;h2 id=&quot;assignment&quot;&gt;Assignment&lt;/h2&gt;
 
-&lt;p&gt;I am going to leave you a challenge, solve the CTF and write a nice write-up and I am going to add it here on the resources links. You might never know where it will take you.&lt;/p&gt;
+&lt;p&gt;I will leave you a challenge, solve the CTF, write an excellent write-up, and I will add it here on the resources links. You might never know where it will take you.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;Follow the hacking methodology, don’t think too much, don’t be in a hurry, and the clues are there for a reason. &lt;a href=&quot;https://drive.google.com/open?id=1JeNyE5hTNon6FRE-n4QnqLnjZMCdBl8C&quot;&gt;LINK &lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;note&quot;&gt;The hacking methodology will be your guide. Don’t overthink, don’t be in a hurry, and the clues are there for a reason. &lt;a href=&quot;https://drive.google.com/open?id=1JeNyE5hTNon6FRE-n4QnqLnjZMCdBl8C&quot;&gt;LINK &lt;/a&gt;&lt;/p&gt;
 
-&lt;p class=&quot;text-align-center faded&quot;&gt;I hope you enjoy the Challenge and Feel free to contact me.&lt;/p&gt;
+&lt;p class=&quot;text-align-center faded&quot;&gt;I hope you enjoy the Challenge, and Feel free to contact me.&lt;/p&gt;
 
 &lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
 
@@ -593,19 +596,19 @@
 
 &lt;p&gt;I am excited right now.&lt;/p&gt;
 
-&lt;p&gt;After my first interaction with a CTF challenge on Reverse Engineering at Africa HackOn 2018, I fell in love. A lot of things came to mind on the capabilities one can do with such a skill. In this blog post, I am going to share the basic need to know with an example. The learning curve will be steep you might end up in a rabbit hole from researching from one place to the other.&lt;/p&gt;
+&lt;p&gt;After my first interaction with a CTF challenge on Reverse Engineering at Africa HackOn 2018, I fell in love. Many things came to mind on the capabilities one can do with such a skill. This post will share the basic need to know with an example. The learning curve will be steep; you might end up in a rabbit hole from researching from one place to the other.&lt;/p&gt;
 
-&lt;p class=&quot;note&quot; title=&quot;Advice&quot;&gt;Don’t think too much, relax you will get a hang of it after a couple of tries, and remember to always perfect your craft (&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Practice&lt;/code&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Practice&lt;/code&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Practice&lt;/code&gt;&lt;/strong&gt;). &lt;a href=&quot;https://twitter.com/LiveOverflow/status/1037296510583689216&quot;&gt;LiveOverflow’s Tips to Master Something&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;note&quot; title=&quot;Advice&quot;&gt;Don’t overthink; relax. After a couple of tries, you will get the hang of it, and remember always to perfect your craft (&lt;strong&gt;Practice&lt;/strong&gt;, &lt;strong&gt;Practice&lt;/strong&gt;, &lt;strong&gt;Practice&lt;/strong&gt;). &lt;a href=&quot;https://twitter.com/LiveOverflow/status/1037296510583689216&quot;&gt;LiveOverflow’s Tips to Master Something&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;So what is Reverse Engineering; it’s the process of &lt;strong&gt;Acquiring&lt;/strong&gt; anything man-made, &lt;strong&gt;Analyzing&lt;/strong&gt; it, and then &lt;strong&gt;Disassembling&lt;/strong&gt;** to understand how it works and acquire any informative knowledge about it.&lt;/p&gt;
+&lt;p&gt;So what is Reverse Engineering; it’s the process of &lt;strong&gt;Acquiring&lt;/strong&gt; anything artificial, &lt;strong&gt;Analyzing&lt;/strong&gt;&lt;strong&gt; it, and then &lt;/strong&gt;Disassembling&lt;em&gt;**&lt;/em&gt; to understand how it works and acquire any informative knowledge about it.&lt;/p&gt;
 
-&lt;p&gt;We have a &lt;a href=&quot;https://www.webopedia.com/TERM/B/binary_file.html&quot;&gt;binary file&lt;/a&gt; named: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CrackMe1.bin&lt;/code&gt; which is a program that has been compiled and converted to machine code.&lt;/p&gt;
+&lt;p&gt;We have a &lt;a href=&quot;https://www.webopedia.com/TERM/B/binary_file.html&quot;&gt;binary file&lt;/a&gt; named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CrackMe1.bin&lt;/code&gt;, a program that has been compiled and converted to machine code.&lt;/p&gt;
 
-&lt;p&gt;So when given such a file there are basic things you should first do before opening it with Radare2, IDA, or binary ninja (disassembly tools).&lt;/p&gt;
+&lt;p&gt;When given such a file, I usually perform a few steps before opening it with Radare2, IDA, or binary ninja (disassembly tools).&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Confirm the &lt;a href=&quot;https://en.wikipedia.org/wiki/File_format&quot;&gt;file format&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Execute the file, to get an understanding of what task you are given to solve.&lt;/li&gt;
+  &lt;li&gt;Execute the file to understand what task you are given to solve.&lt;/li&gt;
   &lt;li&gt;Check the &lt;a href=&quot;https://en.wikipedia.org/wiki/String_(computer_science)&quot;&gt;data strings&lt;/a&gt; of the file. &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -619,9 +622,9 @@
 
 &lt;p style=&quot;padding-top: 4em&quot;&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image3.png&quot; alt=&quot;image3&quot; class=&quot;align-right&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-I&lt;/code&gt; option is for extracting binary information. So we have an &lt;a href=&quot;https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/&quot;&gt;ELF&lt;/a&gt; (Executable and Linkable Format) class 64 binary file, take note that we are going to use this information later on.{: .align-left”}&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-I&lt;/code&gt; option is for extracting binary information. So we have an &lt;a href=&quot;https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/&quot;&gt;ELF&lt;/a&gt; (Executable and Linkable Format) class 64 binary file. Take note that we are going to use this information later on.&lt;/p&gt;
 
-&lt;p&gt;Another way of checking file format which mostly comes in handy when dealing with embedded data is to open the file in a hex editor and identify the &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_file_signatures&quot;&gt;file&lt;/a&gt; header signatures and extract the embedded data.&lt;/p&gt;
+&lt;p&gt;Another way of checking file format that mostly comes in handy when dealing with embedded data is to open the file in a hex editor, identify the &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_file_signatures&quot;&gt;file&lt;/a&gt; header signatures, and extract the embedded data.&lt;/p&gt;
 
 &lt;p style=&quot;padding-top: 20em&quot; class=&quot;figcaption&quot;&gt;img-2: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rabin2 -I crackMe1.bin&lt;/code&gt;&lt;/p&gt;
 
@@ -641,23 +644,23 @@
 
 &lt;p class=&quot;figcaption&quot;&gt;img-3: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;running the binary file&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;So when running the file, you will be prompted for a password and when you type in anything like &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1234&lt;/code&gt;&lt;/strong&gt; it will return a Bad password string output.&lt;/p&gt;
+&lt;p&gt;So when running the file, you will be prompted for a password, and when you type in anything like &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1234&lt;/code&gt;&lt;/strong&gt;, it will return a Bad password string output.&lt;/p&gt;
 
 &lt;h2 id=&quot;strings&quot;&gt;Strings&lt;/h2&gt;
 
-&lt;p&gt;From the above image, we can see that the program outputs several words but the most common one is the word password. Hence while analyzing the program strings we are going to search for lines that contain the string &lt;strong class=&quot;text-color-red&quot;&gt;password&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The above image shows that the program outputs several words, but the word password is the most common. Hence while analyzing the program strings, we are going to search for lines that contain the string &lt;strong class=&quot;text-color-red&quot;&gt;password&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;There are two methods of doing this either using the &lt;a href=&quot;https://linux.die.net/man/1/strings&quot;&gt;strings&lt;/a&gt; UNIX command or using our tool of choice radare2 as I have shown in this &lt;a href=&quot;#strings-using-r2&quot;&gt;section&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are two methods of doing this: the &lt;a href=&quot;https://linux.die.net/man/1/strings&quot;&gt;strings&lt;/a&gt; UNIX command or our tool of choice, radare2, as shown in this &lt;a href=&quot;#strings-using-r2&quot;&gt;section&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;So because we know we have a bad password string let’s try and see if we have any other data string with the password string.&lt;/p&gt;
+&lt;p&gt;So because we know we have a bad password string, let’s try and see if we have any other data string with the password string.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image5.png&quot; alt=&quot;image5&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
 &lt;p class=&quot;figcaption&quot;&gt;img-4: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strings crackMe1.bin | grep &quot;password&quot;&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Good password&lt;/strong&gt; so our main goal is to get the correct password.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Good password&lt;/strong&gt;, so our main goal is to get the correct password.&lt;/p&gt;
 
-&lt;p&gt;When I started learning reverse engineering my tool of choice was IDA until I met &lt;a href=&quot;https://www.radare.org/n/&quot;&gt;Radare2&lt;/a&gt; and hence this post. I am still learning and to be honest the image below says it all.&lt;/p&gt;
+&lt;p&gt;When I started learning reverse engineering, my tool of choice was IDA until I met &lt;a href=&quot;https://www.radare.org/n/&quot;&gt;Radare2&lt;/a&gt;, and hence this post. I am still learning, and to be honest, the image below says it all.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image6.jpg&quot; alt=&quot;image6&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
@@ -667,13 +670,13 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image7.png&quot; alt=&quot;image7&quot; class=&quot;align-left&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;So we begin by examining the file by executing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;r2 crackMe1.bin&lt;/code&gt;. Currently, we are in shell mode where we can execute our commands and by default, we are taken at the entry address &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[0x000008a0]&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;So we begin by examining the file by executing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;r2 crackMe1.bin&lt;/code&gt;. Currently, we are in shell mode, where we can run our commands, and by default, we are taken at the entry address &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[0x000008a0]&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;The first command; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ie&lt;/code&gt; is the entry points info command which prints the entry points.&lt;/p&gt;
+&lt;p&gt;The first command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ie&lt;/code&gt; is the entry points info command, which prints the entry points.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image8.png&quot; alt=&quot;image8&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Next, analyzing the program using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aaa&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a?&lt;/code&gt;; gives you different options of the command).  Remember not to skip this bit because radare2 doesn’t analyze automatically by default but you can run this command when running the binary file with radare.&lt;/p&gt;
+&lt;p&gt;Next, analyzing the program using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aaa&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a?&lt;/code&gt;; gives you different command options).  Remember not to skip this bit because radare2 doesn’t analyze automatically by default, but you can run this command when running the binary file.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# this will allow us to avoid running aaa&lt;/span&gt;
 r2 &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; CrackMe1.bin
@@ -685,9 +688,9 @@ r2 &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; CrackMe1.bin
 
 &lt;p style=&quot;padding-top: 1em&quot;&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image10.png&quot; alt=&quot;image9&quot; class=&quot;align-right&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;After analyzing all flags, we can go ahead and list them using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs&lt;/code&gt; command, which means flag space. As we can see we have a strings flag space, and we proceed to view its contents using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs strings; f&lt;/code&gt; (the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f&lt;/code&gt; option is used to print contents).&lt;/p&gt;
+&lt;p&gt;After analyzing all flags, we can list them using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs&lt;/code&gt; command, which means flag space. As we can see, we have a strings flag space, and we proceed to view its contents using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs strings; f&lt;/code&gt; (the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f&lt;/code&gt; option is used to print contents).&lt;/p&gt;
 
-&lt;p&gt;As you can see it prints each string starting with its &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;address location&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;length&lt;/code&gt;, and the actual string.&lt;/p&gt;
+&lt;p&gt;It prints each string starting with its &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;address location&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;length&lt;/code&gt;, and the actual string.&lt;/p&gt;
 
 &lt;p style=&quot;padding-top: 5em&quot;&gt;Next we are going to find the code reference for our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;str.Good_password&lt;/code&gt; reference.&lt;/p&gt;
 
@@ -698,15 +701,15 @@ r2 &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; CrackMe1.bin
 
 &lt;h3 class=&quot;text-align-center&quot; id=&quot;disassembly&quot;&gt;Disassembly&lt;/h3&gt;
 
-&lt;p&gt;The fun part, disassembling the program.&lt;/p&gt;
+&lt;p&gt;The fun part is disassembling the program.&lt;/p&gt;
 
 &lt;p&gt;In every program, we have a global function called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt;, which serves as the starting point for the program execution. The program will also allow us to understand the program execution.&lt;/p&gt;
 
-&lt;p&gt;That being the case we are going to enter the main function using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s main; pdf&lt;/code&gt;, where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s&lt;/code&gt; means to seek and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pdf&lt;/code&gt; command disassembles the function.&lt;/p&gt;
+&lt;p&gt;That being the case, we will enter the main function using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s main; pdf&lt;/code&gt;, where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s&lt;/code&gt; means to seek, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pdf&lt;/code&gt;` command disassembles the function.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image12.png&quot; alt=&quot;image11&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
-&lt;p class=&quot;note&quot;&gt;Before we proceed to understand our function, know that we currently looking at the assembly language and you as a reader are required to have a basic understanding of the &lt;strong&gt;stack&lt;/strong&gt; and how it works, know how to read assembly language, and have basic knowledge of &lt;strong&gt;C&lt;/strong&gt; and &lt;strong&gt;C++&lt;/strong&gt; programming languages.&lt;/p&gt;
+&lt;p class=&quot;note&quot;&gt;Before we understand our function, know that we are currently looking at the assembly language. You, as a reader, are required to have a basic understanding of the &lt;strong&gt;stack&lt;/strong&gt; and how it works, know how to read assembly language, and have basic knowledge of &lt;strong&gt;C&lt;/strong&gt; and &lt;strong&gt;C++&lt;/strong&gt; programming languages.&lt;/p&gt;
 
 &lt;div class=&quot;language-nasm highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;; main func&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;  &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;; store base pointer in the stack&lt;/span&gt;
@@ -718,13 +721,13 @@ r2 &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; CrackMe1.bin
 &lt;span class=&quot;nf&quot;&gt;ret&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;; return - end of program&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The program starts by pushing the base pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbp&lt;/code&gt; to the top of the stack, then makes the stack pointer the new base pointer. Proceeds to calling two functions &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sym.systemv&lt;/code&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sym.systemo&lt;/code&gt;&lt;/strong&gt; respectively, then move 0 to the accumulator register (&lt;strong&gt;eax&lt;/strong&gt;), gets the base pointer from the top of the stack then performs a subroutine return (&lt;strong&gt;ret&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;The program starts by pushing the base pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbp&lt;/code&gt; to the top of the stack, then makes the stack pointer the new base pointer. Proceeds to call two functions &lt;strong&gt;sym.systemv&lt;/strong&gt; and &lt;strong&gt;sym.systemo&lt;/strong&gt;, then move 0 to the accumulator register (&lt;strong&gt;eax&lt;/strong&gt;), get the base pointer from the top of the stack, and perform a subroutine return (&lt;strong&gt;ret&lt;/strong&gt;).&lt;/p&gt;
 
 &lt;p&gt;So we are going to focus on the two functions being called.&lt;/p&gt;
 
 &lt;h3 class=&quot;text-align-center&quot; id=&quot;first-function-systemv&quot;&gt;First function: systemv&lt;/h3&gt;
 
-&lt;p&gt;From the code below we can note the function’s main purpose is to set the variables.&lt;/p&gt;
+&lt;p&gt;From the code below, we can note the function’s main purpose is to set the variables.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image13.png&quot; alt=&quot;image12&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
@@ -757,7 +760,7 @@ r2 &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; CrackMe1.bin
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image15.png&quot; alt=&quot;image14&quot; class=&quot;lead&quot; width=&quot;1700px&quot; /&gt;&lt;/p&gt;
 
-&lt;p class=&quot;note&quot; title=&quot;Attention&quot;&gt;The image is not that visible but I will fix that issue in future posts, below is the whole code re-written when migrating from blogger.&lt;/p&gt;
+&lt;p class=&quot;note&quot; title=&quot;Attention&quot;&gt;The image is not visible, but I will fix that issue in future posts. Below is the whole code re-written when migrating from blogger.&lt;/p&gt;
 
 &lt;div class=&quot;language-nasm highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;; just realized this is a c++ program date 03/05/22&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;;&lt;/span&gt;
@@ -784,16 +787,15 @@ r2 &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; CrackMe1.bin
 &lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt;    &lt;span class=&quot;nv&quot;&gt;something...&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;; call while passing two arguments rdi, rsi&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;From the above code, we can see the second function contains our string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Good password&lt;/code&gt;, when I was writing this post in 2018 I had noted that I wasn’t going to explain the whole code but the essential bit of the code that led us to our string. 4years later I can explain the whole code. Like I even found a very quick way to solve this challenge by just reading the code. Emphasize on &lt;strong&gt;keep practicing&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;From the above code, we can see the second function contains our string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Good password&lt;/code&gt;; when I was writing this post in 2018, I had noted that I wasn’t going to explain the whole code but the essential bit of the code that led us to our string. 4years later, I can explain the entire code. I even found a quick way to solve this challenge when reading the code. Emphasize on &lt;strong&gt;keep practicing&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;h3 class=&quot;text-align-center&quot; id=&quot;solving&quot;&gt;Solving&lt;/h3&gt;
 
-&lt;p&gt;Because I am writting this post once more, I am going to do what I wasn’t able to do last time, explain everything. I believe this is a second chance so let me take advantage of it and show off.&lt;/p&gt;
+&lt;p&gt;Because I am writting this post once more, I will do what I wasn’t able to do last time, explain everything. I believe this is a second chance so let me take advantage of it and show off.&lt;/p&gt;
 
-&lt;p&gt;So the first function loads the values to variables that are later being used in the second function. After getting our new base pointer we can see the program is reserving space in the stack of size 0x10. It then moves the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_8h&lt;/code&gt; to register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;, then adds the value at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; with the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_4h&lt;/code&gt;. Then moves results of the addition to the register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So the first function loads the values to variables later used in the second function. After getting our new base pointer, we can see the program is reserving space in the stack of size 0x10. It then moves the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_8h&lt;/code&gt; to register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;, then adds the value at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; with the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_4h&lt;/code&gt;. Then moves results of the addition to the register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Then we proceed to multiply using the &lt;a href=&quot;http://www.c-jump.com/CIS77/reference/ISA/DDU0094.html&quot;&gt;imul&lt;/a&gt; instruction.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;imul eax, eax, 0x2d&lt;/code&gt; is a long hand for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;imul eax, 0x2d&lt;/code&gt; which takes the value stored at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; and multiplies it by  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x2d&lt;/code&gt; then stores the new value at register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;. The value is then moved to variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Then we proceed to multiply using the &lt;a href=&quot;http://www.c-jump.com/CIS77/reference/ISA/DDU0094.html&quot;&gt;imul&lt;/a&gt; instruction. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;imul eax, eax, 0x2d&lt;/code&gt; is an extended hand for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;imul eax, 0x2d&lt;/code&gt;, which takes the value stored at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; and multiplies it by  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x2d&lt;/code&gt;. Then holds the new value at register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;, which is then moved to variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;local_8h &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 7
 local_4h &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 5
@@ -807,15 +809,15 @@ eax &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; eax &lt;span class=&quot;k&qu
 local_ch &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; eax &lt;span class=&quot;c&quot;&gt;# 540&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We you read the code above as I have explained the next few instructions executed allow the program to print &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Password&lt;/code&gt; and ask for user password input. Hence no need to explain them twice.&lt;/p&gt;
+&lt;p&gt;We you read the code above, the next few instructions executed allow the program to print &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Password&lt;/code&gt; and ask for user password input. Hence no need to explain them twice.&lt;/p&gt;
 
-&lt;p&gt;After the user has keyed in his password which was stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_10h&lt;/code&gt;, it is then moved to register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; and then compared to the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;After the user has keyed in his password, it is stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_10h&lt;/code&gt;. Then later moved to register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;, which is compared to the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image16.png&quot; alt=&quot;image15&quot; id=&quot;cmp&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;If both values are equal the next instruction executed will lead to printing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Good password&lt;/code&gt; and that would result in us successfully solving the challenge. But if they are not equal it will take a jump to address &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xa62&lt;/code&gt; which I think will end up printing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bad password&lt;/code&gt; as we had seen before while running the program.&lt;/p&gt;
+&lt;p&gt;If both values are equal, the next instruction executed will print &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Good password&lt;/code&gt;, resulting in us successfully solving the challenge. But if they are not equal, it will take a jump to address &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xa62&lt;/code&gt;, which I think will print the string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bad password&lt;/code&gt; as we had seen before while running the program.&lt;/p&gt;
 
-&lt;p&gt;If you check the compare instruction you can see we have our password at two variables; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_10h&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;. Where we already know the value for variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you check the compare instruction, you can see we have our password at two variables; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_10h&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;. Where we already know the value for variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;So our password is &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;540&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 

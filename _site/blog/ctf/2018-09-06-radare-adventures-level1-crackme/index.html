@@ -107,7 +107,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2022-05-26T19:44:13+03:00',
+    INDEX_KEY: 'index--2022-05-27T10:41:27+03:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -308,19 +308,19 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p>I am excited right now.</p>
 
-<p>After my first interaction with a CTF challenge on Reverse Engineering at Africa HackOn 2018, I fell in love. A lot of things came to mind on the capabilities one can do with such a skill. In this blog post, I am going to share the basic need to know with an example. The learning curve will be steep you might end up in a rabbit hole from researching from one place to the other.</p>
+<p>After my first interaction with a CTF challenge on Reverse Engineering at Africa HackOn 2018, I fell in love. Many things came to mind on the capabilities one can do with such a skill. This post will share the basic need to know with an example. The learning curve will be steep; you might end up in a rabbit hole from researching from one place to the other.</p>
 
-<p class="note" title="Advice">Don’t think too much, relax you will get a hang of it after a couple of tries, and remember to always perfect your craft (<strong><code class="language-plaintext highlighter-rouge">Practice</code></strong>, <strong><code class="language-plaintext highlighter-rouge">Practice</code></strong>, <strong><code class="language-plaintext highlighter-rouge">Practice</code></strong>). <a href="https://twitter.com/LiveOverflow/status/1037296510583689216">LiveOverflow’s Tips to Master Something</a></p>
+<p class="note" title="Advice">Don’t overthink; relax. After a couple of tries, you will get the hang of it, and remember always to perfect your craft (<strong>Practice</strong>, <strong>Practice</strong>, <strong>Practice</strong>). <a href="https://twitter.com/LiveOverflow/status/1037296510583689216">LiveOverflow’s Tips to Master Something</a></p>
 
-<p>So what is Reverse Engineering; it’s the process of <strong>Acquiring</strong> anything man-made, <strong>Analyzing</strong> it, and then <strong>Disassembling</strong>** to understand how it works and acquire any informative knowledge about it.</p>
+<p>So what is Reverse Engineering; it’s the process of <strong>Acquiring</strong> anything artificial, <strong>Analyzing</strong><strong> it, and then </strong>Disassembling<em>**</em> to understand how it works and acquire any informative knowledge about it.</p>
 
-<p>We have a <a href="https://www.webopedia.com/TERM/B/binary_file.html">binary file</a> named: <code class="language-plaintext highlighter-rouge">CrackMe1.bin</code> which is a program that has been compiled and converted to machine code.</p>
+<p>We have a <a href="https://www.webopedia.com/TERM/B/binary_file.html">binary file</a> named <code class="language-plaintext highlighter-rouge">CrackMe1.bin</code>, a program that has been compiled and converted to machine code.</p>
 
-<p>So when given such a file there are basic things you should first do before opening it with Radare2, IDA, or binary ninja (disassembly tools).</p>
+<p>When given such a file, I usually perform a few steps before opening it with Radare2, IDA, or binary ninja (disassembly tools).</p>
 
 <ol>
   <li>Confirm the <a href="https://en.wikipedia.org/wiki/File_format">file format</a>.</li>
-  <li>Execute the file, to get an understanding of what task you are given to solve.</li>
+  <li>Execute the file to understand what task you are given to solve.</li>
   <li>Check the <a href="https://en.wikipedia.org/wiki/String_(computer_science)">data strings</a> of the file. </li>
 </ol>
 
@@ -334,9 +334,9 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p style="padding-top: 4em"><img src="/assets/img/blog/2018-09-06/image3.png" alt="image3" class="align-right" /></p>
 
-<p>The <code class="language-plaintext highlighter-rouge">-I</code> option is for extracting binary information. So we have an <a href="https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/">ELF</a> (Executable and Linkable Format) class 64 binary file, take note that we are going to use this information later on.{: .align-left”}</p>
+<p>The <code class="language-plaintext highlighter-rouge">-I</code> option is for extracting binary information. So we have an <a href="https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/">ELF</a> (Executable and Linkable Format) class 64 binary file. Take note that we are going to use this information later on.</p>
 
-<p>Another way of checking file format which mostly comes in handy when dealing with embedded data is to open the file in a hex editor and identify the <a href="https://en.wikipedia.org/wiki/List_of_file_signatures">file</a> header signatures and extract the embedded data.</p>
+<p>Another way of checking file format that mostly comes in handy when dealing with embedded data is to open the file in a hex editor, identify the <a href="https://en.wikipedia.org/wiki/List_of_file_signatures">file</a> header signatures, and extract the embedded data.</p>
 
 <p style="padding-top: 20em" class="figcaption">img-2: <code class="language-plaintext highlighter-rouge">rabin2 -I crackMe1.bin</code></p>
 
@@ -356,23 +356,23 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p class="figcaption">img-3: <code class="language-plaintext highlighter-rouge">running the binary file</code></p>
 
-<p>So when running the file, you will be prompted for a password and when you type in anything like <strong><code class="language-plaintext highlighter-rouge">1234</code></strong> it will return a Bad password string output.</p>
+<p>So when running the file, you will be prompted for a password, and when you type in anything like <strong><code class="language-plaintext highlighter-rouge">1234</code></strong>, it will return a Bad password string output.</p>
 
 <h2 id="strings">Strings</h2>
 
-<p>From the above image, we can see that the program outputs several words but the most common one is the word password. Hence while analyzing the program strings we are going to search for lines that contain the string <strong class="text-color-red">password</strong>.</p>
+<p>The above image shows that the program outputs several words, but the word password is the most common. Hence while analyzing the program strings, we are going to search for lines that contain the string <strong class="text-color-red">password</strong>.</p>
 
-<p>There are two methods of doing this either using the <a href="https://linux.die.net/man/1/strings">strings</a> UNIX command or using our tool of choice radare2 as I have shown in this <a href="#strings-using-r2">section</a>.</p>
+<p>There are two methods of doing this: the <a href="https://linux.die.net/man/1/strings">strings</a> UNIX command or our tool of choice, radare2, as shown in this <a href="#strings-using-r2">section</a>.</p>
 
-<p>So because we know we have a bad password string let’s try and see if we have any other data string with the password string.</p>
+<p>So because we know we have a bad password string, let’s try and see if we have any other data string with the password string.</p>
 
 <p><img src="/assets/img/blog/2018-09-06/image5.png" alt="image5" class="centered" /></p>
 
 <p class="figcaption">img-4: <code class="language-plaintext highlighter-rouge">strings crackMe1.bin | grep "password"</code></p>
 
-<p><strong>Good password</strong> so our main goal is to get the correct password.</p>
+<p><strong>Good password</strong>, so our main goal is to get the correct password.</p>
 
-<p>When I started learning reverse engineering my tool of choice was IDA until I met <a href="https://www.radare.org/n/">Radare2</a> and hence this post. I am still learning and to be honest the image below says it all.</p>
+<p>When I started learning reverse engineering, my tool of choice was IDA until I met <a href="https://www.radare.org/n/">Radare2</a>, and hence this post. I am still learning, and to be honest, the image below says it all.</p>
 
 <p><img src="/assets/img/blog/2018-09-06/image6.jpg" alt="image6" class="centered" /></p>
 
@@ -382,13 +382,13 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p><img src="/assets/img/blog/2018-09-06/image7.png" alt="image7" class="align-left" /></p>
 
-<p>So we begin by examining the file by executing <code class="language-plaintext highlighter-rouge">r2 crackMe1.bin</code>. Currently, we are in shell mode where we can execute our commands and by default, we are taken at the entry address <strong><code class="language-plaintext highlighter-rouge">[0x000008a0]</code></strong>.</p>
+<p>So we begin by examining the file by executing <code class="language-plaintext highlighter-rouge">r2 crackMe1.bin</code>. Currently, we are in shell mode, where we can run our commands, and by default, we are taken at the entry address <strong><code class="language-plaintext highlighter-rouge">[0x000008a0]</code></strong>.</p>
 
-<p>The first command; <code class="language-plaintext highlighter-rouge">ie</code> is the entry points info command which prints the entry points.</p>
+<p>The first command <code class="language-plaintext highlighter-rouge">ie</code> is the entry points info command, which prints the entry points.</p>
 
 <p><img src="/assets/img/blog/2018-09-06/image8.png" alt="image8" class="centered" /></p>
 
-<p>Next, analyzing the program using the command <code class="language-plaintext highlighter-rouge">aaa</code> (<code class="language-plaintext highlighter-rouge">a?</code>; gives you different options of the command).  Remember not to skip this bit because radare2 doesn’t analyze automatically by default but you can run this command when running the binary file with radare.</p>
+<p>Next, analyzing the program using the command <code class="language-plaintext highlighter-rouge">aaa</code> (<code class="language-plaintext highlighter-rouge">a?</code>; gives you different command options).  Remember not to skip this bit because radare2 doesn’t analyze automatically by default, but you can run this command when running the binary file.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># this will allow us to avoid running aaa</span>
 r2 <span class="nt">-A</span> CrackMe1.bin
@@ -400,9 +400,9 @@ r2 <span class="nt">-A</span> CrackMe1.bin
 
 <p style="padding-top: 1em"><img src="/assets/img/blog/2018-09-06/image10.png" alt="image9" class="align-right" /></p>
 
-<p>After analyzing all flags, we can go ahead and list them using the <code class="language-plaintext highlighter-rouge">fs</code> command, which means flag space. As we can see we have a strings flag space, and we proceed to view its contents using the command <code class="language-plaintext highlighter-rouge">fs strings; f</code> (the <code class="language-plaintext highlighter-rouge">f</code> option is used to print contents).</p>
+<p>After analyzing all flags, we can list them using the <code class="language-plaintext highlighter-rouge">fs</code> command, which means flag space. As we can see, we have a strings flag space, and we proceed to view its contents using the command <code class="language-plaintext highlighter-rouge">fs strings; f</code> (the <code class="language-plaintext highlighter-rouge">f</code> option is used to print contents).</p>
 
-<p>As you can see it prints each string starting with its <code class="language-plaintext highlighter-rouge">address location</code>, <code class="language-plaintext highlighter-rouge">length</code>, and the actual string.</p>
+<p>It prints each string starting with its <code class="language-plaintext highlighter-rouge">address location</code>, <code class="language-plaintext highlighter-rouge">length</code>, and the actual string.</p>
 
 <p style="padding-top: 5em">Next we are going to find the code reference for our <code class="language-plaintext highlighter-rouge">str.Good_password</code> reference.</p>
 
@@ -413,15 +413,15 @@ r2 <span class="nt">-A</span> CrackMe1.bin
 
 <h3 class="text-align-center" id="disassembly">Disassembly</h3>
 
-<p>The fun part, disassembling the program.</p>
+<p>The fun part is disassembling the program.</p>
 
 <p>In every program, we have a global function called <code class="language-plaintext highlighter-rouge">main</code>, which serves as the starting point for the program execution. The program will also allow us to understand the program execution.</p>
 
-<p>That being the case we are going to enter the main function using the command <code class="language-plaintext highlighter-rouge">s main; pdf</code>, where <code class="language-plaintext highlighter-rouge">s</code> means to seek and the <code class="language-plaintext highlighter-rouge">pdf</code> command disassembles the function.</p>
+<p>That being the case, we will enter the main function using the command <code class="language-plaintext highlighter-rouge">s main; pdf</code>, where <code class="language-plaintext highlighter-rouge">s</code> means to seek, and the <code class="language-plaintext highlighter-rouge">pdf</code>` command disassembles the function.</p>
 
 <p><img src="/assets/img/blog/2018-09-06/image12.png" alt="image11" class="centered" /></p>
 
-<p class="note">Before we proceed to understand our function, know that we currently looking at the assembly language and you as a reader are required to have a basic understanding of the <strong>stack</strong> and how it works, know how to read assembly language, and have basic knowledge of <strong>C</strong> and <strong>C++</strong> programming languages.</p>
+<p class="note">Before we understand our function, know that we are currently looking at the assembly language. You, as a reader, are required to have a basic understanding of the <strong>stack</strong> and how it works, know how to read assembly language, and have basic knowledge of <strong>C</strong> and <strong>C++</strong> programming languages.</p>
 
 <div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">; main func</span>
 <span class="nf">push</span>  <span class="nb">rbp</span>           <span class="c1">; store base pointer in the stack</span>
@@ -433,13 +433,13 @@ r2 <span class="nt">-A</span> CrackMe1.bin
 <span class="nf">ret</span>                 <span class="c1">; return - end of program</span>
 </code></pre></div></div>
 
-<p>The program starts by pushing the base pointer <code class="language-plaintext highlighter-rouge">rbp</code> to the top of the stack, then makes the stack pointer the new base pointer. Proceeds to calling two functions <strong><code class="language-plaintext highlighter-rouge">sym.systemv</code></strong> and <strong><code class="language-plaintext highlighter-rouge">sym.systemo</code></strong> respectively, then move 0 to the accumulator register (<strong>eax</strong>), gets the base pointer from the top of the stack then performs a subroutine return (<strong>ret</strong>).</p>
+<p>The program starts by pushing the base pointer <code class="language-plaintext highlighter-rouge">rbp</code> to the top of the stack, then makes the stack pointer the new base pointer. Proceeds to call two functions <strong>sym.systemv</strong> and <strong>sym.systemo</strong>, then move 0 to the accumulator register (<strong>eax</strong>), get the base pointer from the top of the stack, and perform a subroutine return (<strong>ret</strong>).</p>
 
 <p>So we are going to focus on the two functions being called.</p>
 
 <h3 class="text-align-center" id="first-function-systemv">First function: systemv</h3>
 
-<p>From the code below we can note the function’s main purpose is to set the variables.</p>
+<p>From the code below, we can note the function’s main purpose is to set the variables.</p>
 
 <p><img src="/assets/img/blog/2018-09-06/image13.png" alt="image12" class="centered" /></p>
 
@@ -472,7 +472,7 @@ r2 <span class="nt">-A</span> CrackMe1.bin
 
 <p><img src="/assets/img/blog/2018-09-06/image15.png" alt="image14" class="lead" width="1700px" /></p>
 
-<p class="note" title="Attention">The image is not that visible but I will fix that issue in future posts, below is the whole code re-written when migrating from blogger.</p>
+<p class="note" title="Attention">The image is not visible, but I will fix that issue in future posts. Below is the whole code re-written when migrating from blogger.</p>
 
 <div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">; just realized this is a c++ program date 03/05/22</span>
 <span class="c1">;</span>
@@ -499,16 +499,15 @@ r2 <span class="nt">-A</span> CrackMe1.bin
 <span class="nf">call</span>    <span class="nv">something...</span>                  <span class="c1">; call while passing two arguments rdi, rsi</span>
 </code></pre></div></div>
 
-<p>From the above code, we can see the second function contains our string <code class="language-plaintext highlighter-rouge">Good password</code>, when I was writing this post in 2018 I had noted that I wasn’t going to explain the whole code but the essential bit of the code that led us to our string. 4years later I can explain the whole code. Like I even found a very quick way to solve this challenge by just reading the code. Emphasize on <strong>keep practicing</strong>.</p>
+<p>From the above code, we can see the second function contains our string <code class="language-plaintext highlighter-rouge">Good password</code>; when I was writing this post in 2018, I had noted that I wasn’t going to explain the whole code but the essential bit of the code that led us to our string. 4years later, I can explain the entire code. I even found a quick way to solve this challenge when reading the code. Emphasize on <strong>keep practicing</strong>.</p>
 
 <h3 class="text-align-center" id="solving">Solving</h3>
 
-<p>Because I am writting this post once more, I am going to do what I wasn’t able to do last time, explain everything. I believe this is a second chance so let me take advantage of it and show off.</p>
+<p>Because I am writting this post once more, I will do what I wasn’t able to do last time, explain everything. I believe this is a second chance so let me take advantage of it and show off.</p>
 
-<p>So the first function loads the values to variables that are later being used in the second function. After getting our new base pointer we can see the program is reserving space in the stack of size 0x10. It then moves the value stored at variable <code class="language-plaintext highlighter-rouge">local_8h</code> to register <code class="language-plaintext highlighter-rouge">eax</code>, then adds the value at <code class="language-plaintext highlighter-rouge">eax</code> with the value stored at variable <code class="language-plaintext highlighter-rouge">local_4h</code>. Then moves results of the addition to the register <code class="language-plaintext highlighter-rouge">eax</code>.</p>
+<p>So the first function loads the values to variables later used in the second function. After getting our new base pointer, we can see the program is reserving space in the stack of size 0x10. It then moves the value stored at variable <code class="language-plaintext highlighter-rouge">local_8h</code> to register <code class="language-plaintext highlighter-rouge">eax</code>, then adds the value at <code class="language-plaintext highlighter-rouge">eax</code> with the value stored at variable <code class="language-plaintext highlighter-rouge">local_4h</code>. Then moves results of the addition to the register <code class="language-plaintext highlighter-rouge">eax</code>.</p>
 
-<p>Then we proceed to multiply using the <a href="http://www.c-jump.com/CIS77/reference/ISA/DDU0094.html">imul</a> instruction.
-<code class="language-plaintext highlighter-rouge">imul eax, eax, 0x2d</code> is a long hand for <code class="language-plaintext highlighter-rouge">imul eax, 0x2d</code> which takes the value stored at <code class="language-plaintext highlighter-rouge">eax</code> and multiplies it by  <code class="language-plaintext highlighter-rouge">0x2d</code> then stores the new value at register <code class="language-plaintext highlighter-rouge">eax</code>. The value is then moved to variable <code class="language-plaintext highlighter-rouge">local_ch</code>.</p>
+<p>Then we proceed to multiply using the <a href="http://www.c-jump.com/CIS77/reference/ISA/DDU0094.html">imul</a> instruction. <code class="language-plaintext highlighter-rouge">imul eax, eax, 0x2d</code> is an extended hand for <code class="language-plaintext highlighter-rouge">imul eax, 0x2d</code>, which takes the value stored at <code class="language-plaintext highlighter-rouge">eax</code> and multiplies it by  <code class="language-plaintext highlighter-rouge">0x2d</code>. Then holds the new value at register <code class="language-plaintext highlighter-rouge">eax</code>, which is then moved to variable <code class="language-plaintext highlighter-rouge">local_ch</code>.</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_8h <span class="o">=</span> 7
 local_4h <span class="o">=</span> 5
@@ -522,15 +521,15 @@ eax <span class="o">=</span> eax <span class="k">*</span> 45 <span class="c"># 5
 local_ch <span class="o">=</span> eax <span class="c"># 540</span>
 </code></pre></div></div>
 
-<p>We you read the code above as I have explained the next few instructions executed allow the program to print <code class="language-plaintext highlighter-rouge">Password</code> and ask for user password input. Hence no need to explain them twice.</p>
+<p>We you read the code above, the next few instructions executed allow the program to print <code class="language-plaintext highlighter-rouge">Password</code> and ask for user password input. Hence no need to explain them twice.</p>
 
-<p>After the user has keyed in his password which was stored at variable <code class="language-plaintext highlighter-rouge">local_10h</code>, it is then moved to register <code class="language-plaintext highlighter-rouge">eax</code> and then compared to the value stored at variable <code class="language-plaintext highlighter-rouge">local_ch</code>.</p>
+<p>After the user has keyed in his password, it is stored at variable <code class="language-plaintext highlighter-rouge">local_10h</code>. Then later moved to register <code class="language-plaintext highlighter-rouge">eax</code>, which is compared to the value stored at variable <code class="language-plaintext highlighter-rouge">local_ch</code>.</p>
 
 <p><img src="/assets/img/blog/2018-09-06/image16.png" alt="image15" id="cmp" class="centered" /></p>
 
-<p>If both values are equal the next instruction executed will lead to printing <code class="language-plaintext highlighter-rouge">Good password</code> and that would result in us successfully solving the challenge. But if they are not equal it will take a jump to address <code class="language-plaintext highlighter-rouge">0xa62</code> which I think will end up printing <code class="language-plaintext highlighter-rouge">Bad password</code> as we had seen before while running the program.</p>
+<p>If both values are equal, the next instruction executed will print <code class="language-plaintext highlighter-rouge">Good password</code>, resulting in us successfully solving the challenge. But if they are not equal, it will take a jump to address <code class="language-plaintext highlighter-rouge">0xa62</code>, which I think will print the string <code class="language-plaintext highlighter-rouge">Bad password</code> as we had seen before while running the program.</p>
 
-<p>If you check the compare instruction you can see we have our password at two variables; <code class="language-plaintext highlighter-rouge">local_10h</code> and <code class="language-plaintext highlighter-rouge">local_ch</code>. Where we already know the value for variable <code class="language-plaintext highlighter-rouge">local_ch</code>.</p>
+<p>If you check the compare instruction, you can see we have our password at two variables; <code class="language-plaintext highlighter-rouge">local_10h</code> and <code class="language-plaintext highlighter-rouge">local_ch</code>. Where we already know the value for variable <code class="language-plaintext highlighter-rouge">local_ch</code>.</p>
 
 <p>So our password is <strong><code class="language-plaintext highlighter-rouge">540</code></strong>.</p>
 
@@ -616,6 +615,7 @@ local_ch <span class="o">=</span> eax <span class="c"># 540</span>
 </details>
 
 <p class="text-align-center faded">There we have it folks, easy as done, see you in the other realm.</p>
+
 
   
 </article>

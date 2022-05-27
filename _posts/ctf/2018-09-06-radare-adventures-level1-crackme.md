@@ -19,20 +19,20 @@ Aplogoies for any rough images, they were migrated from blogger.
 
 I am excited right now.  
 
-After my first interaction with a CTF challenge on Reverse Engineering at Africa HackOn 2018, I fell in love. A lot of things came to mind on the capabilities one can do with such a skill. In this blog post, I am going to share the basic need to know with an example. The learning curve will be steep you might end up in a rabbit hole from researching from one place to the other.
+After my first interaction with a CTF challenge on Reverse Engineering at Africa HackOn 2018, I fell in love. Many things came to mind on the capabilities one can do with such a skill. This post will share the basic need to know with an example. The learning curve will be steep; you might end up in a rabbit hole from researching from one place to the other.
 
-Don't think too much, relax you will get a hang of it after a couple of tries, and remember to always perfect your craft (**`Practice`**, **`Practice`**, **`Practice`**). [LiveOverflow's Tips to Master Something](https://twitter.com/LiveOverflow/status/1037296510583689216)
+Don't overthink; relax. After a couple of tries, you will get the hang of it, and remember always to perfect your craft (**Practice**, **Practice**, **Practice**). [LiveOverflow's Tips to Master Something](https://twitter.com/LiveOverflow/status/1037296510583689216)
 {:.note title="Advice"}
 
-So what is Reverse Engineering; it's the process of **Acquiring** anything man-made, **Analyzing** it, and then **Disassembling**** to understand how it works and acquire any informative knowledge about it.
+So what is Reverse Engineering; it's the process of **Acquiring** anything artificial, **Analyzing**** it, and then **Disassembling**** to understand how it works and acquire any informative knowledge about it.
 
-We have a [binary file](https://www.webopedia.com/TERM/B/binary_file.html) named: `CrackMe1.bin` which is a program that has been compiled and converted to machine code.
+We have a [binary file] named `CrackMe1.bin`, a program that has been compiled and converted to machine code.
 
-So when given such a file there are basic things you should first do before opening it with Radare2, IDA, or binary ninja (disassembly tools).  
+When given such a file, I usually perform a few steps before opening it with Radare2, IDA, or binary ninja (disassembly tools).
 
-1. Confirm the [file format](https://en.wikipedia.org/wiki/File_format).
-2. Execute the file, to get an understanding of what task you are given to solve.
-3. Check the [data strings](https://en.wikipedia.org/wiki/String_(computer_science)) of the file. 
+1. Confirm the [file format].
+2. Execute the file to understand what task you are given to solve.
+3. Check the [data strings] of the file. 
 
 ## File format
 
@@ -41,15 +41,15 @@ So when given such a file there are basic things you should first do before open
 img-1: `file crackMe1.bin`
 {:.figcaption}
 
-On linux you can use the Linux [file](https://en.wikipedia.org/wiki/File_(command)) command or using [rabin2](https://r2wiki.readthedocs.io/en/latest/tools/rabin2/), Radare2 tool for extracting information from binary programs.
+On linux you can use the Linux [file](https://en.wikipedia.org/wiki/File_(command)) command or using [rabin2], Radare2 tool for extracting information from binary programs.
 
 {: style="padding-top: 4em"}
 
 ![image3](/assets/img/blog/2018-09-06/image3.png){: .align-right}
 
-The `-I` option is for extracting binary information. So we have an [ELF](https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/) (Executable and Linkable Format) class 64 binary file, take note that we are going to use this information later on.{: .align-left"}
+The `-I` option is for extracting binary information. So we have an [ELF] (Executable and Linkable Format) class 64 binary file. Take note that we are going to use this information later on.
 
-Another way of checking file format which mostly comes in handy when dealing with embedded data is to open the file in a hex editor and identify the [file](https://en.wikipedia.org/wiki/List_of_file_signatures) header signatures and extract the embedded data.
+Another way of checking file format that mostly comes in handy when dealing with embedded data is to open the file in a hex editor, identify the [file](https://en.wikipedia.org/wiki/List_of_file_signatures) header signatures, and extract the embedded data.
 
 {: style="padding-top: 20em"}
 
@@ -74,24 +74,24 @@ chmod +x crackMe1.bin
 img-3: `running the binary file`
 {:.figcaption}
 
-So when running the file, you will be prompted for a password and when you type in anything like **`1234`** it will return a Bad password string output.
+So when running the file, you will be prompted for a password, and when you type in anything like **`1234`**, it will return a Bad password string output.
 
 ## Strings
 
-From the above image, we can see that the program outputs several words but the most common one is the word password. Hence while analyzing the program strings we are going to search for lines that contain the string **password**{: .text-color-red}.
+The above image shows that the program outputs several words, but the word password is the most common. Hence while analyzing the program strings, we are going to search for lines that contain the string **password**{: .text-color-red}.
 
-There are two methods of doing this either using the [strings](https://linux.die.net/man/1/strings) UNIX command or using our tool of choice radare2 as I have shown in this [section](#strings-using-r2).
+There are two methods of doing this: the [strings] UNIX command or our tool of choice, radare2, as shown in this [section](#strings-using-r2).
 
-So because we know we have a bad password string let's try and see if we have any other data string with the password string.
+So because we know we have a bad password string, let's try and see if we have any other data string with the password string.
 
 ![image5](/assets/img/blog/2018-09-06/image5.png){: .centered}
 
 img-4: `strings crackMe1.bin | grep "password"`
 {:.figcaption}
 
-**Good password** so our main goal is to get the correct password.  
+**Good password**, so our main goal is to get the correct password.  
 
-When I started learning reverse engineering my tool of choice was IDA until I met [Radare2](https://www.radare.org/n/) and hence this post. I am still learning and to be honest the image below says it all.
+When I started learning reverse engineering, my tool of choice was IDA until I met [Radare2], and hence this post. I am still learning, and to be honest, the image below says it all.
 
 ![image6](/assets/img/blog/2018-09-06/image6.jpg){: .centered}
 
@@ -102,13 +102,13 @@ When I started learning reverse engineering my tool of choice was IDA until I me
 
 ![image7](/assets/img/blog/2018-09-06/image7.png){: .align-left}
 
-So we begin by examining the file by executing `r2 crackMe1.bin`. Currently, we are in shell mode where we can execute our commands and by default, we are taken at the entry address **`[0x000008a0]`**.
+So we begin by examining the file by executing `r2 crackMe1.bin`. Currently, we are in shell mode, where we can run our commands, and by default, we are taken at the entry address **`[0x000008a0]`**.
 
-The first command; `ie` is the entry points info command which prints the entry points. 
+The first command `ie` is the entry points info command, which prints the entry points. 
 
 ![image8](/assets/img/blog/2018-09-06/image8.png){: .centered}
 
-Next, analyzing the program using the command `aaa` (`a?`; gives you different options of the command).  Remember not to skip this bit because radare2 doesn't analyze automatically by default but you can run this command when running the binary file with radare.
+Next, analyzing the program using the command `aaa` (`a?`; gives you different command options).  Remember not to skip this bit because radare2 doesn't analyze automatically by default, but you can run this command when running the binary file.
 
 ~~~bash
 # this will allow us to avoid running aaa
@@ -124,9 +124,9 @@ Next step is to view strings and find our `good password` string location addres
 
 ![image9](/assets/img/blog/2018-09-06/image10.png){: .align-right}
 
-After analyzing all flags, we can go ahead and list them using the `fs` command, which means flag space. As we can see we have a strings flag space, and we proceed to view its contents using the command `fs strings; f` (the `f` option is used to print contents).  
+After analyzing all flags, we can list them using the `fs` command, which means flag space. As we can see, we have a strings flag space, and we proceed to view its contents using the command `fs strings; f` (the `f` option is used to print contents).
 
-As you can see it prints each string starting with its `address location`, `length`, and the actual string.
+It prints each string starting with its `address location`, `length`, and the actual string.
 
 {: style="padding-top: 5em"}
 
@@ -141,15 +141,15 @@ axt @@ str.Good_password
 {: .text-align-center}
 ### Disassembly
 
-The fun part, disassembling the program.
+The fun part is disassembling the program.
 
 In every program, we have a global function called `main`, which serves as the starting point for the program execution. The program will also allow us to understand the program execution.
 
-That being the case we are going to enter the main function using the command `s main; pdf`, where `s` means to seek and the `pdf` command disassembles the function.
+That being the case, we will enter the main function using the command `s main; pdf`, where `s` means to seek, and the `pdf`` command disassembles the function.
 
 ![image11](/assets/img/blog/2018-09-06/image12.png){: .centered}
 
-Before we proceed to understand our function, know that we currently looking at the assembly language and you as a reader are required to have a basic understanding of the **stack** and how it works, know how to read assembly language, and have basic knowledge of **C** and **C++** programming languages.
+Before we understand our function, know that we are currently looking at the assembly language. You, as a reader, are required to have a basic understanding of the **stack** and how it works, know how to read assembly language, and have basic knowledge of **C** and **C++** programming languages.
 {:.note}
 
 ~~~nasm
@@ -163,14 +163,14 @@ pop   rbp           ; get the old base pointer
 ret                 ; return - end of program
 ~~~
 
-The program starts by pushing the base pointer `rbp` to the top of the stack, then makes the stack pointer the new base pointer. Proceeds to calling two functions **`sym.systemv`** and **`sym.systemo`** respectively, then move 0 to the accumulator register (**eax**), gets the base pointer from the top of the stack then performs a subroutine return (**ret**).
+The program starts by pushing the base pointer `rbp` to the top of the stack, then makes the stack pointer the new base pointer. Proceeds to call two functions **sym.systemv** and **sym.systemo**, then move 0 to the accumulator register (**eax**), get the base pointer from the top of the stack, and perform a subroutine return (**ret**).
 
 So we are going to focus on the two functions being called.
 
 {: .text-align-center}
 ### First function: systemv
 
-From the code below we can note the function's main purpose is to set the variables.
+From the code below, we can note the function's main purpose is to set the variables.
 
 ![image12](/assets/img/blog/2018-09-06/image13.png){: .centered}
 
@@ -207,7 +207,7 @@ So let's go on ahead and see what the second function is doing.
 
 ![image14](/assets/img/blog/2018-09-06/image15.png){:.lead width="1700px"}
 
-The image is not that visible but I will fix that issue in future posts, below is the whole code re-written when migrating from blogger.
+The image is not visible, but I will fix that issue in future posts. Below is the whole code re-written when migrating from blogger.
 {:.note title="Attention"}
 
 ~~~nasm
@@ -236,17 +236,16 @@ lea     rdi, qword 0x202180           ; load address 0x202180
 call    something...                  ; call while passing two arguments rdi, rsi
 ~~~
 
-From the above code, we can see the second function contains our string `Good password`, when I was writing this post in 2018 I had noted that I wasn't going to explain the whole code but the essential bit of the code that led us to our string. 4years later I can explain the whole code. Like I even found a very quick way to solve this challenge by just reading the code. Emphasize on **keep practicing**.
+From the above code, we can see the second function contains our string `Good password`; when I was writing this post in 2018, I had noted that I wasn't going to explain the whole code but the essential bit of the code that led us to our string. 4years later, I can explain the entire code. I even found a quick way to solve this challenge when reading the code. Emphasize on **keep practicing**.
 
 {: .text-align-center}
 ### Solving
 
-Because I am writting this post once more, I am going to do what I wasn't able to do last time, explain everything. I believe this is a second chance so let me take advantage of it and show off.
+Because I am writting this post once more, I will do what I wasn't able to do last time, explain everything. I believe this is a second chance so let me take advantage of it and show off.
 
-So the first function loads the values to variables that are later being used in the second function. After getting our new base pointer we can see the program is reserving space in the stack of size 0x10. It then moves the value stored at variable `local_8h` to register `eax`, then adds the value at `eax` with the value stored at variable `local_4h`. Then moves results of the addition to the register `eax`.
+So the first function loads the values to variables later used in the second function. After getting our new base pointer, we can see the program is reserving space in the stack of size 0x10. It then moves the value stored at variable `local_8h` to register `eax`, then adds the value at `eax` with the value stored at variable `local_4h`. Then moves results of the addition to the register `eax`.
 
-Then we proceed to multiply using the [imul](http://www.c-jump.com/CIS77/reference/ISA/DDU0094.html) instruction.
-`imul eax, eax, 0x2d` is a long hand for `imul eax, 0x2d` which takes the value stored at `eax` and multiplies it by  `0x2d` then stores the new value at register `eax`. The value is then moved to variable `local_ch`.
+Then we proceed to multiply using the [imul] instruction. `imul eax, eax, 0x2d` is an extended hand for `imul eax, 0x2d`, which takes the value stored at `eax` and multiplies it by  `0x2d`. Then holds the new value at register `eax`, which is then moved to variable `local_ch`.
 
 ~~~sh
 local_8h = 7
@@ -261,15 +260,15 @@ eax = eax * 45 # 540
 local_ch = eax # 540
 ~~~
 
-We you read the code above as I have explained the next few instructions executed allow the program to print `Password` and ask for user password input. Hence no need to explain them twice.
+We you read the code above, the next few instructions executed allow the program to print `Password` and ask for user password input. Hence no need to explain them twice.
 
-After the user has keyed in his password which was stored at variable `local_10h`, it is then moved to register `eax` and then compared to the value stored at variable `local_ch`.
+After the user has keyed in his password, it is stored at variable `local_10h`. Then later moved to register `eax`, which is compared to the value stored at variable `local_ch`.
 
 ![image15](/assets/img/blog/2018-09-06/image16.png){: id="cmp" .centered}
 
-If both values are equal the next instruction executed will lead to printing `Good password` and that would result in us successfully solving the challenge. But if they are not equal it will take a jump to address `0xa62` which I think will end up printing `Bad password` as we had seen before while running the program.
+If both values are equal, the next instruction executed will print `Good password`, resulting in us successfully solving the challenge. But if they are not equal, it will take a jump to address `0xa62`, which I think will print the string `Bad password` as we had seen before while running the program.
 
-If you check the compare instruction you can see we have our password at two variables; `local_10h` and `local_ch`. Where we already know the value for variable `local_ch`.
+If you check the compare instruction, you can see we have our password at two variables; `local_10h` and `local_ch`. Where we already know the value for variable `local_ch`.
 
 So our password is **`540`**.
 
@@ -357,3 +356,13 @@ int main(void) {
 {:.text-align-center}
 There we have it folks, easy as done, see you in the other realm.
 {:.faded}
+
+
+[file format]: https://en.wikipedia.org/wiki/File_format
+[data strings]: https://en.wikipedia.org/wiki/String_(computer_science)
+[binary file]: https://www.webopedia.com/TERM/B/binary_file.html
+[rabin2]: https://r2wiki.readthedocs.io/en/latest/tools/rabin2/
+[ELF]: https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/
+[strings]: https://linux.die.net/man/1/strings
+[Radare2]: https://www.radare.org/n/
+[imul]: http://www.c-jump.com/CIS77/reference/ISA/DDU0094.html

@@ -16,7 +16,7 @@ tags: [create]
 
 `O`pen `S`ource `INT`telligence, is a technique of `collecting data from publicly available sources to produce actionable intelligence`.
 
-While I was roaming the internet space, I came by a YT video titled; open-source intelligence, what I learned being an OSINT creeper by Josh Huff. After watching the video I was excited and eager to learn more. I proceeded to give it a try, but after a few trials, I felt like I had no grip on the methodology presented by Josh.
+While roaming the internet space, I came by a YT video titled; open-source intelligence, what I learned being an OSINT creeper by Josh Huff. After watching the video, I was excited and eager to learn more. I proceeded to give it a try, but after a few trials, I felt like I had no grip on the methodology presented by Josh.
 
 {: style="padding-top: 2em"}
 
@@ -24,17 +24,17 @@ While I was roaming the internet space, I came by a YT video titled; open-source
 
 {: style="padding-top: 2em"}
 
-I thought maybe I would find a CTF challenge on OSINT that I can solve but there wasn't any. Most challenges I found were by DEFCON and they were on site but they had taken recordings which I binged on them for a while. A few minutes later, I had a light bulb moment; why don't I create my challenge. Ding!! ding!! ding!!
+Maybe I would find a CTF challenge on OSINT that I could solve, but there wasn't any. Most of the challenges I found were by DEFCON, and they were on site but had taken recordings which I binged on them for a while. A few minutes later, I had a light bulb moment; why don't I create my challenge. Ding!! Ding!! Ding!!
 
-Excitement and fear rushed through my veins, I went ahead to prepare a storyline and did some research to make the challenge solvable.
+Excitement and fear rushed through my veins. I went ahead to prepare a storyline and did some research to make the challenge solvable.
 
 ## The Challenge
 
-The platform I decided to use for hosting the challenge was the Facebook C.T.F (F.B.C.T.F) platform, it was quite easy to set up, although if you have some other service using port `80`, I would advise you to either shut down the running service or change the Apache service port from `80` to either `1234` on the configuration file.
+The platform I decided to use for hosting the challenge was the Facebook C.T.F (F.B.C.T.F). It was quite easy to set up; however, if you have some other service using port `80`, I would advise you to either shut down the running service or change the Apache service port from `80` to `1234` on the configuration file.
 
-The storyline creation process was quite a challenge because I had to use publicly accessible data to correlate and make a story out of them. The storyline I came up with was of a young boy who was an orphan, being moved from one orphanage to another with him always seeking to find a place which he could call home. Later on, he ended up seeking vengeance on a former colleague who used to be at his sanctuary place (home) for destroying the home's reputation.
+The storyline creation process was quite a challenge because I had to use publicly accessible data to correlate and make a story out of them. The storyline I came up with was of a young boy who was an orphan, being moved from one orphanage to another with him, always seeking to find a place he could call home. Later on, he sought vengeance on a former colleague who used to be at his sanctuary place for destroying the home's reputation.
 
-while re-writing this post, I just noticed the storyline was vague but it was what I had at that moment.
+while re-writing this post, I noticed the storyline was vague, but it was what I had at that moment.
 {: .note}
 
 A [guide](https://github.com/iAmG-r00t/OSINT-CTF/blob/master/PWN3RS%20OSINT%20CTF%20GUIDE.pdf) was provided to the players, where they were to follow a specific path from one country to the other while solving all seven levels.
@@ -65,13 +65,13 @@ FBCTF Task
 
 ## Epilogue
 
-It was an amazing experience, got the opportunity to create something that allowed me to learn and share the knowledge I had learned. I am looking forward to doing more of this on different topics.
+It was an amazing experience. I got the opportunity to create something that allowed me to learn and share my knowledge. I am looking forward to doing more of this on different topics.
 
-The first player who completed the challenge was [Antony](https://twitter.com/AntonyMutiga) Mutiga](https://twitter.com/AntonyMutiga). His write-up is attached in the resources section (the funny thing is that he was my teammate at the AfricaHackOn CTF event 2018, that is a story for another day).
+The first player who completed the challenge was [Antony](https://twitter.com/AntonyMutiga) Mutiga](https://twitter.com/AntonyMutiga). His write-up is attached in the resources section (the funny thing is that he was my teammate at the AfricaHackOn CTF event 2018, a story for another day).
 
 I am happy to say this was a success, and I have provided all the configs of the challenge for anyone who wants to set it up.
 
-The OSINT framework is enough to guide you in solving the challenges, give it a try.
+The OSINT framework is enough to guide you in solving the challenges. Give it a try.
 {: .note}
 
 ## Resources

@@ -107,7 +107,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2022-05-26T19:44:13+03:00',
+    INDEX_KEY: 'index--2022-05-27T10:41:27+03:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -300,32 +300,34 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <h2 id="prologue">Prologue</h2>
 
-<p><strong><code class="language-plaintext highlighter-rouge">Problem statement;</code></strong> I used to use a virtual environment as my playground to break and tinker around with stuff, then got a new laptop and I had to set up the whole environment from zero to how my virtual environment state was. I did it the first time manually and when I was done setting up everything found out that the hard disk for the new laptop was faulty 🤬. I had to replace the hard disk and re-do the setup all over again. It was tiresome and it took me a whole week because each time I was faced with a problem that I had to fix, format the disk, reinstall the OS, and re-do the setup.</p>
+<p><strong><code class="language-plaintext highlighter-rouge">Problem statement;</code></strong> I used to use a virtual environment as my playground to break and tinker around with stuff, then I got a new laptop, and I had to set up the whole environment from zero to my virtual environment state. I did it the first time manually, and when I was done setting up everything, I found out that the new laptop’s hard disk was faulty 🤬. I had to replace the hard disk and re-do the setup again.</p>
 
-<p>I got tired of that cycle and I decided to google around for a solution and I came by a <a href="https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/">post</a> by <a href="https://victoria.dev/">Victoria Drake</a>. Which made me realize that I can automate my setup process and make my life easy.</p>
+<p>It was tiresome, and it took me a whole week because each time I was faced with a problem, I had to fix, format the disk, reinstall the OS, and re-do the setup.</p>
 
-<p>First I want to start by noting down my <code class="language-plaintext highlighter-rouge">playground gadgets</code> and then proceed to explain why I decided to use the bash shell script and not the other fancy stuff (like Vagrant, puppet, chef, or ansible).</p>
+<p>I got tired of that cycle, and I decided to google around for a solution. I came by a <a href="https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/">post</a> by <a href="https://victoria.dev/">Victoria Drake</a>, which made me realize that I can automate my setup process and simplify my life.</p>
+
+<p>I want to start by noting down my <code class="language-plaintext highlighter-rouge">playground gadgets</code> and then explain why I decided to use the bash shell script and not the other fancy stuff (like Vagrant, puppet, chef, or ansible).</p>
 
 <h2 id="playground-gadgets">Playground gadgets</h2>
 
-<p>I have four major gadgets that I use on a normal day, which are;</p>
+<p>I have four major gadgets that I use on a typical day, which are;</p>
 
 <ol>
   <li><code class="language-plaintext highlighter-rouge">Tmux</code> - handles all my terminal sessions and screens.</li>
   <li><code class="language-plaintext highlighter-rouge">Vim</code> - this is my Integrated Development Environment.</li>
-  <li><code class="language-plaintext highlighter-rouge">Keepass2</code> - handles all my SSH keys and stores some of my passwords.</li>
-  <li><code class="language-plaintext highlighter-rouge">bash</code> - preferred shell, this is where I call home. (I defaulted to using bash instead of ZSH)</li>
+  <li><code class="language-plaintext highlighter-rouge">Keepass2</code> - holds all my SSH keys and stores some of my passwords.</li>
+  <li><code class="language-plaintext highlighter-rouge">bash</code> - preferred shell; this is where I call home. (I defaulted to using bash instead of ZSH)</li>
 </ol>
 
 <h2 id="why-shell-script-">Why shell script ??</h2>
 
-<p>I decided to use shell script because it will allow me to better understand the language and fine-tune my coding skills plus it comes by default in most Unix systems. While with the other fancy tools I would be forced to install and maybe configure.</p>
+<p>I decided to use shell script because it will allow me to understand the language better and fine-tune my coding skills. Plus, it comes by default in most Unix systems. While with the other fancy tools, I would be forced to install and maybe configure.</p>
 
 <h2 id="dotfiles">Dotfiles</h2>
 
-<p>Most of the above-mentioned gadgets have configuration files that are called <code class="language-plaintext highlighter-rouge">dotfiles</code>. I won’t go into detail on each dotfile check out <code class="language-plaintext highlighter-rouge">Victoria's post</code> she has done most of the explanation, but I will try my best not to skip the most important bits.</p>
+<p>Most of the gadgets mentioned above have configuration files that are called <code class="language-plaintext highlighter-rouge">dotfiles</code>. I won’t explain each dotfile; check out Victoria’s <a href="https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/">post</a> she has done most of the explanation, but I will try my best not to skip the most important bits.</p>
 
-<p>For the structure of my dotfiles, I decided to place all my dotfiles in one directory, then each config in its directory with its name.</p>
+<p>The dotfiles structure; I decided to place all my dotfiles in one directory, then each config in its directory with its name.</p>
 
 <p><img src="/assets/img/blog/2020-03-13/image1.png" alt="image1" class="centered" /></p>
 
@@ -333,57 +335,57 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <ul>
   <li>
-    <p>The image above is the representation of how I have arranged my config files before you get to question why let me mention that I am a neat freak (kind of), my mind is as organized as a library so that’s why!! now you can go ahead and judge me but it works for me, just do you!</p>
+    <p>The image above represents how I have arranged my config files. Before you ask why? Let me mention that I am a neat freak (kind of). My mind is as organized as a shelf, so that’s why!! Now you can judge me, but it works for me!</p>
   </li>
   <li>
-    <p>In the <code class="language-plaintext highlighter-rouge">.bash</code> folder, I have two aliases one that does contain the normal aliases and the other that contains aliases that have secrets, tokens, and IPs.</p>
+    <p>In the <code class="language-plaintext highlighter-rouge">.bash</code> folder, I have two aliases, one containing the regular aliases and the other containing aliases with secrets, tokens, and IPs.</p>
   </li>
   <li>
-    <p>The <code class="language-plaintext highlighter-rouge">vim</code> folder contains the <code class="language-plaintext highlighter-rouge">YouCompleteMe</code> vim plugin config which I stole from [Jonas <a href="https://jonasdevlieghere.com/a-better-youcompleteme-config/">Devlieghere</a> and the vim config file.</p>
+    <p>The <code class="language-plaintext highlighter-rouge">vim</code> folder contains the <code class="language-plaintext highlighter-rouge">YouCompleteMe</code> vim plugin config I stole from <a href="https://jonasdevlieghere.com/a-better-youcompleteme-config/">Jonas Devlieghere</a> and the vim config file.</p>
   </li>
   <li>
     <p>The <code class="language-plaintext highlighter-rouge">eddie</code> folder contains a <code class="language-plaintext highlighter-rouge">greetings.txt</code> file which contains lines I would like the <a href="https://github.com/victoriadrake/eddie-terminal">eddie-terminal</a> to tell me each time I spawn my terminal. Awesome right!! The project is by the one and only <a href="https://victoria.dev/">Victoria Drake</a>.</p>
   </li>
   <li>
-    <p>The last folder was for Oh-My-ZSH which I currently don’t use in my setup. But it contained various files that were from the bash folder but for the Oh-My-ZSH shell.</p>
+    <p>The last folder was for Oh-My-ZSH, which I currently don’t use in my setup. But it contained various files that were from the bash folder but for the Oh-My-ZSH shell.</p>
   </li>
 </ul>
 
 <h2 id="setup-scripts">Setup Scripts</h2>
 
-<p>For the setup scripts, I will explain the major parts. You can go ahead and check out the whole <a href="https://github.com/iAmG-r00t/desktop-setup">project repo</a> on my <a href="https://github.com/iAmG-r00t">Github</a>.</p>
+<p>For the setup scripts, I will explain the significant bits. And for the rest, you can check out the whole <a href="https://github.com/iAmG-r00t/desktop-setup">project repo</a> on my <a href="https://github.com/iAmG-r00t">Github</a>.</p>
 
 <ol>
-  <li><strong>dotfiles.sh</strong> setups all my dotfiles, it does more than that so you should have a look at it.</li>
-  <li><strong>desktop.sh</strong> setups up my folders and desktop environment look and feel. This includes setting up a screensaver, background image, user profile icon, and favorite apps on my dock. (<code class="language-plaintext highlighter-rouge">Kindly read Victoria Drake's post, she explained how to do it</code>, I would like to mention that some settings like renaming the trash on the desktop don’t work in Ubuntu 19 but works efficiently with ubuntu 18, you can play around with it have fun!!)</li>
-  <li><strong>software.sh</strong> installs all the packages I use on a day-to-day basis and the dependencies required to install all the applications.</li>
-  <li><strong>setup.sh</strong> brings all the scripts together this is where it all starts, also it does some cleanup, installs vim and tmux plugins, <del>changes my default shell from bash to zsh</del>, and then logs out the desktop for some settings to take effect.</li>
+  <li><strong>dotfiles.sh</strong> setups all my dotfiles. Plus, it does more, so you should have a look at it.</li>
+  <li><strong>desktop.sh</strong> setups up my folders and desktop environment look and feel, including setting up a screensaver, background image, user profile icon, and favorite apps on my dock (<code class="language-plaintext highlighter-rouge">kindly read Victoria Drake's post, she explained how to do it</code>). I want to mention that some settings like renaming the trash on the desktop don’t work in Ubuntu 19 but work with ubuntu 18. You can play around with it.</li>
+  <li><strong>software.sh</strong> installs all the packages I use daily and the dependencies required to install all the applications.</li>
+  <li><strong>setup.sh</strong> brings all the scripts together. Everything is executed from here, plus it does some cleanup, installs vim and tmux plugins, <del>changes my default shell from bash to zsh</del>, and then logs out the desktop for some settings to take effect.</li>
   <li><strong>sync.sh</strong> syncs all my dotfiles from the home user directory to the local Github repository so that I can update the remote repository.</li>
 </ol>
 
 <h2 id="secrets-how-do-you-handle-them">Secrets🙊, how do you handle them?</h2>
 
-<p><strong><em>The fun part;</em></strong> so when I was reading Victoria’s post she pointed out that some files that one wouldn’t put on a public repo won’t / shouldn’t be pushed to the remote repository (<code class="language-plaintext highlighter-rouge">best security practice</code>), that was a problem for me because I wanted to backup everything and at the same time share it to the world. Github doesn’t allow one to set some directories in a repository as private so I had to think of a solution to my problem.</p>
+<p><strong><em>The fun part;</em></strong> In Victoria’s <a href="https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/">post</a>, she pointed out there were some files that one wouldn’t put on a public repo as a <code class="language-plaintext highlighter-rouge">best security practice</code>. That was a problem for me because I wanted to back up everything while sharing what was required. Github doesn’t allow one to set some directories in a repository as private, so I had to think of a solution to my problem.</p>
 
-<p>After some research, I found a lot of <a href="#sols">solutions</a> on how to achieve this but I decided to stick with <a href="https://git-secret.io/">git-secret</a>. It uses GPG RSA key pair to encrypt all of your desired secret files and allows you to push them to a public repository, which you can later decrypt in your local environment using the same GPG key.</p>
+<p>Later on, I found a few <a href="#sols">solutions</a> to achieve this. I decided to stick with <a href="https://git-secret.io/">git-secret</a>, which was among the solutions. It uses GPG RSA key pair to encrypt all of your desired secret files and allows you to push them to a public repository, which you can later decrypt in your local environment using the same GPG key.</p>
 
 <h2 id="ssh-keys">SSH Keys</h2>
 
-<p>I am paranoid and at the same time lazy. I required a way to log in to my servers efficiently the same way I log in to my online accounts using <a href="https://www.lastpass.com/">LastPass</a>.</p>
+<p>I am paranoid while at the same time lazy. I required a way to log in to my servers efficiently the same way I log in to my online accounts using <a href="https://www.lastpass.com/">LastPass</a>.</p>
 
-<p>There is a way of doing this <a href="https://devopsheaven.com/ssh/security/lastpass/devops/2018/06/13/ssh-lastpass-cli.html">using LastPass</a> but there were two issues with that, one is that I love to separate my work and social life (<strong><em>I do have two separate machines for this …</em></strong>) meaning I needed a way to store all the passwords that I use during work separately from my mere Gmail and other personal account passwords. </p>
+<p>There is a way of doing this <a href="https://devopsheaven.com/ssh/security/lastpass/devops/2018/06/13/ssh-lastpass-cli.html">using LastPass</a>, but there was an issue where I love to separate my work and social life (<strong><em>I do have two separate machines for this …</em></strong>). I needed a way to store all the passwords I use during work separately from my mere Gmail and other personal/social account passwords. </p>
 
-<p>After some research I decided to use <a href="https://keepass.info/index.html">KeePass</a>, I had heard about it during the time I was working at Safaricom PLC but I never knew it had great perks.</p>
+<p>Later on, I found <a href="https://keepass.info/index.html">KeePass</a>, which I had heard about when working at Safaricom PLC. I never knew it had great perks.</p>
 
-<p>It allows you to store SSH keys and has a plugin known as <a href="https://keeagent.readthedocs.io/en/stable/">KeeAgent</a> which acts as an <a href="https://www.ssh.com/ssh/agent">ssh-agent</a>, which allows you to log in to your servers when the KeePass database file is open without prompting for the ssh-key passphrase.</p>
+<p>It allows you to store SSH keys and has a plugin known as <a href="https://keeagent.readthedocs.io/en/stable/">KeeAgent</a>, which acts as an <a href="https://www.ssh.com/ssh/agent">ssh-agent</a>. It enables you to log in to your servers when the KeePass database file is open without prompting for the ssh-key passphrase.</p>
 
-<p>KeePass has a lot of plugins that do a variety of things, so I decided to look for a way to backup my passwords somewhere and that’s when I found <a href="https://bitbucket.org/devinmartin/keecloud/wiki/Home">KeeCloud</a>, It allows you to store a backup in Dropbox and sync the local file with the dropbox file using triggers or manually using KeePass Synchronize option.</p>
+<p>KeePass has a lot of plugins that do a variety of things, so I decided to look for a way to backup my passwords somewhere, and that’s when I found <a href="https://bitbucket.org/devinmartin/keecloud/wiki/Home">KeeCloud</a>. It allows you to store a backup in Dropbox and sync the local file with the dropbox file using triggers or manually using the KeePass Synchronize option.</p>
 
 <h2 id="epilogue">Epilogue</h2>
 
-<p>All that being said and done, I need to mention that I will be updating this setup process as time goes by, so if you are reading this blog now or later in the future, check out my Github repository for any updates.</p>
+<p>All that being said and done, I need to mention that I will be updating this setup process as time goes by, so if you are reading this blog now or later, check out my Github repository for any updates.</p>
 
-<p>Now let me showcase my work before I end this post, I hope the demo gods will spare me today.</p>
+<p>Now let me showcase my work before I end this post. I hope the demo gods will spare me today.</p>
 
 <p><a href="https://asciinema.org/a/cM0sOz8r2idXdf2E4arL0bhFM"><img src="https://asciinema.org/a/cM0sOz8r2idXdf2E4arL0bhFM.svg" alt="asciicast" /></a></p>
 
@@ -393,9 +395,9 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
     <iframe src="https://www.youtube.com/embed/oNDbW7nxqBM" allowfullscreen=""></iframe>
 </div>
 
-<p style="padding-top: 2em">Before I end this post sorry for the shaky video was recording with my phone, next time I will look for better solutions for such situations. Anyways thank you for your time.</p>
+<p style="padding-top: 2em">Before I end this post, sorry for the shaky video recording, I was using my phone; next time, I will look for better solutions for such situations. Anyways thank you for your time.</p>
 
-<p class="note" title="UPDATE">I reconstructed the whole project in 2020 quarter three during the covid period into single modules. In January 2021 when I was creating some challenges for the <a href="https://ciphercode.dev/">Aspire CTF</a> I ended up deleting my whole 2020 projects directory that I hadn’t backed up to GitHub (Backups are important BTW). Hence this project will be redone.</p>
+<p class="note" title="UPDATE">In 2020 quarter three, during the covid period, I reconstructed the whole project into single modules. In January 2021, when I was creating some challenges for the <a href="https://ciphercode.dev/">Aspire CTF</a>, I deleted my whole 2020 projects directory that I hadn’t backed up to GitHub (Backups are important, BTW). Hence this project will be redone.</p>
 
 <h2 id="sols">Resources</h2>
 
@@ -411,6 +413,7 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
   <li><a href="http://www.arj.no/2017/01/03/nautilus-bookmarks/">Remove standard bookmarks in Nautilus</a></li>
   <li><a href="https://github.com/iAmG-r00t/desktop-setup">Project repository</a></li>
 </ul>
+
 
   
 </article>

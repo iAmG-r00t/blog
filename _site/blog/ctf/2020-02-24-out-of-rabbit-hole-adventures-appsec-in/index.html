@@ -107,7 +107,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2022-05-26T19:44:13+03:00',
+    INDEX_KEY: 'index--2022-05-27T10:41:27+03:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -306,35 +306,35 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <h2 id="prologue">Prologue</h2>
 
-<p>Hi, 👋 happy new year 🎉.  In my previous <a href="2019-04-17-rabbit-hole-adventures-appsec-teaser.md">post</a>, I talked about the lessons I learned while learning how to find bugs in a mobile application.</p>
+<p>Hi, 👋 happy new year 🎉.  In my previous <a href="/blog/scripts/2019-04-17-rabbit-hole-adventures-appsec-teaser/">post</a>, I talked about the lessons I learned while learning to find bugs in a mobile application.</p>
 
 <p>So I decided to write this blog post and bring the adventure to an end.</p>
 
-<p>Last year I attended AfricaHackon. despite not participating in the CTF contest as a player, I did try to solve the challenges, but this time I took more interest in the Mobile Apps, RE, and pwn challenges.</p>
+<p>Last year I attended AfricaHackon. Despite not participating in the CTF contest as a player, I did try to solve the challenges, but this time I took more interest in the Mobile Apps, RE, and pwn challenges.</p>
 
-<p>In this post, I am going to focus on the mobile application and its challenges.</p>
+<p>This post will focus on the mobile application and its challenges.</p>
 
-<p>The players were provided an APK file. When I got hold of the APK file, I installed it on my test device, a Homepesa Sacco application that had a login and register account when spawned.</p>
+<p>The players were provided an APK file. When I got hold of the APK file, I installed it on my test device, a Homepesa Sacco application with a login and register account when spawned.</p>
 
-<p>There were six challenges, so before starting to solve the challenges I decided to do some recon to get to understand the application.</p>
+<p>There were six challenges, so before starting to solve the challenges, I decided to do some recon to understand the application.</p>
 
 <h2 id="recon">Recon</h2>
 
-<p>Below are the steps I normally follow to get to understand the application;</p>
+<p>Below are the steps I usually follow to get to understand the application;</p>
 
 <ol>
-  <li><strong>Decompile the application</strong> (one can use apktool or change the filename extension from dot apk to dot zip then unzip it using any archive utility e.g: 7zip, WinRAR, e.t.c …) this allowed me to view the source code of the app.</li>
-  <li><strong>Read the manifest file</strong> to identify application-defined permissions, look for any misconfigurations set, locate any exported activities or services, and identify any broadcast receivers and content providers.</li>
-  <li><strong>Used <a href="https://labs.f-secure.com/tools/drozer/">drozer</a></strong> to identify any attack surface present, and look for files that are being stored locally in the application directory.</li>
+  <li><strong>Decompile the application</strong> (one can use apktool or change the filename extension from dot apk to dot zip, then unzip it using any archive utility, e.g., 7zip, WinRAR, e.t.c …); this allowed me to view the source code of the app.</li>
+  <li><strong>Read the manifest file</strong> to identify application-defined permissions, look for any misconfigurations set, locate exported activities or services, and identify broadcast receivers and content providers.</li>
+  <li><strong>Used <a href="https://labs.f-secure.com/tools/drozer/">drozer</a></strong> to identify any attack surface present and look for files that are being stored locally in the application directory.</li>
 </ol>
 
 <h2 id="challenges">Challenges</h2>
 
-<p>Afterward, I decided to look at the challenges and focus on what is required, getting the flags. There were six challenges, I will explain how I was able to attain the flag for each challenge.</p>
+<p>Afterward, I decided to look at the challenges and focus on what is required, getting the flags. There were six challenges; I will explain how I was able to attain the flag for each challenge.</p>
 
 <h3 class="text-align-center" id="challenge-1-manifestation">Challenge 1: Manifestation</h3>
 
-<p>From the title of the challenge, it seemed like we were to take a look at the manifest file but from my recon process, I never found it. After consulting with the creator he said the flag was a comment in the manifest file. For this challenge one couldn’t attain the flag because it wasn’t there, it seems like when one is building the application comments that were placed in the manifest file were removed.</p>
+<p>From the challenge title, it seemed like we were to look at the manifest file, but I never spotted it during my recon process. After consulting with the creator, he said the flag was a comment in the manifest file. One couldn’t attain the flag for this challenge because it wasn’t there. The application comments placed in the manifest file were removed when he compiled the source code.</p>
 
 <h3 class="text-align-center" id="challenge-2-registration-payment-bypass">Challenge 2: Registration Payment Bypass</h3>
 
@@ -342,19 +342,19 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p class="figcaption">chall2: <code class="language-plaintext highlighter-rouge">challenge description</code></p>
 
-<p>For the second challenge, I went ahead on registering an account, before finishing registration one was required to do a registration payment. For this challenge when I was reviewing the code I saw the flag right there hardcoded in the <code class="language-plaintext highlighter-rouge">Home</code> class.</p>
+<p>For the second challenge, I went ahead with registering an account, and during the last step of registration, one was required to make a registration payment. When reviewing the code, I saw the flag right there hardcoded in the <code class="language-plaintext highlighter-rouge">Home</code> class.</p>
 
 <p><img src="/assets/img/blog/2020-02-24/image3.png" alt="image3" class="centered" /></p>
 
 <p class="figcaption">chall2: <code class="language-plaintext highlighter-rouge">hardcoded flag</code></p>
 
-<p>Most of the players went ahead and submitted this flag, but for me, I wasn’t satisfied. This wasn’t the proper way of attaining the flag. So I went ahead and reviewed the code. A database file called <code class="language-plaintext highlighter-rouge">bitwise</code> was being created when the <strong>onCreate</strong> method is called, and data was being placed in the database during the account creation process.</p>
+<p>Most of the players went ahead and submitted this flag, but for me, I wasn’t satisfied. This wasn’t the proper way of attaining the flag. So I went ahead and reviewed the code. A <code class="language-plaintext highlighter-rouge">bitwise</code> database file was created when the <strong>onCreate</strong> method was called, and data was placed in the database during the account creation process.</p>
 
 <p><img src="/assets/img/blog/2020-02-24/image4.png" alt="image4" class="centered" /></p>
 
 <p class="figcaption">chall2: <code class="language-plaintext highlighter-rouge">onCreate method</code></p>
 
-<p>Looking at the Alert statement, it was being triggered after checking the <code class="language-plaintext highlighter-rouge">bitwise</code> database if the account status was active or not active and if an account is active it’s when we are presented with our flag.</p>
+<p>The Alert statement was triggered after checking the <code class="language-plaintext highlighter-rouge">bitwise</code> database if the account status was active or not active, and if an account is active, it’s when we are presented with our flag.</p>
 
 <p><img src="/assets/img/blog/2020-02-24/image5.png" alt="image5" class="centered" /></p>
 
@@ -387,15 +387,15 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p class="figcaption">chall3: <code class="language-plaintext highlighter-rouge">challenge description</code></p>
 
-<p>This was a very interesting challenge. I learned a new attack vector before the event was about to end, the challenge had zero solves so we were given a clue, try to log in with a correct email address but a wrong password. I went ahead and did that and I was presented with an alert box saying that I have entered the wrong password, prompting me if I would want to recover the password. So I proceeded and placed my email on the recover password page and was sent a recovery link in the email address I provided.</p>
+<p>This was a very interesting challenge. I learned a new attack vector before the event was about to end. The challenge had zero solves, so we were given a clue, try to log in with a correct email address but a wrong password. I did that, and I was presented with an alert box saying that I had entered the wrong password, prompting me if I wanted to recover the password. So I proceeded and placed my email on the recover password page and was sent a recovery link in the email address I provided.</p>
 
-<p>Opening the email address in the browser I was presented with a page where I was to set a new password to reset it.</p>
+<p>Opening the email address in the browser, I was presented with a page where I was to set a new password to reset it.</p>
 
 <p><img src="/assets/img/blog/2020-02-24/image11.png" alt="image11" class="centered" /></p>
 
 <p class="figcaption">chall3: <code class="language-plaintext highlighter-rouge">Recover Password Page</code></p>
 
-<p>Looking at the URL link; <code class="language-plaintext highlighter-rouge">http://159.203.60.168/recoverypassmy.php?id=9408</code> seems like we can test for SQL injection, I proceeded to test and my tool of choice was <a href="https://github.com/sqlmapproject/sqlmap">sqlmap</a>.</p>
+<p>Looking at the URL link; <code class="language-plaintext highlighter-rouge">http://159.203.60.168/recoverypassmy.php?id=9408</code> seems like we can test for SQL injection. I proceeded to test, and my tool of choice was <a href="https://github.com/sqlmapproject/sqlmap">sqlmap</a>.</p>
 
 <p>Command: <code class="language-plaintext highlighter-rouge">sqlmap -u URL -b</code></p>
 
@@ -403,7 +403,7 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p class="figcaption">chall3: <code class="language-plaintext highlighter-rouge">SQL Map</code></p>
 
-<p>Boom we have an SQL injection present, and we have our entry point <strong><code class="language-plaintext highlighter-rouge">recoverpassmy.php</code></strong> which is our flag.</p>
+<p>Boom, we have an SQL injection present, and we have our entry point <strong><code class="language-plaintext highlighter-rouge">recoverpassmy.php</code></strong>, our flag.</p>
 
 <p><strong>Flag3;</strong> <code class="language-plaintext highlighter-rouge">recoverpassmy.php</code></p>
 
@@ -435,7 +435,7 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p class="figcaption">chall5: <code class="language-plaintext highlighter-rouge">challenge description</code></p>
 
-<p>This will be short, trust me …. so md5 hash isn’t the best encryption. The best thing about sqlmap is that it’s capable of decrypting/cracking hashes with either a custom (which you feed it …) or default wordlist. But there are also other ways of decrypting md5 hashes.</p>
+<p>This will be short. Md5 hash isn’t the best encryption. The best thing about sqlmap is that it’s capable of decrypting/cracking hashes with either a custom (which you feed it) or default wordlist. But there are also other ways of decrypting md5 hashes.</p>
 
 <p><img src="/assets/img/blog/2020-02-24/image17.png" alt="image17" class="centered" /></p>
 
@@ -449,9 +449,9 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p class="figcaption">chall6: <code class="language-plaintext highlighter-rouge">challenge description</code></p>
 
-<p>Obtaining the flag for the last challenge was tough. I stared at the code for a while and the way I found the flag was more on checking each class that was involved in sending SMS.</p>
+<p>Obtaining the flag for the last challenge was tough. I stared at the code for a while, and the way I found the flag was more on checking each class involved in sending SMS.</p>
 
-<p>I would love to point out that the way I solved this challenge was not the proper way from the creator’s point of view. He mentioned that one had to intercept or do a man-in-the-middle attack on the SMS request to solve the challenge. For me I found the flag hardcoded in the code.</p>
+<p>I would love to point out that the way I solved this challenge was not the proper way from the creator’s point of view. He mentioned that one had to intercept or do a man-in-the-middle attack on the SMS request to solve the challenge. For me, I found the flag hardcoded in the code.</p>
 
 <p>The issue being SMS gateway owned, SMS-gateway qual to an API, this being my theory I looked at various classes starting from the <strong><code class="language-plaintext highlighter-rouge">MobilesasaClient</code></strong> class where it has a field for <code class="language-plaintext highlighter-rouge">flag 3</code>.</p>
 
@@ -459,7 +459,7 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p class="figcaption">chall6: <code class="language-plaintext highlighter-rouge">MobilesasaClient Class</code></p>
 
-<p>When I saw this, I knew that I am close. So I decided to look at the <strong><code class="language-plaintext highlighter-rouge">MySMSBroadcastReceiver</code></strong> class where there was no interesting thing so after sitting down and looking at the <strong><code class="language-plaintext highlighter-rouge">MobilesasaClient</code></strong> class I noticed a small detail I had missed <strong><code class="language-plaintext highlighter-rouge">sendSMS</code></strong> I used that to query for any other string that contains the same string and I found the flag in the <strong><code class="language-plaintext highlighter-rouge">ConfirmPhone</code></strong> class.</p>
+<p>When I saw this, I knew that I was close. So I decided to look at the <strong><code class="language-plaintext highlighter-rouge">MySMSBroadcastReceiver</code></strong> class, where there was nothing interesting. But after sitting down and looking at the <strong><code class="language-plaintext highlighter-rouge">MobilesasaClient</code></strong> class, I noticed a small detail I had missed <strong><code class="language-plaintext highlighter-rouge">sendSMS</code></strong>. I used that to query for any other string containing the exact string and found the flag in the <strong><code class="language-plaintext highlighter-rouge">ConfirmPhone</code></strong> class.</p>
 
 <p><img src="/assets/img/blog/2020-02-24/image20.png" alt="image20" class="centered" /></p>
 
@@ -467,7 +467,7 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
 
 <p><strong>Flag6:</strong> <code class="language-plaintext highlighter-rouge">N37w0rk@n@lysisM0bileS@s@</code></p>
 
-<p>As we can note the flag states we should have done network analysis to solve the challenge, next time I will have that in mind.</p>
+<p>As we can note, the flag states we should have done a network analysis to solve the challenge. Next time I will have that in mind.</p>
 
 <h2 id="epilogue">Epilogue</h2>
 
@@ -498,6 +498,7 @@ html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);
   <li><a href="https://twitter.com/s0md3v/status/1150845512838332416">Somedev’s Way</a></li>
   <li><a href="https://twitter.com/fs0c131y/status/1129680329994907648">Elliot Alderson Way</a></li>
 </ul>
+
 
   
 </article>
