@@ -1,5 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-KE"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en-KE" /><updated>2022-05-27T10:41:27+03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">th3_gr00t</title><subtitle>One and only nerd who is on a journey to being a vulnerability researcher.
-</subtitle><author><name>th3gr00t</name></author><entry><title type="html">Bye Blogger, Hello Jekyll</title><link href="http://localhost:4000/blog/scripts/2022-05-25-the-move/" rel="alternate" type="text/html" title="Bye Blogger, Hello Jekyll" /><published>2022-05-25T00:00:00+03:00</published><updated>2022-05-25T00:00:00+03:00</updated><id>http://localhost:4000/blog/scripts/the-move</id><content type="html" xml:base="http://localhost:4000/blog/scripts/2022-05-25-the-move/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-KE"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en-KE" /><updated>2022-05-30T06:57:43+03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">th3_gr00t</title><subtitle>One and only nerd who is on a journey to being a vulnerability researcher.
+</subtitle><author><name>th3gr00t</name></author><entry><title type="html">GTA III; Money &amp;amp; Health Hacked</title><link href="http://localhost:4000/blog/notes/2022-05-30-GTA3-Money-Health-Hack/" rel="alternate" type="text/html" title="GTA III; Money &amp;amp; Health Hacked" /><published>2022-05-30T00:00:00+03:00</published><updated>2022-05-30T00:00:00+03:00</updated><id>http://localhost:4000/blog/notes/GTA3-Money-Health-Hack</id><content type="html" xml:base="http://localhost:4000/blog/notes/2022-05-30-GTA3-Money-Health-Hack/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#intro&quot; id=&quot;markdown-toc-intro&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#dxwnd-to-the-rescue&quot; id=&quot;markdown-toc-dxwnd-to-the-rescue&quot;&gt;DxWnd to the Rescue&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#money-hack&quot; id=&quot;markdown-toc-money-hack&quot;&gt;Money Hack&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#health-hack&quot; id=&quot;markdown-toc-health-hack&quot;&gt;Health Hack&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#epilogue&quot; id=&quot;markdown-toc-epilogue&quot;&gt;Epilogue&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#resources&quot; id=&quot;markdown-toc-resources&quot;&gt;Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;p&gt;This post will introduce a whole series of a game I found either last year or during covid on my friend’s laptop. I did play this game while I was young, and I would love to take this opportunity to bring back the nostalgic feeling I had when completing missions but this time while hacking it as I learn and enjoy myself.&lt;/p&gt;
+
+&lt;p&gt;I was motivated by &lt;a href=&quot;https://twitter.com/GuidedHacking&quot;&gt;Guided Hacking&lt;/a&gt;, from the amazing &lt;a href=&quot;https://www.youtube.com/playlist?list=PLt9cUwGw6CYFSoQHsf9b12kHWLdgYRhmQ&quot;&gt;series&lt;/a&gt; on game hacking, and &lt;a href=&quot;https://www.youtube.com/c/LiveOverflow&quot;&gt;Live0verflow&lt;/a&gt; with some epic content on Minecraft hacking.&lt;/p&gt;
+
+&lt;p&gt;My main goal for this series is to Hack while I enjoy myself and maybe learn how to bypass anti-cheats. I won’t go into the details or the steps to reproduce what I have been doing. Mainly explain the technical details that I found difficult or confusing, particularly for this game, while creating a cheat engine table.&lt;/p&gt;
+
+&lt;h2 id=&quot;dxwnd-to-the-rescue&quot;&gt;DxWnd to the Rescue&lt;/h2&gt;
+
+&lt;p&gt;I needed a way to make the game run in windowed mode because it wasn’t possible, as we can tell game developers in the year 2001 never included it.&lt;/p&gt;
+
+&lt;p&gt;After some research, I came by a software application from &lt;a href=&quot;https://sourceforge.net/&quot;&gt;sourceforge&lt;/a&gt; known as &lt;a href=&quot;https://sourceforge.net/projects/dxwnd/&quot;&gt;DxWnd&lt;/a&gt;, a window hooker that runs fullscreen programs in a window. I found a &lt;a href=&quot;https://sourceforge.net/p/dxwnd/discussion/general/thread/c360cbc28e/&quot;&gt;thread&lt;/a&gt; that contained a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.dxw&lt;/code&gt;` config file which worked after some minor edits; despite that, it took me a whole day.&lt;/p&gt;
+
+&lt;h2 id=&quot;money-hack&quot;&gt;Money Hack&lt;/h2&gt;
+
+&lt;p&gt;I got two static addresses for the money value, which was easy getting it. Watch Guided Hacking &lt;a href=&quot;https://www.youtube.com/playlist?list=PLt9cUwGw6CYFSoQHsf9b12kHWLdgYRhmQ&quot;&gt;series&lt;/a&gt; episode 1.&lt;/p&gt;
+
+&lt;h2 id=&quot;health-hack&quot;&gt;Health Hack&lt;/h2&gt;
+
+&lt;p&gt;Getting the health address took a toll on me. I scanned for 4bytes exact value while the value type was float. I found the address and thought I was done, but the addresses never worked when I closed off the game and started it again. I researched and found an &lt;a href=&quot;https://youtu.be/fvv8IJGke1Q&quot;&gt;old video&lt;/a&gt; by Guided Hacking where he showed how to solve this issue using the &lt;a href=&quot;https://assault.cubers.net/&quot;&gt;AssultCube&lt;/a&gt; game.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2022-05-30/image2.png&quot; alt=&quot;image2&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;Instructions that write to the Health Address&lt;/p&gt;
+
+&lt;p&gt;The image above shows the instructions that write to the health address. The first instruction loads the floating-point value, and then the second instruction subtracts the value at the address &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[ESP+3C&lt;/code&gt;], then the remainder is at the same address it was loaded from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[EBP+2C0]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Following the &lt;a href=&quot;https://youtu.be/fvv8IJGke1Q&quot;&gt;old video&lt;/a&gt; with this information, I obtained several static addresses and confirmed the correct one that was the actual Player Object Pointer. I then took the offset we found from the instructions writing to the health address and found my actual health address that never changes even when spawning the game later on.&lt;/p&gt;
+
+&lt;p&gt;Below is a screen recording of the actual footage of my upcoming cheat table at work.&lt;/p&gt;
+
+&lt;div class=&quot;youtube-wrapper&quot; style=&quot;padding-top: 2em&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/W5596Egy0B4&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;epilogue&quot;&gt;Epilogue&lt;/h2&gt;
+
+&lt;p&gt;Now that we have obtained the Player Object Pointer, it opens up endless hacking opportunities. Thank you for your time, and see you in the other realm.&lt;/p&gt;
+
+&lt;p&gt;Remember, it can be done; all that is required is some bit of practice and consistency.&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;LiveOverflow series on &lt;a href=&quot;https://www.youtube.com/watch?v=Ekcseve-mOg&amp;amp;list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG&quot;&gt;hacking Minecraft&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Guided Hacking &lt;a href=&quot;https://www.youtube.com/watch?v=tiiQBPgSQBI&amp;amp;list=PLt9cUwGw6CYFSoQHsf9b12kHWLdgYRhmQ&quot;&gt;game hacking&lt;/a&gt; series.&lt;/li&gt;
+  &lt;li&gt;Guided Hacking &lt;a href=&quot;https://guidedhacking.com/&quot;&gt;webstite&lt;/a&gt; that contains other resources on game hacking.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="notes" /><category term="gamehacking" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2022-05-30/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2022-05-30/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Bye Blogger, Hello Jekyll</title><link href="http://localhost:4000/blog/notes/2022-05-25-the-move/" rel="alternate" type="text/html" title="Bye Blogger, Hello Jekyll" /><published>2022-05-25T00:00:00+03:00</published><updated>2022-05-25T00:00:00+03:00</updated><id>http://localhost:4000/blog/notes/the-move</id><content type="html" xml:base="http://localhost:4000/blog/notes/2022-05-25-the-move/">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#intro&quot; id=&quot;markdown-toc-intro&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#the-move&quot; id=&quot;markdown-toc-the-move&quot;&gt;The move&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#epilogue&quot; id=&quot;markdown-toc-epilogue&quot;&gt;Epilogue&lt;/a&gt;&lt;/li&gt;
@@ -29,7 +86,7 @@
   &lt;li&gt;Russell’s collection of &lt;a href=&quot;https://github.com/Syonyk/blogger_to_jekyll&quot;&gt;scripts&lt;/a&gt; to help migrate from Blogger to Jekyll.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://lazyren.github.io/devlog/how-i-customized-hydejack-theme.html&quot;&gt;How I customized Hydejack Theme&lt;/a&gt; by DaeIn Lee.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://lazyren.github.io/devlog/hydejack-post-writing-tips-tricks.html&quot;&gt;Hydejack Post Writing Tips &amp;amp; Tricks&lt;/a&gt; by DaeIn Lee.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="scripts" /><category term="Blog" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2022-05-25/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2022-05-25/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Security + DevOp’s Play Ground Automation Setup</title><link href="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/" rel="alternate" type="text/html" title="Security + DevOp’s Play Ground Automation Setup" /><published>2020-03-13T00:00:00+03:00</published><updated>2020-03-13T00:00:00+03:00</updated><id>http://localhost:4000/blog/dev/security-devops-play-ground-automation</id><content type="html" xml:base="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="notes" /><category term="Blog" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2022-05-25/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2022-05-25/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Security + DevOp’s Play Ground Automation Setup</title><link href="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/" rel="alternate" type="text/html" title="Security + DevOp’s Play Ground Automation Setup" /><published>2020-03-13T00:00:00+03:00</published><updated>2020-03-13T00:00:00+03:00</updated><id>http://localhost:4000/blog/dev/security-devops-play-ground-automation</id><content type="html" xml:base="http://localhost:4000/blog/dev/2020-03-13-security-devops-play-ground-automation/">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#prologue&quot; id=&quot;markdown-toc-prologue&quot;&gt;Prologue&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#playground-gadgets&quot; id=&quot;markdown-toc-playground-gadgets&quot;&gt;Playground gadgets&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#why-shell-script-&quot; id=&quot;markdown-toc-why-shell-script-&quot;&gt;Why shell script ??&lt;/a&gt;&lt;/li&gt;
@@ -366,7 +423,7 @@
   &lt;li&gt;&lt;a href=&quot;https://www.hacker101.com/sessions/mobile_crash_course.html&quot;&gt;Mobile Hacking Crash Course&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://twitter.com/s0md3v/status/1150845512838332416&quot;&gt;Somedev’s Way&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://twitter.com/fs0c131y/status/1129680329994907648&quot;&gt;Elliot Alderson Way&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="ctf" /><category term="re" /><category term="appsec" /><summary type="html">Aplogoies for any rough images, they were migrated from blogger.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2020-02-24/image1.gif" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2020-02-24/image1.gif" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Rabbit Hole Adventures: AppSec Teaser</title><link href="http://localhost:4000/blog/scripts/2019-04-17-rabbit-hole-adventures-appsec-teaser/" rel="alternate" type="text/html" title="Rabbit Hole Adventures: AppSec Teaser" /><published>2019-04-17T00:00:00+03:00</published><updated>2019-04-17T00:00:00+03:00</updated><id>http://localhost:4000/blog/scripts/rabbit-hole-adventures-appsec-teaser</id><content type="html" xml:base="http://localhost:4000/blog/scripts/2019-04-17-rabbit-hole-adventures-appsec-teaser/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="ctf" /><category term="re" /><category term="appsec" /><summary type="html">Aplogoies for any rough images, they were migrated from blogger.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2020-02-24/image1.gif" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2020-02-24/image1.gif" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Rabbit Hole Adventures: AppSec Teaser</title><link href="http://localhost:4000/blog/notes/2019-04-17-rabbit-hole-adventures-appsec-teaser/" rel="alternate" type="text/html" title="Rabbit Hole Adventures: AppSec Teaser" /><published>2019-04-17T00:00:00+03:00</published><updated>2019-04-17T00:00:00+03:00</updated><id>http://localhost:4000/blog/notes/rabbit-hole-adventures-appsec-teaser</id><content type="html" xml:base="http://localhost:4000/blog/notes/2019-04-17-rabbit-hole-adventures-appsec-teaser/">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#prologue&quot; id=&quot;markdown-toc-prologue&quot;&gt;Prologue&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#lessons&quot; id=&quot;markdown-toc-lessons&quot;&gt;Lessons&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#epilogue&quot; id=&quot;markdown-toc-epilogue&quot;&gt;Epilogue&lt;/a&gt;&lt;/li&gt;
@@ -395,7 +452,7 @@
 
 &lt;p&gt;Before I got to learn what application security is, I felt like I had a hammer and never knew where to start to look for holes to break. I got to learn this the hard way and I am proud that everything was a success, It was interesting and I will take this knowledge and finish a mobile application CTF series I have been sitting on, for a while now.&lt;/p&gt;
 
-&lt;p&gt;This time I don’t have any resources to share but I would be happy if you would share any resources to keep me going on this journey, here is my Twitter handle &lt;a href=&quot;https://twitter.com/th3_gr00t&quot;&gt;@th3_gr00t&lt;/a&gt;.&lt;/p&gt;</content><author><name>th3gr00t</name></author><category term="scripts" /><category term="appsec" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2019-04-17/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2019-04-17/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">USIU-CTF-2019</title><link href="http://localhost:4000/blog/ctf/2019-03-13-usiu-ctf-2019/" rel="alternate" type="text/html" title="USIU-CTF-2019" /><published>2019-03-13T00:00:00+03:00</published><updated>2019-03-13T00:00:00+03:00</updated><id>http://localhost:4000/blog/ctf/usiu-ctf-2019</id><content type="html" xml:base="http://localhost:4000/blog/ctf/2019-03-13-usiu-ctf-2019/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;p&gt;This time I don’t have any resources to share but I would be happy if you would share any resources to keep me going on this journey, here is my Twitter handle &lt;a href=&quot;https://twitter.com/th3_gr00t&quot;&gt;@th3_gr00t&lt;/a&gt;.&lt;/p&gt;</content><author><name>th3gr00t</name></author><category term="notes" /><category term="appsec" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2019-04-17/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2019-04-17/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">USIU-CTF-2019</title><link href="http://localhost:4000/blog/ctf/2019-03-13-usiu-ctf-2019/" rel="alternate" type="text/html" title="USIU-CTF-2019" /><published>2019-03-13T00:00:00+03:00</published><updated>2019-03-13T00:00:00+03:00</updated><id>http://localhost:4000/blog/ctf/usiu-ctf-2019</id><content type="html" xml:base="http://localhost:4000/blog/ctf/2019-03-13-usiu-ctf-2019/">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#prologue&quot; id=&quot;markdown-toc-prologue&quot;&gt;Prologue&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#challenges&quot; id=&quot;markdown-toc-challenges&quot;&gt;Challenges&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#category-1-miscellaneous&quot; id=&quot;markdown-toc-category-1-miscellaneous&quot;&gt;Category 1 &lt;em&gt;Miscellaneous&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
@@ -557,7 +614,7 @@
 
 &lt;p class=&quot;note&quot;&gt;The challenge contained clues that assisted the challenger in acquiring the next flag.&lt;/p&gt;
 
-&lt;p&gt;I want to give credit to &lt;a href=&quot;https://twitter.com/@RobertWinkel&quot;&gt;Robert Winkel&lt;/a&gt;, it was his vulnerable machine challenge that got me started.&lt;/p&gt;
+&lt;p&gt;I want to give credit to &lt;a href=&quot;https://twitter.com/@RobertWinkel&quot;&gt;Robert Winkel&lt;/a&gt;. It was his vulnerable machine challenge that got me started.&lt;/p&gt;
 
 &lt;h2 id=&quot;assignment&quot;&gt;Assignment&lt;/h2&gt;
 
