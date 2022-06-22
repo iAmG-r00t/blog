@@ -23,7 +23,7 @@ My main goal for this series is to Hack while I enjoy myself and maybe learn how
 
 I needed a way to make the game run in windowed mode because it wasn't possible, as we can tell game developers in the year 2001 never included it.
 
-After some research, I came by a software application from [sourceforge] known as [DxWnd], a window hooker that runs fullscreen programs in a window. I found a [thread] that contained a `.dxw`` config file which worked after some minor edits; despite that, it took me a whole day.
+After some research, I came by a software application from [SourceForge] known as [DxWnd], a window hooker that runs fullscreen programs in a window. I found a [thread] that contained a `.dxw`` config file which worked after some minor edits; despite that, it took me a whole day.
 
 ## Money Hack
 
@@ -58,13 +58,13 @@ Remember, it can be done; all that is required is some bit of practice and consi
 
 * LiveOverflow series on [hacking Minecraft](https://www.youtube.com/watch?v=Ekcseve-mOg&list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG).
 * Guided Hacking [game hacking](https://www.youtube.com/watch?v=tiiQBPgSQBI&list=PLt9cUwGw6CYFSoQHsf9b12kHWLdgYRhmQ) series.
-* Guided Hacking [webstite](https://guidedhacking.com/) that contains other resources on game hacking.
+* Guided Hacking [website](https://guidedhacking.com/) that contains other resources on game hacking.
 
 
 [Guided Hacking]: https://twitter.com/GuidedHacking
 [series]: https://www.youtube.com/playlist?list=PLt9cUwGw6CYFSoQHsf9b12kHWLdgYRhmQ
 [Live0verflow]: https://www.youtube.com/c/LiveOverflow
-[sourceforge]: https://sourceforge.net/
+[SourceForge]: https://sourceforge.net/
 [DxWnd]: https://sourceforge.net/projects/dxwnd/
 [thread]: https://sourceforge.net/p/dxwnd/discussion/general/thread/c360cbc28e/
 [old video]: https://youtu.be/fvv8IJGke1Q

@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Task Interpreter Puzzle | th3_gr00t</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="Task Interpreter Puzzle" />
+<meta name="author" content="th3gr00t" />
+<meta property="og:locale" content="en_KE" />
+<meta name="description" content="The solution often turns out more beautiful than the puzzle. - Richard Dawkins" />
+<meta property="og:description" content="The solution often turns out more beautiful than the puzzle. - Richard Dawkins" />
+<link rel="canonical" href="http://localhost:4000/blog/notes/2022-06-21-puzzle/" />
+<meta property="og:url" content="http://localhost:4000/blog/notes/2022-06-21-puzzle/" />
+<meta property="og:site_name" content="th3_gr00t" />
+<meta property="og:image" content="http://localhost:4000/assets/img/blog/2022-06-21/image1.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-21T00:00:00+03:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/img/blog/2022-06-21/image1.png" />
+<meta property="twitter:title" content="Task Interpreter Puzzle" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"th3gr00t"},"dateModified":"2022-06-21T00:00:00+03:00","datePublished":"2022-06-21T00:00:00+03:00","description":"The solution often turns out more beautiful than the puzzle. - Richard Dawkins","headline":"Task Interpreter Puzzle","image":"http://localhost:4000/assets/img/blog/2022-06-21/image1.png","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/notes/2022-06-21-puzzle/"},"url":"http://localhost:4000/blog/notes/2022-06-21-puzzle/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+    <meta name="keywords" content="security,low-level,hardware-hacking">
+  
+
+
+
+  <meta name="theme-color" content="rgb(101,71,47)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="th3_gr00t">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="th3_gr00t">
+
+<meta name="generator" content="Hydejack v9.1.6" />
+
+
+<link rel="alternate" href="http://localhost:4000/blog/notes/2022-06-21-puzzle/" hreflang="en-ke">
+
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="th3_gr00t" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.1.6.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css">
+  <script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script"),e=(n.src=e,t&&a(n,"load",t,{once:!0}),c.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2022-06-23T00:13:25+03:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.6.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(226,135,67);--accent-color-faded: rgba(226,135,67,0.5);--accent-color-highlight: rgba(226,135,67,0.1);--accent-color-darkened: #dd7222;--theme-color: rgb(101,71,47);--dark-mode-body-bg: #2f2c2b;--dark-mode-border-color: #3c3937}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="dark-mode no-break-layout no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(a=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(a),s.body.classList.remove(e))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/notes/">notes</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>2022-06-21-puzzle</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-notes-puzzle" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Task Interpreter Puzzle
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2022-06-21T00:00:00+03:00">21 Jun 2022</time> in <a href="/blog/notes/" class="flip-title">Notes</a> on <a href="/tag-re/" class="flip-title">Reversing</a>, <span>Puzzle</span>
+           
+          <span class="clap-count" data-url="http://localhost:4000/blog/notes/2022-06-21-puzzle/"></span>
+        
+      
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/assets/img/blog/2022-06-21/image1.png"
+  
+  alt="Task Interpreter Puzzle"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      The solution often turns out more beautiful than the puzzle. - Richard Dawkins
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <ul id="markdown-toc">
+  <li><a href="#intro" id="markdown-toc-intro">Intro</a></li>
+  <li><a href="#the-code" id="markdown-toc-the-code">The Code</a></li>
+  <li><a href="#the-puzzle" id="markdown-toc-the-puzzle">The Puzzle</a>    <ul>
+      <li><a href="#instruction-functions" id="markdown-toc-instruction-functions">Instruction functions</a></li>
+      <li><a href="#bytecode-data" id="markdown-toc-bytecode-data">Bytecode data</a></li>
+    </ul>
+  </li>
+  <li><a href="#thought-process" id="markdown-toc-thought-process">Thought process</a></li>
+  <li><a href="#solving" id="markdown-toc-solving">Solving</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="#resources" id="markdown-toc-resources">Resources</a></li>
+</ul>
+
+<h2 id="intro">Intro</h2>
+
+<p>It was around lunch hour when I received a ping from a good friend and colleague of mine. He sent me a <code class="language-plaintext highlighter-rouge">task_interpreter.py</code> file and asked me if I could solve the challenge. I managed to have a look at it but it seemed a bit tough honestly, wrote some comments on the file and decided to shelf it to my long to-do list.</p>
+
+<p>On Friday while at work, my colleague (he is also a good friend of mine 😂) asked me if I had taken a look at the challenge. We sat down with him and I explained to him what I had understood about the challenge and in the process, I got a better understanding of the challenge. That evening I decided to have a look at the challenge and two days later I was able to solve the challenge and call it a success.</p>
+
+<p>This post will describe my thought process when solving the challenge and what I would conclude as the teaching lesson.</p>
+
+<h2 class="text-align-center" id="the-code">The Code</h2>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># file: "task_interpreter.py"
+</span><span class="kn">import</span> <span class="nn">struct</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha256</span>
+<span class="kn">from</span> <span class="nn">binascii</span> <span class="kn">import</span> <span class="n">hexlify</span><span class="p">,</span> <span class="n">unhexlify</span>
+<span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
+
+
+<span class="n">STACK_MAX_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">PROGRAM_MAX_SIZE</span> <span class="o">=</span> <span class="mi">2048</span>
+
+<span class="n">STACK</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">op_nop</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+	<span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">op_push</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+	<span class="n">off</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+	<span class="n">l</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">'B'</span><span class="p">,</span> <span class="n">code</span><span class="p">[</span><span class="n">off</span><span class="p">:</span><span class="n">off</span><span class="o">+</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="n">off</span> <span class="o">+=</span> <span class="mi">1</span>
+
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">[</span><span class="n">off</span><span class="p">:])</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+	<span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">code</span><span class="p">[</span><span class="n">off</span><span class="p">:</span><span class="n">off</span><span class="o">+</span><span class="n">l</span><span class="p">])</span>
+	<span class="n">off</span> <span class="o">+=</span> <span class="n">l</span>
+
+	<span class="k">return</span> <span class="n">off</span>
+
+<span class="k">def</span> <span class="nf">op_dup</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+	<span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">STACK</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+	<span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">op_equal</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+	<span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">bytes</span><span class="p">([</span><span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="o">==</span> <span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()]))</span>
+	<span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">op_hash</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+	<span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">sha256</span><span class="p">(</span><span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()).</span><span class="n">digest</span><span class="p">())</span>
+	<span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">op_verify</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x00</span><span class="s">'</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Verify failed"</span><span class="p">)</span>
+	<span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">op_check_sig</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+	
+	<span class="n">pub_key</span> <span class="o">=</span> <span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+	<span class="n">msg</span> <span class="o">=</span> <span class="n">sha256</span><span class="p">(</span><span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()).</span><span class="n">digest</span><span class="p">()</span>
+	<span class="n">sig</span> <span class="o">=</span> <span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+
+	<span class="n">msg</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s">'big'</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pub_key</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">129</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">pub_key</span><span class="p">[:</span><span class="mi">128</span><span class="p">],</span> <span class="s">'big'</span><span class="p">)</span>
+	<span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">pub_key</span><span class="p">[</span><span class="mi">128</span><span class="p">:],</span> <span class="s">'big'</span><span class="p">)</span>
+	<span class="n">sig</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="s">'big'</span><span class="p">)</span>
+
+	<span class="n">pub_key</span> <span class="o">=</span> <span class="n">RSA</span><span class="p">.</span><span class="n">RsaKey</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+	<span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">bytes</span><span class="p">([</span><span class="nb">pow</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">pub_key</span><span class="p">.</span><span class="n">e</span><span class="p">,</span> <span class="n">pub_key</span><span class="p">.</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">msg</span><span class="p">]))</span>
+	<span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">OPS</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="mi">0</span><span class="p">:</span> <span class="n">op_nop</span><span class="p">,</span>
+	<span class="mi">1</span><span class="p">:</span> <span class="n">op_push</span><span class="p">,</span>
+	<span class="c1">#2: op_add,
+</span>	<span class="c1">#3: op_sub,
+</span>	<span class="c1">#4: op_not,
+</span>	<span class="mi">6</span><span class="p">:</span> <span class="n">op_dup</span><span class="p">,</span>
+	<span class="mi">7</span><span class="p">:</span> <span class="n">op_equal</span><span class="p">,</span>
+	<span class="mi">8</span><span class="p">:</span> <span class="n">op_hash</span><span class="p">,</span>
+	<span class="mi">9</span><span class="p">:</span> <span class="n">op_verify</span><span class="p">,</span>
+	<span class="mh">0x0c</span><span class="p">:</span> <span class="n">op_check_sig</span><span class="p">,</span>
+	<span class="c1"># 0x0d: op_halt
+</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+	<span class="n">pc</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">while</span> <span class="n">pc</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+		<span class="n">f</span> <span class="o">=</span> <span class="n">OPS</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">[</span><span class="n">pc</span><span class="p">],</span> <span class="bp">None</span><span class="p">)</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s">'Wrong opcode </span><span class="si">{</span><span class="n">code</span><span class="p">[</span><span class="n">pc</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+		<span class="n">pc</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">code</span><span class="p">[</span><span class="n">pc</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span> <span class="o">+</span> <span class="mi">1</span>
+
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">STACK_MAX_SIZE</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Stack size exceeds"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="n">unlock</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lock</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">PROGRAM_MAX_SIZE</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">unlock</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">PROGRAM_MAX_SIZE</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+
+	<span class="n">process</span><span class="p">(</span><span class="n">unlock</span><span class="p">)</span>
+	<span class="n">process</span><span class="p">(</span><span class="n">lock</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">STACK</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x01</span><span class="s">'</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
+
+	<span class="k">return</span> <span class="bp">False</span>
+
+<span class="n">lock</span> <span class="o">=</span> <span class="sa">b</span><span class="s">''</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x08</span><span class="s">'</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x01\x20\x9f\x86\xd0\x81\x88\x4c\x7d\x65\x9a\x2f\xea\xa0\xc5\x5a\xd0\x15\xa3\xbf\x4f\x1b\x2b\x0b\x82\x2c\xd1\x5d\x6c\x15\xb0\xf0\x0a\x08</span><span class="s">'</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x07</span><span class="s">'</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x09</span><span class="s">'</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x01\x83\xb8\x1d\x31\x39\x5e\xd5\xf6\xb7\x14\xac\x1e\x12\xaa\x4a\x72\xca\x24\x7f\xce\x87\x8a\xe6\xf9\x04\x25\xb1\x82\x35\xff\x99\xb1\xf0\x9f\x98\xd3\xfb\xdb\x6d\xeb\x0b\x35\x6f\x63\x51\x67\x44\x8c\x66\x66\xb9\x5c\x44\xb5\x3a\x81\x5b\xce\xbf\xeb\xb2\x2a\x34\x71\xd1\x94\x85\xad\xca\x7f\x30\x37\x7d\xb5\x56\x46\x78\x4c\xe8\xa7\x6f\x43\xcf\x0a\x2d\x32\x13\x76\x5d\x10\xe1\x9f\xe3\xc5\x19\x74\xe9\x69\xe1\xfa\x5b\x71\x4c\x9d\x9c\x0c\x35\xcf\xe8\x53\x2d\x12\xa6\x23\x1e\xd4\x9c\x59\xd3\xab\x81\xa2\x36\x50\x18\x55\xdf\x35\xd1\x01\x00\x01</span><span class="s">'</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x0c</span><span class="s">'</span>
+
+<span class="n">unlock</span> <span class="o">=</span> <span class="n">unhexlify</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'Enter the script to solve the puzzle: '</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">solve</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="n">unlock</span><span class="p">):</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">'Great job!'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">'Try again :('</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The code contains nine functions; <code class="language-plaintext highlighter-rouge">op_nop</code>, <code class="language-plaintext highlighter-rouge">op_push</code>, <code class="language-plaintext highlighter-rouge">op_dup</code>, <code class="language-plaintext highlighter-rouge">op_equal</code>, <code class="language-plaintext highlighter-rouge">op_hash</code>, <code class="language-plaintext highlighter-rouge">op_verify</code>, <code class="language-plaintext highlighter-rouge">op_check_sig</code>, <code class="language-plaintext highlighter-rouge">process</code> and <code class="language-plaintext highlighter-rouge">solve</code>. It also contains one list, one dictionary, and four variables; <code class="language-plaintext highlighter-rouge">STACK</code>, <code class="language-plaintext highlighter-rouge">OPS</code>, <code class="language-plaintext highlighter-rouge">STACK_MAX_SIZE</code>, <code class="language-plaintext highlighter-rouge">PROGRAM_MAX_SIZE</code>, <code class="language-plaintext highlighter-rouge">lock</code>, and <code class="language-plaintext highlighter-rouge">unlock</code> respectively.</p>
+
+<p>At a glance when looking at the first nine instructions they work like VM instructions. The process function works as described and the solve function checks if we have solved the puzzle.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">OPS</code> dictionary contains keys that act as the <code class="language-plaintext highlighter-rouge">op_codes</code> and the values which are our <code class="language-plaintext highlighter-rouge">instructions</code> functions. Our <code class="language-plaintext highlighter-rouge">lock</code> variables already contain data that we will later analyze.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">PROGRAM_MAX_SIZE</code> is equal to 2048 and the <code class="language-plaintext highlighter-rouge">STACK_MAX_SIZE</code> is equal to 128.</p>
+
+<h2 id="the-puzzle">The Puzzle</h2>
+
+<p>The program requires us to input some data in hex which is going to be converted back from hex to binary data (bytes). Our input is then stored in a variable called <code class="language-plaintext highlighter-rouge">unlock</code> which is then passed to the <code class="language-plaintext highlighter-rouge">solve</code> function in an if statement. If the return value from our solve function is true, it prints <strong>Great job!</strong> and if it’s false it prints <strong>Try again :(</strong>.</p>
+
+<p>The solve function takes two variables <code class="language-plaintext highlighter-rouge">lock</code> and <code class="language-plaintext highlighter-rouge">unlock</code>. It first checks the length of both variables and if any of them are greater than the <code class="language-plaintext highlighter-rouge">PROGRAM_MAX_SIZE</code> it will return a false. If the lengths are within bounds it calls the process function twice when passing the <code class="language-plaintext highlighter-rouge">unlock</code> and <code class="language-plaintext highlighter-rouge">lock</code> variables respectively. Then proceeds to check if the first element in our <code class="language-plaintext highlighter-rouge">STACK</code> is equal to byte <code class="language-plaintext highlighter-rouge">\x01</code> it returns true and if it’s not equal it returns false.</p>
+
+<p>The process function takes in one variable <code class="language-plaintext highlighter-rouge">code</code>. First initializes program counter <code class="language-plaintext highlighter-rouge">pc</code> to zero which is the length of our byte code. Then proceeds to a while loop that checks if the <code class="language-plaintext highlighter-rouge">pc</code> is less than the length of our <code class="language-plaintext highlighter-rouge">code</code>. Inside the while loop, it initializes the function <code class="language-plaintext highlighter-rouge">f</code> which checks the first byte in our <code class="language-plaintext highlighter-rouge">code</code> and maps it with the key value in our OPS dictionary. If the key value isn’t present it raises an error printing <strong>Wrong opcode [value]</strong>. The next line of code is the one that prevents the while loop from being an infinite loop. Once the key value has been found and data has been passed to our specified instruction function, the specified instruction returns a value either the length of the <code class="language-plaintext highlighter-rouge">code</code> or zero which is then incremented by one so that <code class="language-plaintext highlighter-rouge">pc</code> to be greater than the length of <code class="language-plaintext highlighter-rouge">code</code>. Afterward, it checks if the data in the <code class="language-plaintext highlighter-rouge">STACK</code> is greater than the <code class="language-plaintext highlighter-rouge">STACK_MAX_SIZE</code> and if it is it raised an error printing <strong>Stack size exceeds</strong>.</p>
+
+<h3 class="text-align-center" id="instruction-functions">Instruction functions</h3>
+
+<p>Each instruction function performs a task using either the input data <code class="language-plaintext highlighter-rouge">code</code> or the data in the <code class="language-plaintext highlighter-rouge">STACK</code>. I won’t explain the finer details of each line in the function but only the important bits and pieces.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">op_push</code>; adds data to the <code class="language-plaintext highlighter-rouge">STACK</code> and returns the length of the input data.</li>
+  <li><code class="language-plaintext highlighter-rouge">op_dup</code>; duplicates the last element in the <code class="language-plaintext highlighter-rouge">STACK</code> and returns zero.</li>
+  <li><code class="language-plaintext highlighter-rouge">op_equal</code>; pops the last two elements in the <code class="language-plaintext highlighter-rouge">STACK</code> and checks if they are equal. Where it appends byte <code class="language-plaintext highlighter-rouge">\x01</code> or <code class="language-plaintext highlighter-rouge">\x00</code> to the <code class="language-plaintext highlighter-rouge">STACK</code> if they are equal or not equal respectively. It also returns zero.</li>
+  <li><code class="language-plaintext highlighter-rouge">op_hash</code>; pops the last element in the <code class="language-plaintext highlighter-rouge">STACK</code> and appended its sha256 digest (hash value) to the <code class="language-plaintext highlighter-rouge">STACK</code>. It also returns zero.</li>
+  <li><code class="language-plaintext highlighter-rouge">op_verify</code>; pops the last element in the <code class="language-plaintext highlighter-rouge">STACK</code> and checks if it is equal to byte <code class="language-plaintext highlighter-rouge">\x00</code> it raises an error printing <code class="language-plaintext highlighter-rouge">Verify failed</code>. It also returns zero.</li>
+  <li><code class="language-plaintext highlighter-rouge">op_check_sig</code>; pops the last three elements in the stack and points them to variables <code class="language-plaintext highlighter-rouge">pub_key</code>, <code class="language-plaintext highlighter-rouge">msg</code>, and <code class="language-plaintext highlighter-rouge">sig</code> respectively. Then proceeds to prepare the data to perform an <a href="https://cryptobook.nakov.com/digital-signatures/rsa-sign-verify-examples">RSA verify signature algorithm</a>.</li>
+</ul>
+
+<h3 class="text-align-center" id="bytecode-data">Bytecode data</h3>
+
+<p>I figured out the bytecode data format by looking at the lock data. This will be important for solving the challenge because we need to understand how the process takes in data to solve the challenge. The first byte data is the <code class="language-plaintext highlighter-rouge">op_code</code> and the second-byte data is the <code class="language-plaintext highlighter-rouge">data_len</code> length of the data following it. The length is mainly required when pushing the data to the stack.</p>
+
+<p><img src="/assets/img/blog/2022-06-21/image2.png" alt="image2" class="centered" /></p>
+
+<p class="figcaption">bytecode data format</p>
+
+<h2 id="thought-process">Thought process</h2>
+
+<p>I noticed that our input data is being processed first then the lock data. That being the case I worked with what I had the lock data.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lock</span> <span class="o">=</span> <span class="sa">b</span><span class="s">''</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x08</span><span class="s">'</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x01\x20\x9f\x86\xd0\x81\x88\x4c\x7d\x65\x9a\x2f\xea\xa0\xc5\x5a\xd0\x15\xa3\xbf\x4f\x1b\x2b\x0b\x82\x2c\xd1\x5d\x6c\x15\xb0\xf0\x0a\x08</span><span class="s">'</span> <span class="c1"># msg_hash
+</span><span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x07</span><span class="s">'</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x09</span><span class="s">'</span>
+<span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x01\x83\xb8\x1d\x31\x39\x5e\xd5\xf6\xb7\x14\xac\x1e\x12\xaa\x4a\x72\xca\x24\x7f\xce\x87\x8a\xe6\xf9\x04\x25\xb1\x82\x35\xff\x99\xb1\xf0\x9f\x98\xd3\xfb\xdb\x6d\xeb\x0b\x35\x6f\x63\x51\x67\x44\x8c\x66\x66\xb9\x5c\x44\xb5\x3a\x81\x5b\xce\xbf\xeb\xb2\x2a\x34\x71\xd1\x94\x85\xad\xca\x7f\x30\x37\x7d\xb5\x56\x46\x78\x4c\xe8\xa7\x6f\x43\xcf\x0a\x2d\x32\x13\x76\x5d\x10\xe1\x9f\xe3\xc5\x19\x74\xe9\x69\xe1\xfa\x5b\x71\x4c\x9d\x9c\x0c\x35\xcf\xe8\x53\x2d\x12\xa6\x23\x1e\xd4\x9c\x59\xd3\xab\x81\xa2\x36\x50\x18\x55\xdf\x35\xd1\x01\x00\x01</span><span class="s">'</span> <span class="c1">#pub_key
+</span><span class="n">lock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x0c</span><span class="s">'</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Starts by calling the <code class="language-plaintext highlighter-rouge">op_hash</code> instruction which will hash the last element in the <code class="language-plaintext highlighter-rouge">STACK</code>.</li>
+  <li>Pushes some data of length 32 to the <code class="language-plaintext highlighter-rouge">STACK</code>.</li>
+  <li>Calls the <code class="language-plaintext highlighter-rouge">op_equal</code> instruction which will compare the last two elements in the <code class="language-plaintext highlighter-rouge">STACK</code>.</li>
+  <li>Calls the <code class="language-plaintext highlighter-rouge">op_verify</code> instruction which will verify if the last two elements were equal.</li>
+  <li>Pushes some data of length 131 to the <code class="language-plaintext highlighter-rouge">STACK</code>.</li>
+  <li>Then proceeds to call the <code class="language-plaintext highlighter-rouge">op_check_sig</code> instruction.</li>
+</ol>
+
+<p>From the lock data I verified two things, one is that the first data being pushed to the <code class="language-plaintext highlighter-rouge">STACK</code> is a sha256 hash digest because the first instruction hashes some data that will be in the stack then later on checking if they are equal to each other and verifying that they were equal. Two is that the last data being pushed before calling <code class="language-plaintext highlighter-rouge">op_check_sig</code> is a <code class="language-plaintext highlighter-rouge">pub_key</code>. When the <code class="language-plaintext highlighter-rouge">op_check_sig</code> is called you could see that the last element is set to the <code class="language-plaintext highlighter-rouge">pub_key</code> variable.</p>
+
+<p>I will be honest at first I thought this was a hash collision attack kind of challenge but after reviewing the <code class="language-plaintext highlighter-rouge">op_check_sig</code> instruction noticed that it wasn’t. Because I have never done any cryptography kind of challenge I went ahead and checked for CTF writeups that involved RSA to learn about it and read also about RSA in the book Serious Cryptography by Jean-Phillipe Aumasson.</p>
+
+<p>Learned a few things when trying to figure out if that instruction was vulnerable and ended up having a quick chat with a friend on discord who was able to crack the <code class="language-plaintext highlighter-rouge">msg_hash</code> using the <a href="https://crackstation.net/">crack station</a> site. My friend also informed me that the <code class="language-plaintext highlighter-rouge">op_check_sig</code> instruction was not vulnerable to textbook RSA signature attacks because <code class="language-plaintext highlighter-rouge">n</code> was not vulnerable.</p>
+
+<p><img src="/assets/img/blog/2022-06-21/image3.png" alt="image3" class="centered" /></p>
+
+<p class="note">I don’t understand how I forgot to try and crack the hash.</p>
+
+<p>I thought I had hit a dead-end because for us to solve this puzzle we are required to have a byte <code class="language-plaintext highlighter-rouge">\x01</code> at the beginning of the stack which I thought we would have got by passing the verify signature algorithm being performed by <code class="language-plaintext highlighter-rouge">op_check_sig</code> instruction.</p>
+
+<h2 id="solving">Solving</h2>
+
+<p>As I was heading to work on Tuesday I got a light bulb moment, we have control of what we place in the <code class="language-plaintext highlighter-rouge">STACK</code> what if we could find a way to place the byte <code class="language-plaintext highlighter-rouge">\x01</code> at the beginning of the stack and despite whatever is appended after the last instruction we will still have our byte present.</p>
+
+<p>To attain this I first noted what data will be popped from the <code class="language-plaintext highlighter-rouge">STACK</code> by each instruction so that the byte should be present at the end. Because now we have the <code class="language-plaintext highlighter-rouge">msg</code> it means we can pass the verification being performed in steps 3 and 4.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># file: "solve.py"
+#!/usr/bin/env python3
+</span><span class="s">"""
+Solve task interpreter puzzle challenge
+"""</span>
+
+<span class="kn">import</span> <span class="nn">struct</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha256</span>
+<span class="kn">from</span> <span class="nn">binascii</span> <span class="kn">import</span> <span class="n">hexlify</span><span class="p">,</span> <span class="n">unhexlify</span>
+
+<span class="n">STACK_MAX_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">PROGRAM_MAX_SIZE</span> <span class="o">=</span> <span class="mi">2048</span>
+
+<span class="n">STACK</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">op_push</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="n">off</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+    <span class="c1"># finds length of unpacked code...
+</span>    <span class="n">l</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">'B'</span><span class="p">,</span> <span class="n">code</span><span class="p">[</span><span class="n">off</span><span class="p">:</span><span class="n">off</span><span class="o">+</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">off</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">[</span><span class="n">off</span><span class="p">:])</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+    <span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">code</span><span class="p">[</span><span class="n">off</span><span class="p">:</span><span class="n">off</span><span class="o">+</span><span class="n">l</span><span class="p">])</span>
+    <span class="n">off</span> <span class="o">+=</span> <span class="n">l</span>
+
+    <span class="k">return</span> <span class="n">off</span>
+
+<span class="k">def</span> <span class="nf">op_dup</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+    <span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">STACK</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">op_equal</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+    <span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">bytes</span><span class="p">([</span><span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="o">==</span> <span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()]))</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">op_hash</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+    <span class="n">STACK</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">sha256</span><span class="p">(</span><span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()).</span><span class="n">digest</span><span class="p">())</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">op_verify</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Opcode processing error"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">STACK</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x00</span><span class="s">'</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Verify failed"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">OPS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="n">op_push</span><span class="p">,</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="n">op_dup</span><span class="p">,</span>
+    <span class="mi">7</span><span class="p">:</span> <span class="n">op_equal</span><span class="p">,</span>
+    <span class="mi">8</span><span class="p">:</span> <span class="n">op_hash</span><span class="p">,</span>
+    <span class="mi">9</span><span class="p">:</span> <span class="n">op_verify</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="n">pc</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">pc</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">OPS</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">[</span><span class="n">pc</span><span class="p">],</span> <span class="bp">None</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s">'Wrong opcode </span><span class="si">{</span><span class="n">code</span><span class="p">[</span><span class="n">pc</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+        <span class="n">pc</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">code</span><span class="p">[</span><span class="n">pc</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">STACK_MAX_SIZE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Stack size exceeds"</span><span class="p">)</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x01\x04\x74\x65\x73\x74</span><span class="s">'</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x01\x01\x00</span><span class="s">'</span>
+
+<span class="n">unlock</span> <span class="o">=</span> <span class="sa">b</span><span class="s">''</span>
+<span class="n">unlock</span> <span class="o">+=</span> <span class="n">msg</span>
+<span class="n">unlock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x06</span><span class="s">'</span>
+<span class="n">unlock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x07</span><span class="s">'</span>
+<span class="n">unlock</span> <span class="o">+=</span> <span class="n">sig</span>
+<span class="n">unlock</span> <span class="o">+=</span> <span class="n">msg</span>
+<span class="n">unlock</span> <span class="o">+=</span> <span class="sa">b</span><span class="s">'</span><span class="se">\x06</span><span class="s">'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">hexlify</span><span class="p">(</span><span class="n">unlock</span><span class="p">))</span>
+
+<span class="n">process</span><span class="p">(</span><span class="n">unlock</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">STACK</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Most of the logic in my script is borrowed from the puzzle. I first specified two variables <code class="language-plaintext highlighter-rouge">msg</code> and <code class="language-plaintext highlighter-rouge">sig</code> where the message is the value cracked from our <code class="language-plaintext highlighter-rouge">msg_hash</code> and signature is a null byte <code class="language-plaintext highlighter-rouge">\x00</code>.</p>
+
+<p>Remember when the <code class="language-plaintext highlighter-rouge">op_sig</code> instruction is called it will pop three values from the stack. These two variables were our missing pieces.</p>
+
+<p>My unlock data do the following;</p>
+
+<ol>
+  <li>Push message <code class="language-plaintext highlighter-rouge">test</code> to the <code class="language-plaintext highlighter-rouge">STACK</code>.</li>
+  <li>Call <code class="language-plaintext highlighter-rouge">op_dup</code> instruction which will duplicate our message.</li>
+  <li>Call <code class="language-plaintext highlighter-rouge">op_equal</code> instruction which will manage to produce the byte <code class="language-plaintext highlighter-rouge">\x01</code> and place it as the first element in our <code class="language-plaintext highlighter-rouge">STACK</code>.</li>
+  <li>Push signature to the stack which will be popped by the <code class="language-plaintext highlighter-rouge">op_check_sig</code> instruction.</li>
+  <li>Push message to the <code class="language-plaintext highlighter-rouge">STACK</code>.</li>
+  <li>Call <code class="language-plaintext highlighter-rouge">op_dup</code> instruction which will duplicate our message where the last message will be hashed by lock data for it to pass the verification.</li>
+</ol>
+
+<p><img src="/assets/img/blog/2022-06-21/image4.png" alt="image4" class="centered" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This was an interesting puzzle to solve. This was an interview question and I think the main idea was to test the interviewee on source code review.</p>
+
+<p>If you find any other way of solving the challenge by passing the verify RSA signature algorithm please feel free to share would love to learn from you.</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li>CTF Wiki by Mahaloz <a href="https://ctf-wiki.mahaloz.re/crypto/asymmetric/rsa/rsa_theory/">RSA Theory</a></li>
+  <li><a href="https://blog.sigmaprime.io/introduction-to-rsa.html">A Detailed Introduction to RSA Cryptography</a> by Kristian Mcdonald.</li>
+  <li><a href="https://cryptobook.nakov.com/digital-signatures/rsa-signatures">RSA Signatures</a></li>
+  <li><a href="https://cryptobook.nakov.com/digital-signatures/rsa-sign-verify-examples">RSA: Sign / Verify</a></li>
+  <li><a href="https://comp38411.jtang.dev/docs/public-key-cryptography/breaking-textbook-rsa-signatures/">Breaking Textbook RSA Signatures</a></li>
+  <li><a href="https://www.learnpythonwithrune.org/birthday-paradox-and-hash-function-collisions-by-example/">Birthday Paradox and Hash Function Collisions by Example</a></li>
+  <li><a href="https://github.com/bwall/HashPump">HashPump</a>; a tool to exploit hash length extension attack.</li>
+  <li><a href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a> RSA attack tool (mainly for CTFs).</li>
+  <li><a href="https://cryptohack.org/">CryptoHack</a>, for learning modern cryptography.</li>
+  <li>The <a href="https://cryptopals.com/">Cryptopals</a> crypto challenges.</li>
+</ul>
+
+
+  
+</article>
+
+
+
+
+
+  <applause-button class="mb6"
+    color=rgb(226,135,67)
+    url=http://localhost:4000/blog/notes/2022-06-21-puzzle/ >
+  </applause-button>
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/authors_128_x_128px.png"
+    srcset="/assets/img/authors_128_x_128px.png 1x,/assets/img/authors_256_x_256px.png 2x"
+    
+  
+  alt="th3gr00t"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    Author
+  </h2>
+
+  <p>A hyperactive nerd and gamer  who enjoys to learn, build, tinker, and break stuff.</p>
+
+
+<!-- comment out social buttons in comments
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in/peter-numi-b14b71145" title="LinkedIn" class="no-mark-external">
+      <span class="icon-linkedin2"></span>
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/th3_gr00t" title="Twitter" class="no-mark-external">
+      <span class="icon-twitter"></span>
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/iAmG-r00t" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.reddit.com/user/th33gr00t" title="reddit" class="no-mark-external">
+      <span class="icon-reddit"></span>
+      <span class="sr-only">reddit</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="http://stackoverflow.com/users/12076640/n00b" title="Stack Overflow" class="no-mark-external">
+      <span class="icon-stackoverflow"></span>
+      <span class="sr-only">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+-->
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/notes/2022-05-30-GTA3-Money-Health-Hack/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/assets/img/blog/2022-05-30/image1.png"    alt="GTA III; Money & Health Hacked"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/notes/2022-05-30-GTA3-Money-Health-Hack/" class="flip-title">GTA III; Money & Health Hacked</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      My primary goal of hacking was intellectual curiosity, the seduction of adventure. - Kevin Mitnick    </p>      <a class="fill-card no-hover" href="/blog/notes/2022-05-30-GTA3-Money-Health-Hack/" tabindex="-1"><span class="sr-only">Continue reading GTA III; Money & Health Hacked</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/notes/2022-05-25-the-move/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/assets/img/blog/2022-05-25/image1.png"    alt="Bye Blogger, Hello Jekyll"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/notes/2022-05-25-the-move/" class="flip-title">Bye Blogger, Hello Jekyll</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Teach thy tongue to say ‘I do not know,’ and thou shalt progress. - Maimonides    </p>      <a class="fill-card no-hover" href="/blog/notes/2022-05-25-the-move/" tabindex="-1"><span class="sr-only">Continue reading Bye Blogger, Hello Jekyll</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+
+  
+  
+    <script src="https://giscus.app/client.js"
+            data-repo=iAmG-r00t/blog
+            data-repo-id=R_kgDOHZL19g
+            data-category=Comments
+            data-category-id=DIC_kwDOHZL19s4CPSRG
+            data-mapping=pathname
+            data-reactions-enabled=1
+            data-theme=dark_dimmed
+            crossorigin=anonymous
+            async>
+    </script>
+  
+
+</aside>
+
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© GR00T
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(101,71,47);background-image:url(/assets/img/sidebar-bg.jpg)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">th3_gr00t</h2></a>
+    
+    
+      <p class="">
+        Journey to Vulnerability Research
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/blog/"
+          class="sidebar-nav-item "
+          
+        >
+          Blog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/tags/"
+          class="sidebar-nav-item "
+          
+        >
+          Tags
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in/peter-numi-b14b71145" title="LinkedIn" class="no-mark-external">
+      <span class="icon-linkedin2"></span>
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/th3_gr00t" title="Twitter" class="no-mark-external">
+      <span class="icon-twitter"></span>
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/iAmG-r00t" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.reddit.com/user/th33gr00t" title="reddit" class="no-mark-external">
+      <span class="icon-reddit"></span>
+      <span class="sr-only">reddit</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="http://stackoverflow.com/users/12076640/n00b" title="Stack Overflow" class="no-mark-external">
+      <span class="icon-stackoverflow"></span>
+      <span class="sr-only">Stack Overflow</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+  <div class="sidebar-sticky no-fouc"></div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.6.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.6.js" nomodule defer></script>
+  <!--
+Script that will allow us to add clap count to post
+-->
+<script>
+  document.getElementById('_pushState').addEventListener('hy-push-state-load', function() {
+    var elements = Array.from(document.getElementsByClassName('clap-count'));
+    var urls = elements.map(function (el) {
+      return el.getAttribute("data-url");
+    });
+    if (urls.length) {
+      var request = new XMLHttpRequest();
+      request.open('POST', 'https://api.applause-button.com/get-multiple', true);
+      request.setRequestHeader('Content-Type', 'text/plain');
+      request.responseType = 'json';
+      request.addEventListener('load', function() {
+        switch (request.status) {
+          case 200:
+            elements.forEach(function(element) {
+              var url = element.getAttribute("data-url").replace(/^https?:\/\//, "");
+              var clapCount = request.response.find(function(e) { return e.url === url; });
+              if (clapCount && clapCount.claps > 0) {
+                element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+                  <g class="flat">
+                    <path d="M57.0443547 6.86206897C57.6058817 6.46227795 57.7389459 5.67962382 57.3416215 5.11431557 56.9442971 4.54900731 56.1672933 4.41483804 55.6055588 4.81504702L52.4950525 7.030721C51.9335255 7.43051202 51.8004613 8.21316614 52.1977857 8.7784744 52.4404567 9.12371996 52.8251182 9.30825496 53.2153846 9.30825496 53.4640757 9.30825496 53.7152578 9.23343783 53.9338485 9.07753396L57.0443547 6.86206897zM48.8035059 6.1414838C48.94778 6.19623824 49.0959982 6.22215256 49.2415177 6.22215256 49.7455426 6.22215256 50.2198824 5.91201672 50.4075424 5.40898642L51.7485642 1.81818182C51.9906124 1.17011494 51.664906.447021944 51.0209664.203343783 50.3772345-.0405433647 49.6587706.287774295 49.4167224.93584117L48.0757006 4.52664577C47.83386 5.17471264 48.1595664 5.89780564 48.8035059 6.1414838zM58.5931726 11.6219436C58.5846615 11.6219436 58.5761504 11.6219436 58.5674317 11.6219436L54.7579749 11.6541275C54.0702341 11.6681296 53.5240687 12.1985371 53.5379772 12.8909091 53.551678 13.5745037 54.1065621 14.1297806 54.7828855 14.1297806 54.7913966 14.1297806 54.7999077 14.1297806 54.8086265 14.1297806L58.6180833 14.0643678C59.305824 14.0501567 59.8519894 13.4934169 59.838081 12.8010449 59.8243801 12.1174504 59.269496 11.6219436 58.5931726 11.6219436z"/>
+                    <path d="M37.1910045 6.68944619C37.7313574 6.14566353 38.4431784 5.8737722 39.155207 5.8737722 39.967916 5.8737722 40.7808327 6.22800418 41.3380002 6.93667712 42.2214969 8.06039707 42.0666359 9.69111808 41.0600392 10.7042842L39.777765 11.9949843C39.5801407 12.1276907 39.3877061 12.2695925 39.2075193 12.430303 39.0619998 11.5985371 38.7167801 10.7954023 38.1668781 10.0961338 37.4907623 9.23636364 36.588375 8.62424242 35.5772114 8.31410658L37.1910045 6.68944619zM28.5289586 3.66394984C29.0691039 3.12016719 29.7811325 2.84827586 30.4931611 2.84827586 31.3060777 2.84848485 32.1187868 3.20271682 32.6759543 3.91138976 33.559451 5.03510972 33.40459 6.66562173 32.3979933 7.67878788L17.6760235 22.3467085 17.6276554 20.6499478C17.6149925 19.014629 16.8595779 17.554441 15.6854573 16.5945664L28.5289586 3.66394984zM.624996757 36.9889537C.491717597 36.554099.508245877 35.7327064.906400646 35.2666667L3.45579518 32.2829676C3.45662553 32.2819923 4.33763118 25.8376176 6.09881213 12.9498433 6.09881213 11.4271682 7.33624726 10.1814002 8.84873717 10.1814002 10.3612271 10.1814002 11.5988698 11.4271682 11.5988698 12.9498433L11.6704878 15.4649948C9.18191673 15.8089864 7.24428555 17.9170324 7.14921001 20.492581L4.62804751 38.9475444 3.8946373 39.8060606C3.04504924 39.4926018 2.3776139 39.1458968 1.89233128 38.7659456 1.16440735 38.1960189.758275917 37.4238085.624996757 36.9889537z"/>
+                    <path d="M49.6070811,36.8942529 L42.4182909,44.1316614 C36.2784454,50.3128527 29.8604313,55.2743992 24.2225349,56.5113898 C24.0512744,56.5492163 23.8901857,56.6217346 23.7511014,56.7293626 L20.5013032,59.2417973 C20.2908084,59.4045977 20.1673015,59.6181154 19.5026647,59.6181154 C18.8380279,59.6181154 13.0160695,55.8303982 10.3595306,53.2846814 C7.96626306,50.9912532 3.77432047,43.9549368 4.44453927,43.0079415 L6.99372621,40.0244514 C6.99469496,40.0233368 7.87570061,33.578962 9.63674317,20.6913271 C9.63674317,19.168652 10.8743859,17.922675 12.3868758,17.922675 C13.8993657,17.922675 15.1368008,19.168652 15.1368008,20.6913271 L15.2667512,25.2522466 C15.2883404,26.0100313 15.907577,26.5034483 16.5519317,26.5034483 C16.8662207,26.5034483 17.1867374,26.3857889 17.4464306,26.1245559 L32.0670972,11.4054336 C32.6074501,10.861442 33.3190635,10.5897597 34.0312997,10.5897597 C34.8440088,10.5897597 35.6569254,10.9439916 36.214093,11.6526646 C37.0975897,12.7763845 36.942521,14.4071055 35.9359243,15.4202717 L25.8641449,25.5598746 C25.3412294,26.0865204 25.3412294,26.9398119 25.8641449,27.4660397 C26.1288202,27.7324974 26.4757006,27.8658307 26.822581,27.8658307 C27.1694614,27.8658307 27.5165494,27.7324974 27.7810172,27.4660397 L40.7291431,14.43093 C41.2692884,13.8869383 41.9811094,13.615256 42.6933456,13.615256 C43.5060547,13.615465 44.3189713,13.969697 44.8761389,14.6783699 C45.7596356,15.8018809 45.6045669,17.4326019 44.5979702,18.445768 L31.7106677,31.4198537 C31.1806943,31.953605 31.1806943,32.8183908 31.7106677,33.3521421 C31.9718141,33.615047 32.31392,33.7464995 32.656441,33.7464995 C32.9985469,33.7464995 33.3408603,33.615047 33.6020067,33.3521421 L43.7346096,23.1515152 C44.2749625,22.6075235 44.9867835,22.3358412 45.6988121,22.3358412 C46.5115212,22.3358412 47.3244378,22.6900731 47.8816054,23.3989551 C48.7651021,24.522466 48.6100334,26.153187 47.6034367,27.1663532 L37.5667397,37.2708464 C37.0245185,37.8165099 37.0245185,38.7017764 37.5667397,39.2474399 C37.8334909,39.5161964 38.161896,39.6422153 38.4900934,39.6422153 C38.8184984,39.6422153 39.1469035,39.5161964 39.3972552,39.2639498 L45.6195133,32.999791 C46.1802099,32.4353187 46.93085,32.1368861 47.678999,32.1368861 C48.2741552,32.1368861 48.8676508,32.3258098 49.361919,32.7197492 C50.682182,33.7717868 50.7639719,35.7297806 49.6070811,36.8942529 Z"/>
+                  </g>
+                  <g class="outline">
+                    <path d="M57.1428763 6.63333333C57.6856856 6.24686869 57.8143144 5.49030303 57.4302341 4.94383838 57.0461538 4.39737374 56.2950502 4.26767677 55.7520401 4.65454545L52.7452174 6.79636364C52.202408 7.18282828 52.0737793 7.93939394 52.4578595 8.48585859 52.6924415 8.81959596 53.0642809 8.9979798 53.4415385 8.9979798 53.6819398 8.9979798 53.9247492 8.92565657 54.1360535 8.77494949L57.1428763 6.63333333zM49.1767224 5.93676768C49.3161873 5.98969697 49.4594649 6.01474747 49.6001338 6.01474747 50.0873579 6.01474747 50.5458863 5.71494949 50.727291 5.22868687L52.023612 1.75757576C52.257592 1.13111111 51.9427425.432121212 51.3202676.196565657 50.6979933-.0391919192 50.0034783.278181818 49.7694983.904646465L48.4731773 4.37575758C48.239398 5.00222222 48.5542475 5.70121212 49.1767224 5.93676768zM58.6400669 11.2345455C58.6318395 11.2345455 58.623612 11.2345455 58.6151839 11.2345455L54.932709 11.2656566C54.267893 11.2791919 53.7399331 11.7919192 53.7533779 12.4612121 53.7666221 13.1220202 54.30301 13.6587879 54.9567893 13.6587879 54.9650167 13.6587879 54.9732441 13.6587879 54.9816722 13.6587879L58.6641472 13.5955556C59.3289632 13.5818182 59.8569231 13.0436364 59.8434783 12.3743434 59.8302341 11.7135354 59.2938462 11.2345455 58.6400669 11.2345455zM51.2107023 29.7280808C50.5940468 29.2365657 49.8640134 28.9020202 49.0922408 28.7448485 49.1432107 28.6519192 49.1907692 28.5573737 49.2357191 28.4614141L49.7189298 27.9749495C51.5799331 26.1012121 51.7753846 23.1519192 50.1732441 21.1141414 49.4169231 20.1523232 48.3670234 19.5131313 47.2009365 19.2745455 47.284214 19.120202 47.3580602 18.9624242 47.4250836 18.8022222 48.6925084 16.9539394 48.6718395 14.469899 47.2681605 12.6844444 46.5116388 11.7220202 45.4613378 11.0808081 44.2946488 10.8426263 45.2578595 9.05959596 45.1348495 6.83737374 43.8481605 5.20121212 42.8753177 3.96383838 41.4182609 3.25393939 39.8502341 3.25393939 38.5946488 3.25393939 37.4101003 3.70565657 36.480602 4.53272727 36.3399331 3.72888889 36.0064214 2.95252525 35.4748495 2.27636364 34.501806 1.0389899 33.0447492.329292929 31.4767224.329090909 30.1141806.329090909 28.8351171.861414141 27.8753177 1.82767677L15.6666221 14.1185859 15.6200669 12.4781818C15.5985953 9.68424242 13.3340468 7.41777778 10.5537793 7.41777778 7.8238796 7.41777778 5.59143813 9.60262626 5.49110368 12.3264646L3.05377926 30.1660606 1.05050167 32.510303C-.150100334 33.9157576.751318148 36.4103164 1.05050167 37.002855 1.3496852 37.5953936 1.66593319 37.9666982 2.51271962 38.8651283 2.8050341 39.1752704 3.3712736 39.6680391 4.21143813 40.3434343 3.2935786 41.7335354 4.72327715 47.298456 9.51045561 52.4226263 15.4436869 58.7735254 20.1888963 59.9262626 21.1316388 59.9262626 21.9056187 59.9262626 22.6703679 59.6646465 23.2846154 59.189899L26.2031438 56.9337374C29.0107023 56.2660606 32.1060201 54.7492929 35.4086288 52.4226263 38.2924415 50.3907071 41.4210702 47.6832323 44.7070234 44.3749495L51.656388 37.3787879C52.681204 36.3470707 53.220602 34.9165657 53.1363211 33.4541414 53.0520401 31.9941414 52.350301 30.6361616 51.2107023 29.7280808zM37.9513043 6.46646465C38.4736455 5.94080808 39.1617391 5.6779798 39.8500334 5.6779798 40.6356522 5.6779798 41.4214716 6.02040404 41.9600669 6.70545455 42.8141137 7.79171717 42.6644147 9.36808081 41.6913712 10.3474747L40.4518395 11.5951515C40.2608027 11.7234343 40.0747826 11.8606061 39.900602 12.0159596 39.7599331 11.2119192 39.4262207 10.4355556 38.8946488 9.75959596 38.2410702 8.92848485 37.3687625 8.33676768 36.3913043 8.0369697L37.9513043 6.46646465zM29.5779933 3.54181818C30.1001338 3.01616162 30.7884281 2.75333333 31.4767224 2.75333333 32.2625418 2.75353535 33.0481605 3.0959596 33.5867559 3.7810101 34.4408027 4.86727273 34.2911037 6.44343434 33.3180602 7.42282828L19.0868227 21.6018182 19.0400669 19.9616162C19.0278261 18.3808081 18.297592 16.9692929 17.1626087 16.0414141L29.5779933 3.54181818zM2.60416353 35.7559886C2.47532701 35.335629 2.49130435 34.5416162 2.87618729 34.0911111L5.34060201 31.2068687C5.34140468 31.2059259 6.19304348 24.9763636 7.89551839 12.5181818 7.89551839 11.0462626 9.09170569 9.8420202 10.5537793 9.8420202 12.0158528 9.8420202 13.2122408 11.0462626 13.2122408 12.5181818L13.2814716 14.9494949C10.8758528 15.2820202 9.00280936 17.319798 8.91090301 19.8094949L6.47377926 37.6492929 5.76481605 38.4791919C4.9435476 38.1761817 4.2983601 37.8410335 3.82925357 37.4737474 3.12559377 36.9228183 2.73300005 36.1763482 2.60416353 35.7559886zM49.9535117 35.6644444L43.0043478 42.6606061C37.0691639 48.6357576 30.8650836 53.4319192 25.4151171 54.6276768 25.2495652 54.6642424 25.0938462 54.7343434 24.959398 54.8383838L21.8179264 57.2670707C21.6144482 57.4244444 21.4950582 57.6308449 20.8525759 57.6308449 20.2100936 57.6308449 14.5822005 53.9693849 12.0142129 51.5085254 9.70072096 49.2915447 5.64850979 42.4897722 6.29638796 41.5743434L8.76060201 38.690303C8.76153846 38.6892256 9.61317726 32.4596633 11.3155184 20.0016162 11.3155184 18.529697 12.5119064 17.3252525 13.9739799 17.3252525 15.4360535 17.3252525 16.6322408 18.529697 16.6322408 20.0016162L16.7578595 24.4105051C16.7787291 25.1430303 17.3773244 25.62 18.0002007 25.62 18.3040134 25.62 18.6138462 25.5062626 18.8648829 25.2537374L32.998194 11.0252525C33.5205351 10.4993939 34.2084281 10.2367677 34.8969231 10.2367677 35.6825418 10.2367677 36.4683612 10.5791919 37.0069565 11.2642424 37.8610033 12.3505051 37.7111037 13.9268687 36.7380602 14.9062626L27.0020067 24.7078788C26.4965217 25.2169697 26.4965217 26.0418182 27.0020067 26.5505051 27.2578595 26.8080808 27.5931773 26.9369697 27.928495 26.9369697 28.2638127 26.9369697 28.5993311 26.8080808 28.8549833 26.5505051L41.371505 13.949899C41.8936455 13.4240404 42.5817391 13.1614141 43.2702341 13.1614141 44.0558528 13.1616162 44.8416722 13.5040404 45.3802676 14.1890909 46.2343144 15.2751515 46.0844147 16.8515152 45.1113712 17.8309091L32.6536455 30.3725253C32.1413378 30.8884848 32.1413378 31.7244444 32.6536455 32.240404 32.906087 32.4945455 33.2367893 32.6216162 33.567893 32.6216162 33.8985953 32.6216162 34.2294983 32.4945455 34.4819398 32.240404L44.2767893 22.379798C44.7991304 21.8539394 45.4872241 21.5913131 46.1755184 21.5913131 46.9611371 21.5913131 47.7469565 21.9337374 48.2855518 22.6189899 49.1395987 23.7050505 48.989699 25.2814141 48.0166555 26.2608081L38.3145151 36.0284848C37.7903679 36.5559596 37.7903679 37.4117172 38.3145151 37.9391919 38.5723746 38.1989899 38.8898328 38.3208081 39.2070903 38.3208081 39.5245485 38.3208081 39.8420067 38.1989899 40.0840134 37.9551515L46.0988629 31.899798C46.6408696 31.3541414 47.3664883 31.0656566 48.089699 31.0656566 48.6650167 31.0656566 49.2387291 31.2482828 49.7165217 31.6290909 50.9927759 32.6460606 51.0718395 34.5387879 49.9535117 35.6644444z"/>
+                  </g>
+                </svg>`;
+                var countSpan = document.createElement('span');
+                countSpan.textContent = clapCount.claps;
+                element.appendChild(countSpan);
+                element.style.display = 'initial';
+              }
+            });
+            break;
+          default:
+            console.log("POST to https://api.applause-button.com/get-multiple failed");
+            break;
+          }
+      });
+      request.send(JSON.stringify(urls));
+    }
+  });
+</script>
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>
