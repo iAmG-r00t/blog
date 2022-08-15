@@ -9,7 +9,7 @@ category: ctf
 tags: [re, appsec]
 ---
 
-Aplogoies for any rough images, they were migrated from blogger.
+Apologoies for any rough images, they were migrated from blogger.
 {:.note title="APOLOGY"}
 
 - Table of Contents

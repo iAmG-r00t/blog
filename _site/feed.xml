@@ -1,5 +1,211 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-KE"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en-KE" /><updated>2022-06-23T00:13:25+03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">th3_gr00t</title><subtitle>One and only nerd who is on a journey to being a vulnerability researcher.
-</subtitle><author><name>th3gr00t</name></author><entry><title type="html">Task Interpreter Puzzle</title><link href="http://localhost:4000/blog/notes/2022-06-21-puzzle/" rel="alternate" type="text/html" title="Task Interpreter Puzzle" /><published>2022-06-21T00:00:00+03:00</published><updated>2022-06-21T00:00:00+03:00</updated><id>http://localhost:4000/blog/notes/puzzle</id><content type="html" xml:base="http://localhost:4000/blog/notes/2022-06-21-puzzle/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-KE"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en-KE" /><updated>2022-08-15T16:47:23+03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">th3_gr00t</title><subtitle>One and only nerd who is on a journey to being a vulnerability researcher.
+</subtitle><author><name>th3gr00t</name></author><entry><title type="html">AH-CTF 2019 iamfree</title><link href="http://localhost:4000/blog/ctf/2022-08-14-ah-ctf19-iamfree/" rel="alternate" type="text/html" title="AH-CTF 2019 iamfree" /><published>2022-08-14T00:00:00+03:00</published><updated>2022-08-14T00:00:00+03:00</updated><id>http://localhost:4000/blog/ctf/ah-ctf19-iamfree</id><content type="html" xml:base="http://localhost:4000/blog/ctf/2022-08-14-ah-ctf19-iamfree/">&lt;p class=&quot;note&quot;&gt;I was second-guessing myself on releasing this post because I felt like it was too simple in general. But this is my log, we still have to log it despite its simplicity.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#intro&quot; id=&quot;markdown-toc-intro&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#challenge&quot; id=&quot;markdown-toc-challenge&quot;&gt;Challenge&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#use-after-free&quot; id=&quot;markdown-toc-use-after-free&quot;&gt;Use After Free&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#exploitation&quot; id=&quot;markdown-toc-exploitation&quot;&gt;Exploitation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#conclusion&quot; id=&quot;markdown-toc-conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#resources&quot; id=&quot;markdown-toc-resources&quot;&gt;Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;p&gt;I am still trying to be consistent on blogging 😃. In Other news, I finally attained my &lt;a href=&quot;https://pwn.college/belts&quot;&gt;Yellow Belt&lt;/a&gt; (search for gr00t) from &lt;a href=&quot;https://pwn.college&quot;&gt;pwn.college&lt;/a&gt;. I am planning to get the Blue Belt before the end of the year. Received some interesting (neither sad or happy) news and solved an interview assessment (crossing my fingers on that one).&lt;/p&gt;
+
+&lt;p&gt;Alot has been going on but we still move. This post is for a challenge from the AfricaHackon CTF competition 2019. It was in my to do list for a very long time and after years of attaining knowledge on binary exploitation and reverse engineering, I went back to tackle and solve the challenge.&lt;/p&gt;
+
+&lt;p&gt;Sit down, relax and enjoy.&lt;/p&gt;
+
+&lt;h2 id=&quot;challenge&quot;&gt;Challenge&lt;/h2&gt;
+
+&lt;p&gt;The challenge was under pwn category and two files, the source code and binary were provided.&lt;/p&gt;
+
+&lt;p&gt;Let’s take a look at the source code. At first, when I was looking at the code (in 2019), I thought it was a buffer overflow challenge but when seeing it define &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gets_s&lt;/code&gt; that uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fgets&lt;/code&gt; which checks the input size, that option was out of the equation.&lt;/p&gt;
+
+&lt;p&gt;After the competition, the challenge creator gave us another clue, &lt;a href=&quot;https://owasp.org/www-community/vulnerabilities/Using_freed_memory&quot;&gt;Use After Free&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* File: &apos;iamfree.c&apos; */&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;stdint.h&amp;gt;
+&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;#define gets_s(x, len) fgets((x), (len) + 1, stdin)
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves_t&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;king&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;pawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;checkmate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;setuid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1007&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+  &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myMove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Let play a game of chess&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Make your move : &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gets_s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;king&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x46524545&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x71756565&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pawn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x6e333e3a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myMove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Nice move. I can&apos;t catchup&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;king&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x4e455721&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x4b494e47&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pawn&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+      
+        &lt;span class=&quot;n&quot;&gt;myMove&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;myMove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkmate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkmate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;King placed in order&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;king&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x75733334&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x66743352&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pawn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x66523333&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Brilliant. One last Move&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myMove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkmate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x6d343137&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/bin/cat flag&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Wrong move&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once again carefully looking at the source code, we can see a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct&lt;/code&gt; called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;moves_t&lt;/code&gt; with four members; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;king&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;queen&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pawn&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checkmate&lt;/code&gt; defined.&lt;/p&gt;
+
+&lt;p&gt;Inside the main function it sets and defines several variables;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;userid&lt;/code&gt; (don’t remember why, looks like user access control)&lt;/li&gt;
+  &lt;li&gt;struct &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;moves_t&lt;/code&gt; pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myMove&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;size (of size of struct &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;moves_t&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;struct &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;moves_t&lt;/code&gt; pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;play&lt;/code&gt; (allocated with memory of size variable)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Then we have a printf statement that will print the string, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Let play a game of chess&lt;/code&gt; then strats a never ending while loop.&lt;/p&gt;
+
+&lt;p&gt;Insides our while loop we have one printf statement that will print the string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Make your move : &lt;/code&gt;, then wait for our input of size 16 is copied to the struct pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;play&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We then have four if statements that each compare our struct member to specific hex data.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If we pass the first if statement, a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;free&lt;/code&gt; operation will be performed on our struct pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myMove&lt;/code&gt; and the program will print the string, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Nice move. I can&apos;t catchup.&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;If we pass the second if statement our struct pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myMove&lt;/code&gt; will be allocated data, then the struct member &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checkmate&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myMove&lt;/code&gt; will be the same as for what the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;play&lt;/code&gt; pointer holds and the program will print the string, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;King placed in order&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;If we pass the third if statement, we end up in the last if statement.&lt;/li&gt;
+  &lt;li&gt;If we pass the last if statement, the program runs a system command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/bin/cat&lt;/code&gt; against file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flag&lt;/code&gt; that will output its content.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;use-after-free&quot;&gt;Use After Free&lt;/h2&gt;
+
+&lt;p&gt;Our main goal is to pass the last if statement to get the flag. To better understand how to reach our goal we need to understand how &lt;a href=&quot;https://owasp.org/www-community/vulnerabilities/Using_freed_memory&quot;&gt;Use After Free&lt;/a&gt; works.&lt;/p&gt;
+
+&lt;p&gt;In C, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt; function will allocate memory on the heap and return a pointer to the address of the allocated memory. Then there is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;free()&lt;/code&gt; function that will deallocate the address of the memory allocation presented by the pointer returned from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt;. When a block of memory is freed the memory stored at that space remains there until modified or overwritten.&lt;/p&gt;
+
+&lt;p&gt;This becomes a bug/vulnerability when the pointer of the deallocated memory address is still being used again after being freed.&lt;/p&gt;
+
+&lt;h2 id=&quot;exploitation&quot;&gt;Exploitation&lt;/h2&gt;
+
+&lt;p class=&quot;note&quot;&gt;This section is going to include screenshots that I think will better describe the bug.&lt;/p&gt;
+
+&lt;p&gt;I came to realize while debugging the program under GDB, is that the hex values are not just random but they are actual ASCII strings 🤦🏾‍♂️. Didn’t think of trying to decode them with &lt;a href=&quot;https://gchq.github.io/CyberChef/&quot;&gt;CyberChef&lt;/a&gt; - The Cyber Swiss Army Knife by GCHQ.&lt;/p&gt;
+
+&lt;p&gt;Lets proceed and inspect our two struct pointers in the heap with GDB to better understand how to solve the challenge.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2022-08-14/image2.png&quot; alt=&quot;image2&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;partial main function program in assembly&lt;/p&gt;
+
+&lt;p&gt;At the variable definations section, we can see right after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; being called the address to the allocated memory which is stored at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; being moved to a DWORD (4 bytes) pointer at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ebp-0x14&lt;/code&gt; (which is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;play&lt;/code&gt; pointer struct).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2022-08-14/image3.png&quot; alt=&quot;image3&quot; class=&quot;align-right&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To confirm this if we proceed inside our infinite loop, we can see right before &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fgets&lt;/code&gt; being called three variables being pushed to the stack; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stdin&lt;/code&gt; address that was moved to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ebx+0x38&lt;/code&gt;, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;size&lt;/code&gt; that was moved to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;edx&lt;/code&gt; from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ebp+0x10&lt;/code&gt; and our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;play&lt;/code&gt; pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ebp-0x14&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Which we can see are the arguments being passed to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fgets&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p style=&quot;padding-top: 2em&quot;&gt;When we set our break point right after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fgets&lt;/code&gt; can see our input pointer address to the heap at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ebp-0x14&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2022-08-14/image4.png&quot; alt=&quot;image4&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;Verifying our input pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;play&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;We are going to proceed an inspect the the second pointer after malloc and then after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myMove-&amp;gt;checkmate = play-&amp;gt;checkmate being&lt;/code&gt; executed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2022-08-14/image5.png&quot; alt=&quot;image5&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;First two if statements in assembly&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2022-08-14/image6.png&quot; alt=&quot;image6&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;After malloc invocation, heap inspection&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2022-08-14/image7.png&quot; alt=&quot;image7&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;figcaption&quot;&gt;After &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;myMove-&amp;gt;checkmate = play-&amp;gt;checkmate&lt;/code&gt; invocation, heap inspection&lt;/p&gt;
+
+&lt;div class=&quot;language-py highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# File: &apos;sol.py&apos;
+#!/usr/bin/env python3
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+Creates an exploit
+AH CTF19 pwn; iamfree
+&quot;&quot;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;&apos;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos; &apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fromhex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[::&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;                                                                                                                                                                                                                              
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;KING&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;0x4e455721 0x4b494e47 0x4141413f 0x6d343137&apos;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;FREE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;0x46524545 0x71756565 0x6e333e3a&apos;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PAWN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;0x75733334 0x66743352 0x66523333&apos;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;KING: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;KING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;FREE: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FREE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;PAWN: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PAWN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# solution 1; KING then PAWN
+# solution 2; KING, FREE then PAWN
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p style=&quot;padding-top: 1em&quot;&gt;&lt;img src=&quot;/assets/img/blog/2022-08-14/image8.png&quot; alt=&quot;image8&quot; class=&quot;align-left&quot; /&gt;&lt;/p&gt;
+
+&lt;p style=&quot;padding-top: 2em&quot;&gt;While debugging the program under GDB, I came to realize that program has two solutions.&lt;/p&gt;
+
+&lt;p&gt;Where there is the expected solution which was more like a UAF. While the unexpected solution is that you don’t really need to invoke &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;free&lt;/code&gt; because from our inspection after invoking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; we can see that the pointer already contains the data required to pass the last if statement.&lt;/p&gt;
+
+&lt;p&gt;That being said even when you call free the data will still be there and the pointer can still be used to pass the last if statement.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I learnt afew things when playing around with this program and I do hope you have too. Would like to thank the creator &lt;a href=&quot;https://twitter.com/icrackthecode&quot;&gt;@icrackthecode&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;6Point6 &lt;a href=&quot;https://6point6.co.uk/insights/common-software-vulnerabilities-part-ii-explaining-the-use-after-free/&quot;&gt;Common Software Vulnerabilities, PartII: Explaining the Use After Free&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Orange Cyberdefense &lt;a href=&quot;https://sensepost.com/blog/2017/linux-heap-exploitation-intro-series-used-and-abused-use-after-free/&quot;&gt;Linux Heap Exploitation Intro Series: Used and Abused - Use After Free&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;LiveOverflow &lt;a href=&quot;https://www.youtube.com/watch?v=ZHghwsTRyzQ&quot;&gt;The Heap: How do use-after-free exploits work?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;CryptoCat &lt;a href=&quot;https://www.youtube.com/watch?v=YGQAvJ__12k&quot;&gt;Exploiting a Use-After-Free (UAF) Vulnerability&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Marcus Hutchins &lt;a href=&quot;https://www.youtube.com/watch?v=PKqMsaKGdlM&quot;&gt;Introduction to Use-After-Free Vulnerabilities (Part: 1)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="ctf" /><category term="re" /><category term="pwn" /><summary type="html">I was second-guessing myself on releasing this post because I felt like it was too simple in general. But this is my log, we still have to log it despite its simplicity.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2022-08-14/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2022-08-14/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Task Interpreter Puzzle</title><link href="http://localhost:4000/blog/notes/2022-06-21-puzzle/" rel="alternate" type="text/html" title="Task Interpreter Puzzle" /><published>2022-06-21T00:00:00+03:00</published><updated>2022-06-21T00:00:00+03:00</updated><id>http://localhost:4000/blog/notes/puzzle</id><content type="html" xml:base="http://localhost:4000/blog/notes/2022-06-21-puzzle/">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#intro&quot; id=&quot;markdown-toc-intro&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#the-code&quot; id=&quot;markdown-toc-the-code&quot;&gt;The Code&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#the-puzzle&quot; id=&quot;markdown-toc-the-puzzle&quot;&gt;The Puzzle&lt;/a&gt;    &lt;ul&gt;
@@ -582,7 +788,7 @@ Solve task interpreter puzzle challenge
   &lt;li&gt;&lt;a href=&quot;https://bitbucket.org/devinmartin/keecloud/issues/19/dropbox-setup-for-dummies&quot;&gt;Dropbox setup for dummies&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.arj.no/2017/01/03/nautilus-bookmarks/&quot;&gt;Remove standard bookmarks in Nautilus&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/iAmG-r00t/desktop-setup&quot;&gt;Project repository&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="dev" /><category term="Automation" /><category term="Bash" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2020-03-13/image1.gif" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2020-03-13/image1.gif" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Out Of The Rabbit Hole Adventures: AppSec in the flesh</title><link href="http://localhost:4000/blog/ctf/2020-02-24-out-of-rabbit-hole-adventures-appsec-in/" rel="alternate" type="text/html" title="Out Of The Rabbit Hole Adventures: AppSec in the flesh" /><published>2020-02-24T00:00:00+03:00</published><updated>2020-02-24T00:00:00+03:00</updated><id>http://localhost:4000/blog/ctf/out-of-rabbit-hole-adventures-appsec-in</id><content type="html" xml:base="http://localhost:4000/blog/ctf/2020-02-24-out-of-rabbit-hole-adventures-appsec-in/">&lt;p class=&quot;note&quot; title=&quot;APOLOGY&quot;&gt;Aplogoies for any rough images, they were migrated from blogger.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="dev" /><category term="Automation" /><category term="Bash" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2020-03-13/image1.gif" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2020-03-13/image1.gif" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Out Of The Rabbit Hole Adventures: AppSec in the flesh</title><link href="http://localhost:4000/blog/ctf/2020-02-24-out-of-rabbit-hole-adventures-appsec-in/" rel="alternate" type="text/html" title="Out Of The Rabbit Hole Adventures: AppSec in the flesh" /><published>2020-02-24T00:00:00+03:00</published><updated>2020-02-24T00:00:00+03:00</updated><id>http://localhost:4000/blog/ctf/out-of-rabbit-hole-adventures-appsec-in</id><content type="html" xml:base="http://localhost:4000/blog/ctf/2020-02-24-out-of-rabbit-hole-adventures-appsec-in/">&lt;p class=&quot;note&quot; title=&quot;APOLOGY&quot;&gt;Apologoies for any rough images, they were migrated from blogger.&lt;/p&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#prologue&quot; id=&quot;markdown-toc-prologue&quot;&gt;Prologue&lt;/a&gt;&lt;/li&gt;
@@ -793,7 +999,7 @@ Solve task interpreter puzzle challenge
   &lt;li&gt;&lt;a href=&quot;https://www.hacker101.com/sessions/mobile_crash_course.html&quot;&gt;Mobile Hacking Crash Course&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://twitter.com/s0md3v/status/1150845512838332416&quot;&gt;Somedev’s Way&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://twitter.com/fs0c131y/status/1129680329994907648&quot;&gt;Elliot Alderson Way&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="ctf" /><category term="re" /><category term="appsec" /><summary type="html">Aplogoies for any rough images, they were migrated from blogger.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2020-02-24/image1.gif" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2020-02-24/image1.gif" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Rabbit Hole Adventures: AppSec Teaser</title><link href="http://localhost:4000/blog/notes/2019-04-17-rabbit-hole-adventures-appsec-teaser/" rel="alternate" type="text/html" title="Rabbit Hole Adventures: AppSec Teaser" /><published>2019-04-17T00:00:00+03:00</published><updated>2019-04-17T00:00:00+03:00</updated><id>http://localhost:4000/blog/notes/rabbit-hole-adventures-appsec-teaser</id><content type="html" xml:base="http://localhost:4000/blog/notes/2019-04-17-rabbit-hole-adventures-appsec-teaser/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/ul&gt;</content><author><name>th3gr00t</name></author><category term="ctf" /><category term="re" /><category term="appsec" /><summary type="html">Apologoies for any rough images, they were migrated from blogger.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2020-02-24/image1.gif" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2020-02-24/image1.gif" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Rabbit Hole Adventures: AppSec Teaser</title><link href="http://localhost:4000/blog/notes/2019-04-17-rabbit-hole-adventures-appsec-teaser/" rel="alternate" type="text/html" title="Rabbit Hole Adventures: AppSec Teaser" /><published>2019-04-17T00:00:00+03:00</published><updated>2019-04-17T00:00:00+03:00</updated><id>http://localhost:4000/blog/notes/rabbit-hole-adventures-appsec-teaser</id><content type="html" xml:base="http://localhost:4000/blog/notes/2019-04-17-rabbit-hole-adventures-appsec-teaser/">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#prologue&quot; id=&quot;markdown-toc-prologue&quot;&gt;Prologue&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#lessons&quot; id=&quot;markdown-toc-lessons&quot;&gt;Lessons&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#epilogue&quot; id=&quot;markdown-toc-epilogue&quot;&gt;Epilogue&lt;/a&gt;&lt;/li&gt;
@@ -1001,332 +1207,4 @@ Solve task interpreter puzzle challenge
   &lt;li&gt;&lt;a href=&quot;http://www.hackingarticles.in/capture-flag-challenges/&quot;&gt;Capture The Flag Challenges&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://captf.com/practice-ctf/&quot;&gt;Practice List&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://youtu.be/rfjV8XukxO8&quot;&gt;Play CTF, a great way to learn Hacking&lt;/a&gt; by Liveoverflow&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>th3gr00t</name></author><category term="ctf" /><category term="create" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2018-09-11/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2018-09-11/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Radare2 Adventures: Level1-crackMe</title><link href="http://localhost:4000/blog/ctf/2018-09-06-radare-adventures-level1-crackme/" rel="alternate" type="text/html" title="Radare2 Adventures: Level1-crackMe" /><published>2018-09-06T00:00:00+03:00</published><updated>2018-09-06T00:00:00+03:00</updated><id>http://localhost:4000/blog/ctf/radare-adventures-level1-crackme</id><content type="html" xml:base="http://localhost:4000/blog/ctf/2018-09-06-radare-adventures-level1-crackme/">&lt;p class=&quot;note&quot; title=&quot;APOLOGY&quot;&gt;Aplogoies for any rough images, they were migrated from blogger.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#intro&quot; id=&quot;markdown-toc-intro&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#file-format&quot; id=&quot;markdown-toc-file-format&quot;&gt;File format&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#running-the-file&quot; id=&quot;markdown-toc-running-the-file&quot;&gt;Running the file&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#strings&quot; id=&quot;markdown-toc-strings&quot;&gt;Strings&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#reversing&quot; id=&quot;markdown-toc-reversing&quot;&gt;Reversing&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#analysis&quot; id=&quot;markdown-toc-analysis&quot;&gt;Analysis&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#disassembly&quot; id=&quot;markdown-toc-disassembly&quot;&gt;Disassembly&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#first-function-systemv&quot; id=&quot;markdown-toc-first-function-systemv&quot;&gt;First function: systemv&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#second-function-systemo&quot; id=&quot;markdown-toc-second-function-systemo&quot;&gt;Second function: systemo&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#solving&quot; id=&quot;markdown-toc-solving&quot;&gt;Solving&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#bonus&quot; id=&quot;markdown-toc-bonus&quot;&gt;Bonus&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
-
-&lt;p&gt;I am excited right now.&lt;/p&gt;
-
-&lt;p&gt;After my first interaction with a CTF challenge on Reverse Engineering at Africa HackOn 2018, I fell in love. Many things came to mind on the capabilities one can do with such a skill. This post will share the basic need to know with an example. The learning curve will be steep; you might end up in a rabbit hole from researching from one place to the other.&lt;/p&gt;
-
-&lt;p class=&quot;note&quot; title=&quot;Advice&quot;&gt;Don’t overthink; relax. After a couple of tries, you will get the hang of it, and remember always to perfect your craft (&lt;strong&gt;Practice&lt;/strong&gt;, &lt;strong&gt;Practice&lt;/strong&gt;, &lt;strong&gt;Practice&lt;/strong&gt;). &lt;a href=&quot;https://twitter.com/LiveOverflow/status/1037296510583689216&quot;&gt;LiveOverflow’s Tips to Master Something&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;So what is Reverse Engineering; it’s the process of &lt;strong&gt;Acquiring&lt;/strong&gt; anything artificial, &lt;strong&gt;Analyzing&lt;/strong&gt;&lt;strong&gt; it, and then &lt;/strong&gt;Disassembling&lt;em&gt;**&lt;/em&gt; to understand how it works and acquire any informative knowledge about it.&lt;/p&gt;
-
-&lt;p&gt;We have a &lt;a href=&quot;https://www.webopedia.com/TERM/B/binary_file.html&quot;&gt;binary file&lt;/a&gt; named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CrackMe1.bin&lt;/code&gt;, a program that has been compiled and converted to machine code.&lt;/p&gt;
-
-&lt;p&gt;When given such a file, I usually perform a few steps before opening it with Radare2, IDA, or binary ninja (disassembly tools).&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Confirm the &lt;a href=&quot;https://en.wikipedia.org/wiki/File_format&quot;&gt;file format&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Execute the file to understand what task you are given to solve.&lt;/li&gt;
-  &lt;li&gt;Check the &lt;a href=&quot;https://en.wikipedia.org/wiki/String_(computer_science)&quot;&gt;data strings&lt;/a&gt; of the file. &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;file-format&quot;&gt;File format&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image2.png&quot; alt=&quot;imag2&quot; width=&quot;1000px&quot; /&gt;&lt;/p&gt;
-
-&lt;p class=&quot;figcaption&quot;&gt;img-1: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file crackMe1.bin&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;On linux you can use the Linux &lt;a href=&quot;https://en.wikipedia.org/wiki/File_(command)&quot;&gt;file&lt;/a&gt; command or using &lt;a href=&quot;https://r2wiki.readthedocs.io/en/latest/tools/rabin2/&quot;&gt;rabin2&lt;/a&gt;, Radare2 tool for extracting information from binary programs.&lt;/p&gt;
-
-&lt;p style=&quot;padding-top: 4em&quot;&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image3.png&quot; alt=&quot;image3&quot; class=&quot;align-right&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-I&lt;/code&gt; option is for extracting binary information. So we have an &lt;a href=&quot;https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis/&quot;&gt;ELF&lt;/a&gt; (Executable and Linkable Format) class 64 binary file. Take note that we are going to use this information later on.&lt;/p&gt;
-
-&lt;p&gt;Another way of checking file format that mostly comes in handy when dealing with embedded data is to open the file in a hex editor, identify the &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_file_signatures&quot;&gt;file&lt;/a&gt; header signatures, and extract the embedded data.&lt;/p&gt;
-
-&lt;p style=&quot;padding-top: 20em&quot; class=&quot;figcaption&quot;&gt;img-2: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rabin2 -I crackMe1.bin&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;running-the-file&quot;&gt;Running the file&lt;/h2&gt;
-
-&lt;p&gt;Binary files require execution rights to be added so that they can be executed.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# checking for execution rights&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; crackMe1.bin
-&lt;span class=&quot;c&quot;&gt;# giving execution right to binary file&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x crackMe1.bin
-&lt;span class=&quot;c&quot;&gt;# executing the file&lt;/span&gt;
-./crackMe1.bin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image4.png&quot; alt=&quot;image4&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;p class=&quot;figcaption&quot;&gt;img-3: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;running the binary file&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;So when running the file, you will be prompted for a password, and when you type in anything like &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1234&lt;/code&gt;&lt;/strong&gt;, it will return a Bad password string output.&lt;/p&gt;
-
-&lt;h2 id=&quot;strings&quot;&gt;Strings&lt;/h2&gt;
-
-&lt;p&gt;The above image shows that the program outputs several words, but the word password is the most common. Hence while analyzing the program strings, we are going to search for lines that contain the string &lt;strong class=&quot;text-color-red&quot;&gt;password&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;There are two methods of doing this: the &lt;a href=&quot;https://linux.die.net/man/1/strings&quot;&gt;strings&lt;/a&gt; UNIX command or our tool of choice, radare2, as shown in this &lt;a href=&quot;#strings-using-r2&quot;&gt;section&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;So because we know we have a bad password string, let’s try and see if we have any other data string with the password string.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image5.png&quot; alt=&quot;image5&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;p class=&quot;figcaption&quot;&gt;img-4: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strings crackMe1.bin | grep &quot;password&quot;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Good password&lt;/strong&gt;, so our main goal is to get the correct password.&lt;/p&gt;
-
-&lt;p&gt;When I started learning reverse engineering, my tool of choice was IDA until I met &lt;a href=&quot;https://www.radare.org/n/&quot;&gt;Radare2&lt;/a&gt;, and hence this post. I am still learning, and to be honest, the image below says it all.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image6.jpg&quot; alt=&quot;image6&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;reversing&quot;&gt;Reversing&lt;/h2&gt;
-
-&lt;h3 class=&quot;text-align-center&quot; id=&quot;analysis&quot;&gt;Analysis&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image7.png&quot; alt=&quot;image7&quot; class=&quot;align-left&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;So we begin by examining the file by executing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;r2 crackMe1.bin&lt;/code&gt;. Currently, we are in shell mode, where we can run our commands, and by default, we are taken at the entry address &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[0x000008a0]&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;The first command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ie&lt;/code&gt; is the entry points info command, which prints the entry points.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image8.png&quot; alt=&quot;image8&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Next, analyzing the program using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aaa&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a?&lt;/code&gt;; gives you different command options).  Remember not to skip this bit because radare2 doesn’t analyze automatically by default, but you can run this command when running the binary file.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# this will allow us to avoid running aaa&lt;/span&gt;
-r2 &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; CrackMe1.bin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image9.png&quot; alt=&quot;image8&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;p id=&quot;strings-using-r2&quot;&gt;Next step is to view strings and find our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;good password&lt;/code&gt; string location address.&lt;/p&gt;
-
-&lt;p style=&quot;padding-top: 1em&quot;&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image10.png&quot; alt=&quot;image9&quot; class=&quot;align-right&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;After analyzing all flags, we can list them using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs&lt;/code&gt; command, which means flag space. As we can see, we have a strings flag space, and we proceed to view its contents using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs strings; f&lt;/code&gt; (the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f&lt;/code&gt; option is used to print contents).&lt;/p&gt;
-
-&lt;p&gt;It prints each string starting with its &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;address location&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;length&lt;/code&gt;, and the actual string.&lt;/p&gt;
-
-&lt;p style=&quot;padding-top: 5em&quot;&gt;Next we are going to find the code reference for our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;str.Good_password&lt;/code&gt; reference.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;axt @@ str.Good_password
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image11.png&quot; alt=&quot;image10&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 class=&quot;text-align-center&quot; id=&quot;disassembly&quot;&gt;Disassembly&lt;/h3&gt;
-
-&lt;p&gt;The fun part is disassembling the program.&lt;/p&gt;
-
-&lt;p&gt;In every program, we have a global function called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt;, which serves as the starting point for the program execution. The program will also allow us to understand the program execution.&lt;/p&gt;
-
-&lt;p&gt;That being the case, we will enter the main function using the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s main; pdf&lt;/code&gt;, where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s&lt;/code&gt; means to seek, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pdf&lt;/code&gt;` command disassembles the function.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image12.png&quot; alt=&quot;image11&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;p class=&quot;note&quot;&gt;Before we understand our function, know that we are currently looking at the assembly language. You, as a reader, are required to have a basic understanding of the &lt;strong&gt;stack&lt;/strong&gt; and how it works, know how to read assembly language, and have basic knowledge of &lt;strong&gt;C&lt;/strong&gt; and &lt;strong&gt;C++&lt;/strong&gt; programming languages.&lt;/p&gt;
-
-&lt;div class=&quot;language-nasm highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;; main func&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;  &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;; store base pointer in the stack&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;   &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rsp&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;; make the stack pointer the new base pointer&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;sym.systemv&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;; call function systemv&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;sym.systemo&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;; call function systemo after systemv has ended&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;   &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;; move zero to register eax&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;   &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;; get the old base pointer&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;ret&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;; return - end of program&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The program starts by pushing the base pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rbp&lt;/code&gt; to the top of the stack, then makes the stack pointer the new base pointer. Proceeds to call two functions &lt;strong&gt;sym.systemv&lt;/strong&gt; and &lt;strong&gt;sym.systemo&lt;/strong&gt;, then move 0 to the accumulator register (&lt;strong&gt;eax&lt;/strong&gt;), get the base pointer from the top of the stack, and perform a subroutine return (&lt;strong&gt;ret&lt;/strong&gt;).&lt;/p&gt;
-
-&lt;p&gt;So we are going to focus on the two functions being called.&lt;/p&gt;
-
-&lt;h3 class=&quot;text-align-center&quot; id=&quot;first-function-systemv&quot;&gt;First function: systemv&lt;/h3&gt;
-
-&lt;p&gt;From the code below, we can note the function’s main purpose is to set the variables.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image13.png&quot; alt=&quot;image12&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-nasm highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;; systemv func&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;  &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;                     &lt;span class=&quot;c1&quot;&gt;; routine command&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;   &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rsp&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;; routine command&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;   &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_4h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;; mov the 32-bit int rep of 5 into the 4bytes stack-location&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;   &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_8h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;; mov the 32-bit int rep of 7 into the 4bytes stack-location&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;   &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_ch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x1f5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; mov the 32-bit int rep of hex 0x1f5 == 105 into the 4bytes stack-location&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;nop&lt;/span&gt;                           &lt;span class=&quot;c1&quot;&gt;; nop-sled&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;                       &lt;span class=&quot;c1&quot;&gt;; routine command&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;ret&lt;/span&gt;                           &lt;span class=&quot;c1&quot;&gt;; return end of program&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To convert a hexadecimal value in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;r2&lt;/code&gt; you can do the following in  the shell: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;? 0x1f5&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image14.png&quot; alt=&quot;image13&quot; class=&quot;align-left&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* current variables */&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_4h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_8h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_ch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;501&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;note&quot; title=&quot;r2 Praise&quot;&gt;r2 can perform arithmetic calculations and convert hex to different data types as seen in the image on our left.&lt;/p&gt;
-
-&lt;h3 class=&quot;text-align-center&quot; id=&quot;second-function-systemo&quot;&gt;Second function: systemo&lt;/h3&gt;
-
-&lt;p&gt;So let’s go on ahead and see what the second function is doing.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image15.png&quot; alt=&quot;image14&quot; class=&quot;lead&quot; width=&quot;1700px&quot; /&gt;&lt;/p&gt;
-
-&lt;p class=&quot;note&quot; title=&quot;Attention&quot;&gt;The image is not visible, but I will fix that issue in future posts. Below is the whole code re-written when migrating from blogger.&lt;/p&gt;
-
-&lt;div class=&quot;language-nasm highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;; just realized this is a c++ program date 03/05/22&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;                           &lt;span class=&quot;c1&quot;&gt;; routine command&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;rbp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rsp&lt;/span&gt;                      &lt;span class=&quot;c1&quot;&gt;; routine command&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;sub&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;rsp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x10&lt;/span&gt;                     &lt;span class=&quot;c1&quot;&gt;; set up space in the stack of size 16bytes&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_8h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;; mov value 7 to eax&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;     &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_4h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;; add value 7 to value 5 at local_4h and store the result in local_4h&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_4h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;; mov value at local_4h to eax&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;imul&lt;/span&gt;    &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x2d&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;; multiply value at eax by 45 and store the result in eax (imul eax, 0x2d)&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;     &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_ch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;; mov 32bit int rep of value at eax into the 4bytes stack-location&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;     &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_10h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;; mov 32bit int rep of value 0 into the 4bytes stack-location&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;lea&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;rsi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;qword&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;str.Password&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;; load address of string Password to rsi&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt;    &lt;span class=&quot;nv&quot;&gt;something...&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;; print str.Password&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;lea&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;rax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;qword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_10h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;; load address of stack variable [local_10h] to rax variable&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;rsi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rax&lt;/span&gt;                      &lt;span class=&quot;c1&quot;&gt;; mov address at rax to rsi&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;lea&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;rdi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;qword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x202060&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;; load address to rdi&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt;    &lt;span class=&quot;nv&quot;&gt;something...&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;; call function that will take user input&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_10h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;; mov 32bit int rep of value at local_10h to eax&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;cmp&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;local_ch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;; compare value at eax with value stored at local_ch&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;jne&lt;/span&gt;     &lt;span class=&quot;mh&quot;&gt;0xa62&lt;/span&gt;                         &lt;span class=&quot;c1&quot;&gt;; if compare is not equal, I think it will lead to print Bad password&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;lea&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;rsi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;qword&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;str.Good_password&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;; load address of string Good_password to rsi&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;lea&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;rdi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;qword&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x202180&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;; load address 0x202180&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt;    &lt;span class=&quot;nv&quot;&gt;something...&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;; call while passing two arguments rdi, rsi&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;From the above code, we can see the second function contains our string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Good password&lt;/code&gt;; when I was writing this post in 2018, I had noted that I wasn’t going to explain the whole code but the essential bit of the code that led us to our string. 4years later, I can explain the entire code. I even found a quick way to solve this challenge when reading the code. Emphasize on &lt;strong&gt;keep practicing&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h3 class=&quot;text-align-center&quot; id=&quot;solving&quot;&gt;Solving&lt;/h3&gt;
-
-&lt;p&gt;Because I am writting this post once more, I will do what I wasn’t able to do last time, explain everything. I believe this is a second chance so let me take advantage of it and show off.&lt;/p&gt;
-
-&lt;p&gt;So the first function loads the values to variables later used in the second function. After getting our new base pointer, we can see the program is reserving space in the stack of size 0x10. It then moves the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_8h&lt;/code&gt; to register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;, then adds the value at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; with the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_4h&lt;/code&gt;. Then moves results of the addition to the register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Then we proceed to multiply using the &lt;a href=&quot;http://www.c-jump.com/CIS77/reference/ISA/DDU0094.html&quot;&gt;imul&lt;/a&gt; instruction. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;imul eax, eax, 0x2d&lt;/code&gt; is an extended hand for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;imul eax, 0x2d&lt;/code&gt;, which takes the value stored at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt; and multiplies it by  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x2d&lt;/code&gt;. Then holds the new value at register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;, which is then moved to variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;local_8h &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 7
-local_4h &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 5
-local_ch &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 501
-local_10h &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; user_input
-
-eax &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; local_8h
-local_4h &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; local_4h + eax
-eax &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; local_4h &lt;span class=&quot;c&quot;&gt;# 12&lt;/span&gt;
-eax &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; eax &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; 45 &lt;span class=&quot;c&quot;&gt;# 540&lt;/span&gt;
-local_ch &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; eax &lt;span class=&quot;c&quot;&gt;# 540&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We you read the code above, the next few instructions executed allow the program to print &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Password&lt;/code&gt; and ask for user password input. Hence no need to explain them twice.&lt;/p&gt;
-
-&lt;p&gt;After the user has keyed in his password, it is stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_10h&lt;/code&gt;. Then later moved to register &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax&lt;/code&gt;, which is compared to the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image16.png&quot; alt=&quot;image15&quot; id=&quot;cmp&quot; class=&quot;centered&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;If both values are equal, the next instruction executed will print &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Good password&lt;/code&gt;, resulting in us successfully solving the challenge. But if they are not equal, it will take a jump to address &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xa62&lt;/code&gt;, which I think will print the string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bad password&lt;/code&gt; as we had seen before while running the program.&lt;/p&gt;
-
-&lt;p&gt;If you check the compare instruction, you can see we have our password at two variables; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_10h&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;. Where we already know the value for variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;So our password is &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;540&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p class=&quot;text-align-center&quot;&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image17.png&quot; alt=&quot;image16&quot; /&gt;
-&lt;img src=&quot;/assets/img/blog/2018-09-06/image18.png&quot; alt=&quot;image17&quot; /&gt;&lt;/p&gt;
-
-&lt;p class=&quot;figcaption&quot;&gt;r2 doing arithmetics&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/2018-09-06/image19.png&quot; alt=&quot;image18&quot; class=&quot;align-left&quot; /&gt;&lt;/p&gt;
-
-&lt;p class=&quot;note&quot; title=&quot;SUCCESS&quot;&gt;We have our password&lt;/p&gt;
-
-&lt;h2 id=&quot;bonus&quot;&gt;Bonus&lt;/h2&gt;
-
-&lt;details&gt;
-&lt;summary&gt;Quick and easy solve&lt;/summary&gt;
-&lt;div&gt;
-    &lt;p&gt;Another quicker method of solving this challenge would be to set a breakpoint at the comparison instruction &lt;a href=&quot;#cmp&quot;&gt;cmp&lt;/a&gt; then view the value stored at variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local_ch&lt;/code&gt; and boom we have the password. Quick and easy.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/details&gt;
-
-&lt;details&gt;
-&lt;summary&gt;Translating the challenge to C&lt;/summary&gt;
-&lt;div&gt;
-
-    &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;atdioh&amp;gt;
-&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/**
- * main
-*/&lt;/span&gt;
-
-&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;systemv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_4h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_8h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_ch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;105&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;systemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_10h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_ch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;local_ch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;local_8h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;local_4h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;scanf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;local_10h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;local_10h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;local_ch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Good password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Bad password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;systemv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;systemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-  &lt;/div&gt;
-&lt;/details&gt;
-
-&lt;details&gt;
-&lt;summary&gt;Resources&lt;/summary&gt;
-&lt;div&gt;
-
-    &lt;blockquote&gt;
-      &lt;p&gt;The following will get you started, Enjoy.&lt;/p&gt;
-    &lt;/blockquote&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;&lt;a href=&quot;https://twitter.com/megabeets_&quot;&gt;Megabeets&lt;/a&gt;; &lt;a href=&quot;https://www.megabeets.net/a-journey-into-radare-2-part-1/&quot;&gt;A journey into Radare2 - Part 1: simple crackme&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Sushant; &lt;a href=&quot;http://sushant94.me/2015/05/31/Introduction_to_radare2/&quot;&gt;An intro to radare2&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.cs.virginia.edu/~evans/cs216/guides/x86.html&quot;&gt;x86 Assembly Guide&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Intel’s Intro to &lt;a href=&quot;https://software.intel.com/en-us/articles/introduction-to-x64-assembly/&quot;&gt;x64 Assembly&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Intro to &lt;a href=&quot;https://www3.nd.edu/~dthain/courses/cse40243/fall2015/intel-intro.html&quot;&gt;x86-64 Assembly for Compiler Writers&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;A good read &amp;gt; &lt;a href=&quot;https://sockpuppet.org/issue-79-file-0xb-foxport-hht-hacking.txt.html&quot;&gt;h3h3&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Stack &lt;a href=&quot;https://en.wikipedia.org/wiki/Stack_(abstract_data_type)&quot;&gt;wiki&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://www.begin.re/&quot;&gt;RE for Beginners&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Radare2 &lt;a href=&quot;https://radare.gitbooks.io/radare2book/content/&quot;&gt;Git Book&lt;/a&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p class=&quot;text-align-center faded&quot;&gt;There we have it folks, easy as done, see you in the other realm.&lt;/p&gt;</content><author><name>th3gr00t</name></author><category term="ctf" /><category term="re" /><summary type="html">Aplogoies for any rough images, they were migrated from blogger.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2018-09-06/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2018-09-06/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;/ol&gt;</content><author><name>th3gr00t</name></author><category term="ctf" /><category term="create" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/blog/2018-09-11/image1.png" /><media:content medium="image" url="http://localhost:4000/assets/img/blog/2018-09-11/image1.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

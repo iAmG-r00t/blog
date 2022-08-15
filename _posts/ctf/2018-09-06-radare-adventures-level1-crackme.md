@@ -9,7 +9,7 @@ category: ctf
 tags: [re]
 ---
 
-Aplogoies for any rough images, they were migrated from blogger.
+Apologies for any rough images, they were migrated from blogger.
 {:.note title="APOLOGY"}
 
 - Table of Contents
@@ -130,7 +130,7 @@ It prints each string starting with its `address location`, `length`, and the ac
 
 {: style="padding-top: 5em"}
 
-Next we are going to find the code reference for our `str.Good_password` reference.
+Next, we are going to find the code reference for our `str.Good_password` reference.
 
 ~~~bash
 axt @@ str.Good_password
