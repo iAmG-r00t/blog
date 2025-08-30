@@ -68,7 +68,7 @@ paginate_path:         /blog/:num/
 # ---------------------------------------------------------------------------------------
 
 # theme: jekyll-theme-hydejack
-# remote_theme: hydecorp/hydejack@v9
+# remote_theme: hydecorp/hydejack@v9.2.1
 
 
 # Customizaton
