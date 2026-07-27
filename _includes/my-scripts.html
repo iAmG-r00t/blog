@@ -10,8 +10,10 @@ Script that will allow us to add clap count to post
 -->
 <script>
   document.getElementById('_pushState').addEventListener('hy-push-state-load', function() {
-    // Only select our post-list placeholders. The Applause web component also
-    // renders an internal element named `clap-count`, but it has no data URL.
+    /*
+     * Only select our post-list placeholders. The Applause web component also
+     * renders an internal element named `clap-count`, but it has no data URL.
+     */
     var elements = Array.from(document.querySelectorAll('.clap-count[data-url]'));
     var normalizeApplauseUrl = function(url) {
       return (url || '').replace(/^https?:\/\//i, '').replace(/^\/\//, '');
