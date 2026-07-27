@@ -41,7 +41,9 @@
     </p>
   {% endif %}
   {% if post.applause_button %}
-    <span class="clap-count" data-url="{{ site.applause_host }}{{ post.url }}"></span>
+    <span class="clap-count" data-url="{{ site.applause_host }}{{ post.url }}">
+      <applause-button class="clap-count-source" api="{{ site.applause_api }}" url="{{ site.applause_host }}{{ post.url }}" aria-hidden="true"></applause-button>
+    </span>
   {% endif %}
   {% assign text = site.data.strings.continue_reading | default:"Continue reading <!--post_title-->" %}
   <a class="fill-card no-hover" href="{{ post.url | relative_url }}" tabindex="-1"><span class="sr-only">{{ text | replace:"<!--post_title-->", post.title }}</span></a>

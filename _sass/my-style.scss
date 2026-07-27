@@ -88,6 +88,15 @@ applause-button {
     @extend h4;
     color: var(--accent-color);
     display: none;
+
+    .clap-count-source {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
   
     svg {
       height: 1em;

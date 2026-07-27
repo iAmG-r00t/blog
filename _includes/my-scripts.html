@@ -6,9 +6,7 @@
 </script>
 
 <!--
-Load post-list clap counts through the Applause web component. The former
-get-multiple API endpoint is no longer reliable, while the component endpoint
-used on individual posts continues to return the persisted count.
+Load post-list clap counts from server-rendered Applause components.
 -->
 <script>
   function loadClapCounts() {
@@ -18,31 +16,29 @@ used on individual posts continues to return the persisted count.
       if (element.getAttribute('data-clap-loading') === 'true') return;
       element.setAttribute('data-clap-loading', 'true');
 
-      var applause = document.createElement('applause-button');
-      applause.setAttribute('url', element.getAttribute('data-url'));
-      applause.setAttribute('aria-hidden', 'true');
-      applause.style.cssText =
-        'position:absolute;width:1px;height:1px;overflow:hidden;' +
-        'opacity:0;pointer-events:none;';
-      element.appendChild(applause);
+      var applause = element.querySelector('.clap-count-source');
+      if (!applause) return;
 
       var finish = function() {
-        var sourceCount = applause.querySelector('.clap-count');
-        var count = sourceCount && parseInt(sourceCount.textContent, 10);
+        var sourceCount = applause.querySelector('.count, .clap-count');
+        var count = sourceCount && parseInt(sourceCount.textContent.replace(/,/g, ''), 10);
         if (!Number.isFinite(count)) return false;
 
         if (count > 0) {
           var sourceIcon = applause.querySelector('svg');
-          if (!sourceIcon) return false;
-          var icon = sourceIcon.cloneNode(true);
-          var flat = icon.querySelector('.hands-flat');
-          var outline = icon.querySelector('.hands-outline');
-          if (flat) flat.setAttribute('class', 'flat');
-          if (outline) outline.setAttribute('class', 'outline');
-
           var countSpan = document.createElement('span');
           countSpan.textContent = count;
-          element.replaceChildren(icon, countSpan);
+
+          element.replaceChildren();
+          if (sourceIcon) {
+            var icon = sourceIcon.cloneNode(true);
+            var flat = icon.querySelector('.hands-flat');
+            var outline = icon.querySelector('.hands-outline');
+            if (flat) flat.setAttribute('class', 'flat');
+            if (outline) outline.setAttribute('class', 'outline');
+            element.appendChild(icon);
+          }
+          element.appendChild(countSpan);
           element.style.display = 'initial';
         } else {
           element.replaceChildren();

@@ -30,7 +30,9 @@
         {%- include components/tag-list.html tags=post.tags meta=site.featured_tags start_with=tag_start separator=tag_separator -%}
         {% if post.applause_button %}
           {{ ' ' }}
-          <span class="clap-count" data-url="{{ site.applause_host }}{{ post.url }}"></span>
+          <span class="clap-count" data-url="{{ site.applause_host }}{{ post.url }}">
+            <applause-button class="clap-count-source" api="{{ site.applause_api }}" url="{{ site.applause_host }}{{ post.url }}" aria-hidden="true"></applause-button>
+          </span>
         {% endif %}
       {% endcapture %}
       <span class="ellipsis mr1">

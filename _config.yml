@@ -155,6 +155,7 @@ kramdown:
 
 # Canonical host/path key used by the Applause API.
 applause_host:         blog.th3-gr00t.net
+applause_api:          https://applause.chabouis.fr
 
 # Set which comment system to use
 comments:
