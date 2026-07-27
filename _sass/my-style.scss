@@ -50,6 +50,28 @@ img.align-right {
   line-height: 2rem;
 }
 
+// Animated greeting on the welcome page.
+.wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: wave-hand 2s ease-in-out infinite;
+}
+
+@keyframes wave-hand {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(16deg); }
+  20% { transform: rotate(-10deg); }
+  30% { transform: rotate(16deg); }
+  40% { transform: rotate(-6deg); }
+  50% { transform: rotate(12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave {
+    animation: none;
+  }
+}
+
 // applause-button
 applause-button {
     width: 80px;

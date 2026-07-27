@@ -1,6 +1,7 @@
 ---
 layout: welcome
-title: Hello 👋🏾
+title: Hello
+animated_wave: true
 cover: true
 #sitemap: false
 ---
