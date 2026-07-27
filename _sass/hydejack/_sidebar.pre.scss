@@ -44,7 +44,7 @@ hy-drawer {
     // >>>
 
     // <<< link
-    --hy-drawer-peek-width: #{$sidebar-width};
+    & { --hy-drawer-peek-width: #{$sidebar-width}; }
     // >>>
   }
 
@@ -71,8 +71,7 @@ hy-drawer {
   display: flex;
   justify-content: center;
   align-items: center;
-  //color: rgba(255, 255, 255, .75);
-  color: white;
+  color: rgba(255, 255, 255, .75);
   text-align: center;
   min-height: 100vh;
   &.invert { color: rgba(32, 32, 32, .75) }
@@ -86,10 +85,8 @@ hy-drawer {
     // >>>
     // <<< link
     &:hover { 
-      //border-bottom-color: #fff;
-      border-bottom-color: peru;
-      //text-decoration-color: #fff;
-      text-decoration-color: peru;
+      border-bottom-color: #fff;
+      text-decoration-color: #fff;
     }
     // >>>
   }
@@ -102,8 +99,7 @@ hy-drawer {
     // >>>
     // <<< link
     &:hover { 
-      //border-bottom-color: #222;
-      border-bottom-color: peru;
+      border-bottom-color: #222;
       text-decoration-color: #222;
     }
     // >>>
@@ -169,14 +165,13 @@ hy-drawer.loaded .sidebar {
       display: block;
       border-bottom: 2px solid;
       margin: 0 auto .5rem;
-      width: 9rem;
+      width: 4rem;
       border-color: rgba(255, 255, 255, 0.2);
       transition: border-color 250ms;
     }
 
     &:hover::after {
-      //border-color: rgba(255, 255, 255, 1);
-      border-color: peru;
+      border-color: rgba(255, 255, 255, 1);
       transition: border-color 50ms;
     }
   }
@@ -184,8 +179,7 @@ hy-drawer.loaded .sidebar {
 
 .sidebar.invert .sidebar-about > a.sidebar-title{
   &::after { border-color: rgba(32, 32, 32, 0.2) }
-  //&:hover::after { border-color: #222 }
-  &:hover::after { border-color: peru }
+  &:hover::after { border-color: #222 }
 }
 
 .sidebar-nav > ul {

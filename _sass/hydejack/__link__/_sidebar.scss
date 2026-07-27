@@ -40,7 +40,7 @@ hy-drawer {
     
 
     
-    --hy-drawer-peek-width: #{$sidebar-width};
+    & { --hy-drawer-peek-width: #{$sidebar-width}; }
     
   }
 
@@ -68,9 +68,7 @@ hy-drawer {
     
     
     &:hover { 
-      //border-bottom-color: #fff;
       border-bottom-color: peru;
-      //text-decoration-color: #fff;
       text-decoration-color: peru;
     }
     
@@ -80,7 +78,6 @@ hy-drawer {
     
     
     &:hover { 
-      //border-bottom-color: #222;
       border-bottom-color: peru;
       text-decoration-color: #222;
     }
@@ -127,4 +124,3 @@ hy-drawer.loaded .sidebar {
     transform: scale(1);
   }
 }
-

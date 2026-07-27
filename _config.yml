@@ -266,7 +266,7 @@ hydejack:
   # Only use if you know what Service Workers are and how they can impact your site!
   offline:
     enabled:           false
-    cache_version:     13
+    cache_version:     14
     precache_assets:
       - /assets/img/swipe.svg
 
