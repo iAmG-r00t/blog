@@ -84,10 +84,10 @@ accent_color:          rgb(226,135,67)
 theme_color:           rgb(101,71,47)
 
 # font settings
-font:                  '"Alegreya Sans", sans-serif'
+font:                  '"Comic Neue", cursive'
 font_heading:          Kalam, cursive
 font_code:             Fira Code, Menlo, Monaco, Consolas, monospace;
-google_fonts:          Alegreya+Sans:400,400i,500,500i,700,700i|Kalam:400,700
+google_fonts:          Comic+Neue:400,400i,700,700i|Kalam:400,700
 
 
 
