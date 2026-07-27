@@ -40,6 +40,9 @@
       {{ post.tagline | default:post.caption | default:post.description | markdownify | replace:'<p>','' | replace:'</p>','' }}
     </p>
   {% endif %}
+  {% if post.applause_button %}
+    <span class="clap-count" data-url="{{ site.applause_host }}{{ post.url }}"></span>
+  {% endif %}
   {% assign text = site.data.strings.continue_reading | default:"Continue reading <!--post_title-->" %}
   <a class="fill-card no-hover" href="{{ post.url | relative_url }}" tabindex="-1"><span class="sr-only">{{ text | replace:"<!--post_title-->", post.title }}</span></a>
 </article>
