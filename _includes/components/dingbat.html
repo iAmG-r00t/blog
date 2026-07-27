@@ -2,7 +2,7 @@
   <applause-button
     class="mb6"
     color="{{ site.accent_color | default:'rgb(79,177,186)' }}"
-    url="{{ page.url | absolute_url }}">
+    url="{{ site.applause_host }}{{ page.url }}">
   </applause-button>
 {% else %}
   <hr class="dingbat related mb6" />

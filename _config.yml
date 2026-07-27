@@ -4,6 +4,7 @@
 # ----------------------------------------------------------------------------------------
 # base url
 baseurl:
+url:                   https://blog.th3-gr00t.net
 
 # GitHub repository identifier used by jekyll-github-metadata.
 repository:             iAmG-r00t/blog
@@ -151,6 +152,9 @@ kramdown:
 # Setting a disqus shortname will enable the comment section on
 # pages with `comments: true` in the front matter.
 # disqus:                <username>
+
+# Canonical host/path key used by the Applause API.
+applause_host:         blog.th3-gr00t.net
 
 # Set which comment system to use
 comments:

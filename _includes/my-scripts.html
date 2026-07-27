@@ -11,8 +11,11 @@ Script that will allow us to add clap count to post
 <script>
   document.getElementById('_pushState').addEventListener('hy-push-state-load', function() {
     var elements = Array.from(document.getElementsByClassName('clap-count'));
+    var normalizeApplauseUrl = function(url) {
+      return url.replace(/^https?:\/\//i, '').replace(/^\/\//, '');
+    };
     var urls = elements.map(function (el) {
-      return el.getAttribute("data-url");
+      return normalizeApplauseUrl(el.getAttribute("data-url"));
     });
     if (urls.length) {
       var request = new XMLHttpRequest();
@@ -23,8 +26,10 @@ Script that will allow us to add clap count to post
         switch (request.status) {
           case 200:
             elements.forEach(function(element) {
-              var url = element.getAttribute("data-url").replace(/^https?:\/\//, "");
-              var clapCount = request.response.find(function(e) { return e.url === url; });
+              var url = normalizeApplauseUrl(element.getAttribute("data-url"));
+              var clapCount = request.response.find(function(e) {
+                return normalizeApplauseUrl(e.url) === url;
+              });
               if (clapCount && clapCount.claps > 0) {
                 element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
                   <g class="flat">
