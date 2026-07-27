@@ -18,10 +18,10 @@ title:                 th3_gr00t
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  One and only nerd who is on a journey to being a vulnerability researcher.
+  A nerd on a journey to being a skilled 0day vulnerability researcher.
 
 # A shorter description for the sidebar.
-tagline:               Journey to Vulnerability Research
+tagline:               Journey to being a skilled 0day Vulnerability Researcher
 
 # A list of keywords for your blog
 keywords:              ["security", "low-level", "hardware-hacking"]
@@ -166,7 +166,7 @@ giscus:
   category-id:         DIC_kwDOHZL19s4CPSRG
   mapping:             "pathname"
   reaction-enabled:    "1"
-  theme:               "dark_dimmed"
+  theme:               "https://cdn.jsdelivr.net/gh/iAmG-r00t/blog@main/assets/css/giscus-theme.css"
   crossorigin:         "anonymous"
 
 # Setting a tinyletter username will enable the newsletter subscription box.
